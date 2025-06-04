@@ -1,5 +1,3 @@
-
-
 project: Unity向けMCPサーバー構築計画
 author_level: 初心者（Node.js未経験、Web系も不慣れ）
 methodology: HaaS（Human-as-a-Service）駆動、フルスクラッチで構築する方針

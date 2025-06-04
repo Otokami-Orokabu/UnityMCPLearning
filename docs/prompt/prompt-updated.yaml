@@ -1,0 +1,146 @@
+project: Unity向けMCPサーバー構築計画
+author_level: 初心者（Node.js未経験、Web系も不慣れ）
+methodology: HaaS（Human-as-a-Service）駆動、フルスクラッチで構築する方針
+execution_style: ".mdによるステップ分割ドキュメント指向"
+language_preference: 日本語で返答すること
+
+# プロジェクト進捗状況
+current_status: "Step 1 完了 - MCPサーバーとClaude Desktopの通信確立済み"
+
+# 完了した機能
+completed_features:
+  - JSON-RPC 2.0プロトコル対応
+  - MCP プロトコル 2024-11-05 準拠
+  - stdio通信による安定した接続
+  - MCPツール機能の実装
+  - Claude Desktop統合の成功
+  - Unityモックデータの分離とテスト機能
+
+environment:
+  os: macOS
+  runtime: node.js
+  language: TypeScript
+  mcp_client:
+    platform: Unity
+    version: "6以上"
+    ui_framework: UIToolkit
+    async_system: Awaiter
+    data_output:
+      constraint: "Assets外"
+      path: "./UnityMCP/"
+  interface:
+    controlled_by: Claude Desktop (GUI操作前提)
+    communication: stdio (JSON-RPC 2.0)
+  
+# 実装済みMCPサーバー機能
+implemented_features:
+  server_info:
+    - name: "unity-mcp-server"
+    - version: "1.0.0"
+    - protocol: "2024-11-05"
+  
+  available_tools:
+    - name: "unity_info"
+      description: "Unity プロジェクト情報取得（固定データ）"
+      status: "completed"
+    - name: "unity_info_dynamic" 
+      description: "Unity プロジェクト情報取得（動的データ）"
+      status: "completed"
+    - name: "ping"
+      description: "サーバー生存確認"
+      status: "completed"
+  
+  data_structure:
+    - editorVersion: "Unity エディターバージョン"
+    - projectName: "プロジェクト名"
+    - sceneName: "現在のシーン名"
+    - gameObjects: "GameObjectリスト（位置情報付き）"
+    - assetCount: "アセット数"
+    - isPlaying: "再生状態"
+    - buildTarget: "ビルドターゲット"
+
+# ファイル構成
+file_structure:
+  unity-mcp-node/:
+    - package.json: "Node.jsプロジェクト設定"
+    - tsconfig.json: "TypeScript設定"
+    - src/:
+      - index.ts: "MCPサーバーメイン実装"
+      - unity-mock-data.ts: "Unityモックデータ定義"
+    - dist/: "コンパイル済みファイル"
+    - test-ping.sh: "テストスクリプト"
+  docs/:
+    - tutorial/:
+      - step1-ping-api.md: "Step 1 実装ガイド"
+      - claude-desktop-setup.md: "Claude Desktop設定手順"
+
+goals:
+  step_1:
+    description: "Claude Desktop と MCPサーバー間での通信確立"
+    status: "✅ 完了"
+    achievements:
+      - "JSON-RPC 2.0 通信の確立"
+      - "MCP プロトコル対応"
+      - "ツール機能の実装"
+      - "Claude Desktop統合"
+      - "テストデータの分離"
+    
+  step_2:
+    description: "Unity → JSON出力 → MCPが読み取る設計"
+    status: "⏳ 待機中"
+    requirements:
+      - "Unity Editor Script作成"
+      - "実際のUnity情報出力"
+      - "ファイル監視機能実装"
+      - "UnityMCP/ディレクトリの作成"
+    
+  step_3:
+    description: "Claude ⇨ MCP ⇨ Unity の実行ルートを通して、Cubeを生成"
+    status: "⏳ 未開始"
+    requirements:
+      - "Unity制御コマンドの実装"
+      - "GameObject生成機能"
+      - "EditorでのCommand実行"
+    
+  step_4:
+    description: "MCPのAPI構成を拡張・管理性を高める"
+    status: "⏳ 未開始"
+
+# テスト確認済み項目
+verified_tests:
+  communication:
+    - "Claude Desktop → MCP Server接続"
+    - "unity_info ツール実行"
+    - "unity_info_dynamic ツール実行" 
+    - "ping テスト"
+    - "エラーハンドリング"
+  
+  data_retrieval:
+    - "Unity プロジェクト情報表示"
+    - "GameObjectリスト取得"
+    - "動的データ変化確認"
+
+constraints:
+  - "Unityの出力先はAssets外に限定"
+  - "macOS前提"
+  - "Claude Desktopからの起動・制御を想定"
+  - "フルスクラッチ実装（外部SDK使用禁止）"
+
+next_steps:
+  priority_high:
+    - "Step 2への移行許可確認"
+    - "Unity Editor Script実装計画"
+    - "ファイル監視機能の設計"
+  
+  documentation:
+    - "Step 1完了報告書作成"
+    - "Step 2実装ガイドの準備"
+
+# Claude Desktop設定
+claude_desktop_config:
+  path: "~/Library/Application Support/Claude/claude_desktop_config.json"
+  current_setup:
+    mcpServers:
+      unity-mcp:
+        command: "node"
+        args: ["/Users/USERNAME/ProjectGit/UnityMCPLearning/unity-mcp-node/dist/index.js"]
