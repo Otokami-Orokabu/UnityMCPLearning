@@ -15,6 +15,10 @@ completed_features:
   - MCPツール機能の実装
   - Claude Desktop統合の成功
   - Unityモックデータの分離とテスト機能
+  - EditorConfig設定による統一フォーマット
+  - 独立したGitIgnore設定
+  - 包括的なテストスイート
+  - 詳細なドキュメント化
 
 environment:
   os: macOS
@@ -61,15 +65,26 @@ implemented_features:
 
 # ファイル構成
 file_structure:
+  root/:
+    - .editorconfig: "プロジェクト全体のフォーマット設定"
+    - .gitignore: "Unity + プロジェクト管理用"
+    - README.md: "プロジェクト概要"
   unity-mcp-node/:
+    - .editorconfig: "Node.js専用フォーマット設定"
+    - .gitignore: "Node.js + MCP Server専用"
     - package.json: "Node.jsプロジェクト設定"
+    - package-lock.json: "依存関係ロック"
     - tsconfig.json: "TypeScript設定"
+    - mcp-config.json: "Claude Desktop設定例"
+    - test-ping.sh: "包括的テストスクリプト"
     - src/:
       - index.ts: "MCPサーバーメイン実装"
       - unity-mock-data.ts: "Unityモックデータ定義"
-    - dist/: "コンパイル済みファイル"
-    - test-ping.sh: "テストスクリプト"
+    - dist/: "コンパイル済みファイル（gitignore対象）"
   docs/:
+    - prompt/:
+      - prompt.yaml: "プロジェクト基本仕様"
+      - prompt-updated.yaml: "現在の進捗状況"
     - tutorial/:
       - step1-ping-api.md: "Step 1 実装ガイド"
       - claude-desktop-setup.md: "Claude Desktop設定手順"
@@ -80,10 +95,14 @@ goals:
     status: "✅ 完了"
     achievements:
       - "JSON-RPC 2.0 通信の確立"
-      - "MCP プロトコル対応"
-      - "ツール機能の実装"
-      - "Claude Desktop統合"
-      - "テストデータの分離"
+      - "MCP プロトコル 2024-11-05 対応"
+      - "ツール機能の実装（unity_info, unity_info_dynamic, ping）"
+      - "Claude Desktop統合成功"
+      - "テストデータの分離（unity-mock-data.ts）"
+      - "EditorConfig設定による統一フォーマット"
+      - "独立したGitIgnore設定"
+      - "包括的テストスイート"
+      - "初学者向けドキュメント作成"
     
   step_2:
     description: "Unity → JSON出力 → MCPが読み取る設計"
@@ -126,15 +145,50 @@ constraints:
   - "Claude Desktopからの起動・制御を想定"
   - "フルスクラッチ実装（外部SDK使用禁止）"
 
+# Git履歴
+git_commits:
+  recent_commits:
+    - commit: "0607de5"
+      message: "Step 1実装ガイドとClaude Desktop設定手順を追加"
+      description: "チュートリアルドキュメント"
+    - commit: "314e433"
+      message: "プロジェクト仕様と進捗管理ドキュメントを更新"
+      description: "プロジェクト仕様"
+    - commit: "82f3ef4"
+      message: "テストスクリプトとClaude Desktop設定を追加"
+      description: "テストと設定"
+    - commit: "0a77b93"
+      message: "MCPサーバーのコア実装を追加"
+      description: "MCPサーバー実装"
+    - commit: "a76cbb4"
+      message: "Node.js/TypeScript開発環境を構築"
+      description: "開発環境"
+    - commit: "ac2ca22"
+      message: "GitIgnore設定を独立した構成に見直し"
+      description: "GitIgnore設定"
+    - commit: "63ab512"
+      message: "EditorConfig設定を追加してコードフォーマットを統一"
+      description: "EditorConfig設定"
+
+# 現在の開発状況
+development_status:
+  current_phase: "Step 1 完了、Step 2 準備段階"
+  working_tree: "clean（すべてコミット済み）"
+  commits_ahead: "7 commits ahead of origin/main"
+  build_status: "✅ 正常（TypeScript コンパイル成功）"
+  test_status: "✅ 全テスト通過"
+  claude_desktop_integration: "✅ 動作確認済み"
+
 next_steps:
   priority_high:
     - "Step 2への移行許可確認"
     - "Unity Editor Script実装計画"
     - "ファイル監視機能の設計"
+    - "UnityMCP/ディレクトリ設計"
   
   documentation:
-    - "Step 1完了報告書作成"
     - "Step 2実装ガイドの準備"
+    - "Unity Editor Script仕様策定"
 
 # Claude Desktop設定
 claude_desktop_config:
