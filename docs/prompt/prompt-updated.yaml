@@ -5,7 +5,7 @@ execution_style: ".mdによるステップ分割ドキュメント指向"
 language_preference: 日本語で返答すること
 
 # プロジェクト進捗状況
-current_status: "Step 1 完了 - MCPサーバーとClaude Desktopの通信確立済み"
+current_status: "Step 1 完了 + Unityプロジェクト追加完了 - MCPサーバーとClaude Desktopの通信確立済み、Unity開発環境準備完了"
 
 # 完了した機能
 completed_features:
@@ -21,6 +21,10 @@ completed_features:
   - 詳細なドキュメント化
   - 相対パス設定による移植性向上
   - 個人情報の除去とプライバシー対応
+  - Unityプロジェクト（MCPLearning）の追加
+  - Unity用EditorConfig設定（UTF-8-BOM対応）
+  - Unity用GitAttributes設定（改行コード制御）
+  - Unity用GitIgnore設定
 
 environment:
   os: macOS
@@ -83,6 +87,13 @@ file_structure:
       - index.ts: "MCPサーバーメイン実装"
       - unity-mock-data.ts: "Unityモックデータ定義"
     - dist/: "コンパイル済みファイル（gitignore対象）"
+  MCPLearning/:
+    - .editorconfig: "Unity用フォーマット設定（UTF-8-BOM対応）"
+    - .gitattributes: "改行コード制御設定"
+    - .gitignore: "Unity専用GitIgnore設定"
+    - Assets/: "Unityアセットディレクトリ"
+    - ProjectSettings/: "Unityプロジェクト設定"
+    - Packages/: "Unity Package Manager設定"
   docs/:
     - prompt/:
       - prompt.yaml: "プロジェクト基本仕様"
@@ -108,12 +119,17 @@ goals:
     
   step_2:
     description: "Unity → JSON出力 → MCPが読み取る設計"
-    status: "⏳ 待機中"
+    status: "🔄 準備完了（Unityプロジェクト追加済み）"
     requirements:
       - "Unity Editor Script作成"
       - "実際のUnity情報出力"
       - "ファイル監視機能実装"
       - "UnityMCP/ディレクトリの作成"
+    unity_project_status:
+      - "✅ MCPLearningプロジェクト作成済み"
+      - "✅ EditorConfig設定完了"
+      - "✅ GitAttributes設定完了"
+      - "✅ GitIgnore設定完了"
     
   step_3:
     description: "Claude ⇨ MCP ⇨ Unity の実行ルートを通して、Cubeを生成"
@@ -150,36 +166,34 @@ constraints:
 # Git履歴
 git_commits:
   recent_commits:
-    - commit: "0607de5"
+    - commit: "87867cf"
+      message: "Unityプロジェクト（MCPLearning）を追加"
+      description: "Unity開発環境とStep 2準備"
+    - commit: "9af03aa"
+      message: "個人情報除去と相対パス設定による移植性向上"
+      description: "プライバシー対応・移植性向上"
+    - commit: "ec131ff"
+      message: "プロジェクト現状を反映してprompt-updated.yamlを更新"
+      description: "ドキュメント更新"
+    - commit: "ecce8c3"
       message: "Step 1実装ガイドとClaude Desktop設定手順を追加"
       description: "チュートリアルドキュメント"
-    - commit: "314e433"
+    - commit: "1560937"
       message: "プロジェクト仕様と進捗管理ドキュメントを更新"
       description: "プロジェクト仕様"
-    - commit: "82f3ef4"
+    - commit: "0858de5"
       message: "テストスクリプトとClaude Desktop設定を追加"
       description: "テストと設定"
-    - commit: "0a77b93"
-      message: "MCPサーバーのコア実装を追加"
-      description: "MCPサーバー実装"
-    - commit: "a76cbb4"
-      message: "Node.js/TypeScript開発環境を構築"
-      description: "開発環境"
-    - commit: "ac2ca22"
-      message: "GitIgnore設定を独立した構成に見直し"
-      description: "GitIgnore設定"
-    - commit: "63ab512"
-      message: "EditorConfig設定を追加してコードフォーマットを統一"
-      description: "EditorConfig設定"
 
 # 現在の開発状況
 development_status:
-  current_phase: "Step 1 完了、設定最適化・プライバシー対応完了"
-  working_tree: "modified（個人情報除去・相対パス対応中）"
-  commits_ahead: "7+ commits ahead of origin/main"
+  current_phase: "Step 1 完了 + Unityプロジェクト追加完了、Step 2準備完了"
+  working_tree: "clean（Unityプロジェクト追加完了）"
+  commits_ahead: "8+ commits ahead of origin/main"
   build_status: "✅ 正常（TypeScript コンパイル成功）"
   test_status: "✅ 全テスト通過"
   claude_desktop_integration: "✅ 動作確認済み（相対パス設定）"
+  unity_project_status: "✅ MCPLearningプロジェクト作成・設定完了"
 
 recent_improvements:
   privacy_security:
@@ -191,17 +205,25 @@ recent_improvements:
     - "相対パス設定への移行"
     - "Claude Desktop設定の最適化"
     - "プラットフォーム非依存の設定例"
+  
+  unity_environment:
+    - "MCPLearningプロジェクト作成完了"
+    - "Unity用EditorConfig設定（UTF-8-BOM対応）"
+    - "Unity用GitAttributes設定（改行コード制御）"
+    - "Unity用GitIgnore設定（標準準拠）"
+    - "Universal Render Pipeline設定"
+    - "Input System設定"
 
 next_steps:
   priority_high:
-    - "変更のコミット（個人情報除去・設定最適化）"
-    - "Step 2への移行許可確認"
-    - "Unity Editor Script実装計画"
-    - "ファイル監視機能の設計"
+    - "Step 2の実装開始（Unity Editor Script作成）"
+    - "Unity → JSON出力機能の実装"
+    - "UnityMCP/ディレクトリの作成"
+    - "ファイル監視機能の実装"
   
   documentation:
-    - "Step 2実装ガイドの準備"
-    - "Unity Editor Script仕様策定"
+    - "Step 2実装ガイドの作成"
+    - "Unity Editor Script仕様ドキュメント作成"
 
 # Claude Desktop設定
 claude_desktop_config:
