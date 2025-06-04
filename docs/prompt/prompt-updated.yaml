@@ -19,6 +19,8 @@ completed_features:
   - 独立したGitIgnore設定
   - 包括的なテストスイート
   - 詳細なドキュメント化
+  - 相対パス設定による移植性向上
+  - 個人情報の除去とプライバシー対応
 
 environment:
   os: macOS
@@ -172,19 +174,30 @@ git_commits:
 
 # 現在の開発状況
 development_status:
-  current_phase: "Step 1 完了、Step 2 準備段階"
-  working_tree: "clean（すべてコミット済み）"
-  commits_ahead: "7 commits ahead of origin/main"
+  current_phase: "Step 1 完了、設定最適化・プライバシー対応完了"
+  working_tree: "modified（個人情報除去・相対パス対応中）"
+  commits_ahead: "7+ commits ahead of origin/main"
   build_status: "✅ 正常（TypeScript コンパイル成功）"
   test_status: "✅ 全テスト通過"
-  claude_desktop_integration: "✅ 動作確認済み"
+  claude_desktop_integration: "✅ 動作確認済み（相対パス設定）"
+
+recent_improvements:
+  privacy_security:
+    - "個人情報（ユーザー名）の除去完了"
+    - "ドキュメント内パスの汎用化"
+    - "mcp-config.jsonの相対パス対応"
+  
+  portability:
+    - "相対パス設定への移行"
+    - "Claude Desktop設定の最適化"
+    - "プラットフォーム非依存の設定例"
 
 next_steps:
   priority_high:
+    - "変更のコミット（個人情報除去・設定最適化）"
     - "Step 2への移行許可確認"
     - "Unity Editor Script実装計画"
     - "ファイル監視機能の設計"
-    - "UnityMCP/ディレクトリ設計"
   
   documentation:
     - "Step 2実装ガイドの準備"
@@ -196,5 +209,10 @@ claude_desktop_config:
   current_setup:
     mcpServers:
       unity-mcp:
-        command: "node"
-        args: ["/Users/USERNAME/ProjectGit/UnityMCPLearning/unity-mcp-node/dist/index.js"]
+        command: "npm"
+        args: ["run", "dev"]
+        cwd: "./unity-mcp-node"
+  advantages:
+    - "相対パス使用で移植性向上"
+    - "開発用設定で自動リロード対応"
+    - "個人情報を含まない汎用的設定"

@@ -149,7 +149,7 @@ unity-mcp-node/
   "mcpServers": {
     "unity-mcp": {
       "command": "node",
-      "args": ["/Users/USERNAME/ProjectGit/UnityMCPLearning/unity-mcp-node/dist/index.js"]
+      "args": ["/path/to/your/UnityMCPLearning/unity-mcp-node/dist/index.js"]
     }
   }
 }

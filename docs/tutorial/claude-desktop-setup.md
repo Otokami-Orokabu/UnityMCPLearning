@@ -18,7 +18,7 @@ MCP 2024-11-05プロトコルに対応した設定を行います。
 設定前に、MCPサーバーが正常にビルドされていることを確認:
 
 ```bash
-cd /Users/USERNAME/ProjectGit/UnityMCPLearning/unity-mcp-node
+cd ./unity-mcp-node
 npm run build
 ```
 
@@ -32,34 +32,34 @@ macOSの場合、以下の設定ファイルを編集:
 
 ### 3. MCPサーバーの設定を追加
 
-**推奨設定（本番用）:**
+**推奨設定（開発用）:**
 ```json
 {
   "mcpServers": {
     "unity-mcp": {
-      "command": "node",
-      "args": ["/Users/USERNAME/ProjectGit/UnityMCPLearning/unity-mcp-node/dist/index.js"]
+      "command": "npm",
+      "args": ["run", "dev"],
+      "cwd": "./unity-mcp-node"
     }
   }
 }
 ```
 
-**開発用設定（オプション）:**
+**本番用設定（オプション）:**
 ```json
 {
   "mcpServers": {
-    "unity-mcp-dev": {
-      "command": "npm",
-      "args": ["run", "dev"],
-      "cwd": "/Users/USERNAME/ProjectGit/UnityMCPLearning/unity-mcp-node"
+    "unity-mcp-prod": {
+      "command": "node",
+      "args": ["./unity-mcp-node/dist/index.js"]
     }
   }
 }
 ```
 
 **注意点:**
-- 本番環境では絶対パスを使用することを推奨
-- `cwd`は開発時のファイル監視が必要な場合のみ使用
+- 相対パス（`./unity-mcp-node`）を使用することで移植性が向上
+- `cwd`を使用することで開発時のファイル監視が可能
 - 既存のMCPサーバーがある場合は、カンマで区切って追加
 
 ### 4. Claude Desktopの再起動
@@ -108,7 +108,7 @@ Claude Desktopで以下をテスト:
 #### 手動テスト
 
 ```bash
-cd /Users/USERNAME/ProjectGit/UnityMCPLearning/unity-mcp-node
+cd ./unity-mcp-node
 ./test-ping.sh
 ```
 
