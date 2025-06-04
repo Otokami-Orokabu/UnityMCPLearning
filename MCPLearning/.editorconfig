@@ -1,0 +1,61 @@
+# EditorConfig is awesome: https://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+# All files
+[*]
+charset = utf-8-bom
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# C# Unity files
+[*.cs]
+indent_style = space
+indent_size = 4
+tab_width = 4
+
+# Unity-specific C# settings
+dotnet_sort_system_directives_first = true
+dotnet_separate_import_directive_groups = false
+
+# Unity scene and prefab files
+[*.{unity,prefab}]
+insert_final_newline = false
+trim_trailing_whitespace = false
+
+# Unity meta files
+[*.meta]
+insert_final_newline = false
+trim_trailing_whitespace = false
+
+# Unity asset files
+[*.{asset,mat,physicMaterial,physicsMaterial2D,anim,controller,overrideController,mask,preset,playable,signal,giparams}]
+insert_final_newline = false
+trim_trailing_whitespace = false
+
+# Shader files
+[*.{shader,compute,hlsl,glsl}]
+indent_style = space
+indent_size = 4
+
+# JSON files (including Unity package manifests)
+[*.json]
+indent_style = space
+indent_size = 2
+
+# YAML files
+[*.{yml,yaml}]
+indent_style = space
+indent_size = 2
+
+# XML files (including Unity project settings)
+[*.xml]
+indent_style = space
+indent_size = 2
+
+# Text and markdown files
+[*.{txt,md}]
+indent_style = space
+indent_size = 2

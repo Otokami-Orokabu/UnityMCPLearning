@@ -1,0 +1,69 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Unity files
+*.cs text eol=lf
+*.shader text eol=lf
+*.hlsl text eol=lf
+*.compute text eol=lf
+
+# Unity project files
+*.unity merge=unityyamlmerge eol=lf
+*.prefab merge=unityyamlmerge eol=lf
+*.asset text eol=lf
+*.meta text eol=lf
+
+# Configuration files
+*.json text eol=lf
+*.xml text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# Documentation
+*.md text eol=lf
+*.txt text eol=lf
+
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.tga binary
+*.psd binary
+*.cubemap binary
+*.unitypackage binary
+*.dll binary
+*.so binary
+*.dylib binary
+*.exe binary
+*.pdf binary
+*.zip binary
+*.7z binary
+*.rar binary
+
+# Audio
+*.mp3 binary
+*.wav binary
+*.ogg binary
+*.aiff binary
+
+# Video
+*.mp4 binary
+*.mov binary
+*.avi binary
+*.flv binary
+*.wmv binary
+
+# 3D models
+*.fbx binary
+*.obj binary
+*.max binary
+*.blend binary
+*.dae binary
+*.3ds binary
+
+# Fonts
+*.ttf binary
+*.otf binary
+*.woff binary
+*.woff2 binary
