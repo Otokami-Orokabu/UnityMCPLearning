@@ -1,0 +1,74 @@
+# EditorConfig is awesome: https://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+# All files
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
+
+# TypeScript, JavaScript files
+[*.{ts,js,mts,cts}]
+indent_size = 2
+max_line_length = 100
+
+# JSON files
+[*.json]
+indent_size = 2
+
+# YAML files
+[*.{yml,yaml}]
+indent_size = 2
+
+# Markdown files
+[*.md]
+indent_size = 2
+trim_trailing_whitespace = false
+
+# Shell scripts
+[*.sh]
+indent_size = 2
+
+# Unity files
+[*.{cs,unity,prefab,mat,scene}]
+indent_style = space
+indent_size = 4
+end_of_line = crlf
+
+# Unity meta files
+[*.meta]
+indent_size = 2
+
+# Configuration files
+[*.{config,conf,ini}]
+indent_size = 2
+
+# Documentation files
+[{README,CHANGELOG,CONTRIBUTING}.md]
+indent_size = 2
+
+# Package management files
+[{package.json,package-lock.json,yarn.lock}]
+indent_size = 2
+
+# Build and CI files
+[{Dockerfile,docker-compose.yml,.dockerignore}]
+indent_size = 2
+
+[{.github/**/*.yml,.gitlab-ci.yml}]
+indent_size = 2
+
+# Ignore generated files
+[{node_modules,dist,build}/**]
+insert_final_newline = unset
+trim_trailing_whitespace = unset
+
+# Unity specific ignores
+[{Library,Temp,Logs}/**]
+insert_final_newline = unset
+trim_trailing_whitespace = unset
