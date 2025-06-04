@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "unity-mcp": {
+      "command": "npm",
+      "args": ["run", "dev"],
+      "cwd": "/Users/USERNAME/ProjectGit/UnityMCPLearning/unity-mcp-node"
+    }
+  }
+}
