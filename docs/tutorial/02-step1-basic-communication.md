@@ -161,9 +161,9 @@ server/infoでサーバーの詳細情報を教えて
 | ツール名 | 機能 | 入力パラメータ |
 |---------|------|---------------|
 | `ping` | 接続テスト | なし |
-| `server/info` | サーバー情報取得 | なし |
-| `unity_info` | Unity情報取得（固定データ） | なし |
-| `unity_info_dynamic` | Unity情報取得（動的データ） | なし |
+| `unity_info_realtime` | Unity情報取得（リアルタイムデータ） | category (オプション) |
+
+**注意**: 現在は`unity_info_realtime`のみ実装されています。Step 1の段階では実際のUnityデータを取得します。
 
 ### モックデータについて
 

@@ -96,16 +96,12 @@ Unity側確認：
 create a sphere
 ```
 
-```
-create a plane
-```
-
 Unity側確認：
-- 3つのオブジェクトがシーンに表示
+- 2つのオブジェクトがシーンに表示
 
 #### **テスト3: 情報取得 (60秒)**
 ```
-get scene info
+unity_info_realtime
 ```
 
 ✅ **成功例:**
@@ -131,9 +127,7 @@ get gameobjects
 - [ ] `ping` コマンドが成功
 - [ ] Cubeが Unity シーンに作成された
 - [ ] Sphereが Unity シーンに作成された
-- [ ] Planeが Unity シーンに作成された
-- [ ] `get scene info` で情報取得できた
-- [ ] `get gameobjects` でオブジェクト一覧取得できた
+- [ ] `unity_info_realtime` で情報取得できた
 
 #### **🎊 全て成功した場合**
 **おめでとうございます！** Unity MCP Learning が正常に動作しています。
