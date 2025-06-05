@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEditor.Build;
 
 namespace UnityMCP.Editor
 {
@@ -40,15 +41,16 @@ namespace UnityMCP.Editor
         private Dictionary<string, object> GatherData()
         {
             var buildTargetGroup = EditorUserBuildSettings.selectedBuildTargetGroup;
+            var namedBuildTarget = NamedBuildTarget.FromBuildTargetGroup(buildTargetGroup);
             
             return new Dictionary<string, object>
             {
                 ["buildTarget"] = EditorUserBuildSettings.activeBuildTarget.ToString(),
                 ["buildTargetGroup"] = buildTargetGroup.ToString(),
                 ["developmentBuild"] = EditorUserBuildSettings.development,
-                ["scriptingBackend"] = PlayerSettings.GetScriptingBackend(buildTargetGroup).ToString(),
-                ["apiCompatibilityLevel"] = PlayerSettings.GetApiCompatibilityLevel(buildTargetGroup).ToString(),
-                ["architecture"] = PlayerSettings.GetArchitecture(buildTargetGroup),
+                ["scriptingBackend"] = PlayerSettings.GetScriptingBackend(namedBuildTarget).ToString(),
+                ["apiCompatibilityLevel"] = PlayerSettings.GetApiCompatibilityLevel(namedBuildTarget).ToString(),
+                ["architecture"] = PlayerSettings.GetArchitecture(namedBuildTarget),
                 ["applicationIdentifier"] = PlayerSettings.applicationIdentifier,
                 ["productName"] = PlayerSettings.productName,
                 ["companyName"] = PlayerSettings.companyName
