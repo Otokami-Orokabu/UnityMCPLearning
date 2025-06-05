@@ -1,9 +1,10 @@
 {
   "mcpServers": {
-    "unity-mcp": {
-      "command": "npm",
-      "args": ["run", "dev"],
-      "cwd": "./unity-mcp-node"
+    "unity-mcp-prod": {
+      "command": "node",
+      "args": ["./unity-mcp-node/dist/index.js"],
+      "cwd": "."
     }
-  }
+  },
+  "unityDataPath": "./MCPLearning/UnityMCP/Data"
 }
