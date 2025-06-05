@@ -166,6 +166,19 @@ file_structure:
     - ProjectSettings/: "Unityプロジェクト設定"
     - Packages/: "Unity Package Manager設定（Unity Logging含む）"
   docs/:
+    - README.md: "ドキュメント全体の案内・目的別ガイド"
+    - development/:
+      - code-quality-analysis.md: "コード品質分析レポート"
+      - improvement-roadmap.md: "改善ロードマップ（短期・中期・長期）"
+      - unity-test-runner-guide.md: "Unity Test Runner導入ガイド"
+    - legal/:
+      - license-guide.md: "ライセンスガイド（MIT License）"
+      - security-analysis.md: "セキュリティ分析とGitHub公開準備"
+    - future/:
+      - distribution-packages.md: "配布パッケージ計画"
+      - future-ideas.md: "将来のアイデア・GitHub Issues化"
+      - unity-console-integration.md: "Unity Console統合"
+      - unity-mcp-manager.md: "Unity MCP管理システム"
     - prompt/:
       - prompt.yaml: "プロジェクト基本仕様"
       - prompt-updated.yaml: "現在の進捗状況（ポータブル化対応完了版）"
@@ -176,6 +189,9 @@ file_structure:
       - 03-step2-unity-integration.md: "Step 2: Unity連携システム実装"
       - 04-troubleshooting.md: "包括的トラブルシューティング"
       - 05-advanced-configuration.md: "高度な設定・カスタマイズ・配布"
+      - 06-step3-unity-control.md: "Step 3: Unity制御システム"
+      - 07-current-capabilities.md: "現在の機能"
+      - 08-quick-start-guide.md: "クイックスタートガイド"
 
 goals:
   step_1:
@@ -307,6 +323,7 @@ constraints:
   - "macOS前提"
   - "Claude Desktopからの起動・制御を想定"
   - "フルスクラッチ実装（外部SDK使用禁止）"
+  - "Unity関連ファイル作成時は.metaファイルの作成を禁止（UnityエディターがAssets内のファイルを検知した際に自動生成されるため）"
 
 # Git履歴
 git_commits:
@@ -345,6 +362,9 @@ development_status:
   realtime_data_flow: "✅ Claude Desktop ↔ MCP Server ↔ Unity Editor完全双方向連携確立"
   privacy_compliance: "✅ 個人情報除去完了（GitHub公開準備済み）"
   unity_control_system: "✅ GameObject作成・エラーハンドリング・非同期処理完全実装"
+  documentation_organization: "✅ 2025年6月5日 ドキュメント構造整理完了（development/, legal/カテゴリ追加）"
+  quality_improvement_planning: "✅ 2025年6月5日 コード品質改善計画策定・GitHub Issue #6作成"
+  test_framework_setup: "🔄 進行中 Jest設定完了、Unity Test Runner設定中"
 
 recent_improvements:
   privacy_security:
@@ -395,6 +415,21 @@ recent_improvements:
     - "包括的ドキュメント作成"
     - "初学者向けガイド・クイックスタート"
 
+  documentation_restructure:
+    - "ドキュメント構造の整理・カテゴリ分け完了（2025年6月5日）"
+    - "development/カテゴリ新設（コード品質・改善計画・テストガイド）"
+    - "legal/カテゴリ新設（ライセンス・セキュリティ分析）"
+    - "docs/README.md作成（目的別ドキュメント案内）"
+    - "prompt-updated.yamlのファイル構成セクション更新"
+
+  quality_planning:
+    - "コード品質分析レポート作成（テストカバレッジ0%の課題特定）"
+    - "改善ロードマップ策定（短期・中期・長期の3フェーズ）"
+    - "Unity Test Runner導入ガイド作成"
+    - "GitHub Issue #6作成（コード品質改善トラッキング）"
+    - "Jest設定ファイル作成・package.json更新"
+    - "Unity Test用Assembly Definition作成"
+
 next_steps:
   step_4_planning:
     - "MCPのAPI構成拡張・管理性向上"
@@ -404,6 +439,13 @@ next_steps:
     - "Transform操作コマンド"
     - "コンポーネント操作機能"
   
+  immediate_priorities:
+    - "Jest テストスイート実装（TypeScript側）"
+    - "Unity Test Runner テスト実装（Unity側）"
+    - "エラーハンドリング統一実装"
+    - "JSON Schema設定検証機能追加"
+    - "GitHub Actions CI/CD構築"
+  
   documentation_completed:
     - "✅ Step 3完了報告書作成"
     - "✅ prompt-updated.yaml更新（Step 3反映）"
@@ -411,6 +453,8 @@ next_steps:
     - "✅ 初学者向けガイド・クイックスタート"
     - "✅ チュートリアル構成整理"
     - "✅ README.md包括的更新"
+    - "✅ ドキュメント構造整理（development/, legal/カテゴリ化）"
+    - "✅ コード品質改善計画策定・GitHub Issue化"
 
 # Claude Desktop設定
 claude_desktop_config:
