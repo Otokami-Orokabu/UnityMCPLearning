@@ -1,4 +1,5 @@
 # Unity MCP Learning 🎮🤖
+*by orlab*
 
 **Claude DesktopからUnity Editorを自然言語で操作できる革新的なMCPサーバー**
 
@@ -281,6 +282,11 @@ MIT License - 詳細は [LICENSE](LICENSE) を参照
 - [Model Context Protocol](https://modelcontextprotocol.io/) - MCPスタンダード提供
 - [Unity Technologies](https://unity.com/) - Unity Engine
 - [Anthropic](https://www.anthropic.com/) - Claude Desktop・MCP支援
+
+## 🏢 Organization
+
+**orlab** - AI技術とゲーム開発の融合を探求する研究開発組織  
+Unity MCP Learningは、AI駆動開発の新しい可能性を実証するプロジェクトです。
 
 ---
 

@@ -92,7 +92,7 @@ Unity MCP Learningプロジェクトは **MIT License** を採用しています
 ```
 MIT License
 
-Copyright (c) 2025 Unity MCP Learning Project
+Copyright (c) 2025 orlab (Unity MCP Learning Project)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

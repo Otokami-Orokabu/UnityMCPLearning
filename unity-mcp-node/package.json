@@ -12,9 +12,9 @@
     "mcp",
     "unity"
   ],
-  "author": "",
-  "license": "ISC",
-  "description": "MCP server for Unity Editor integration",
+  "author": "orlab (Unity MCP Learning Project)",
+  "license": "MIT",
+  "description": "MCP server for Unity Editor integration with Claude Desktop",
   "devDependencies": {
     "@types/node": "^22.15.29",
     "tsx": "^4.19.4",
