@@ -1,9 +1,7 @@
 import { createInterface } from 'readline';
 import { randomUUID } from 'crypto';
-import {
-  generateMockUnityData,
-  generateDynamicMockData
-} from './unity-mock-data.js';
+import * as fs from 'fs';
+import * as path from 'path';
 
 // JSON-RPC 2.0のメッセージタイプ
 interface JsonRpcRequest {
@@ -39,6 +37,39 @@ const JSON_RPC_ERRORS = {
   INTERNAL_ERROR: -32603
 } as const;
 
+// ファイル監視用の変数 - 環境変数または設定から取得
+const getUnityDataPath = () => {
+  // 環境変数から取得を試行
+  if (process.env.UNITY_MCP_DATA_PATH) {
+    return path.resolve(process.env.UNITY_MCP_DATA_PATH);
+  }
+  
+  // 設定ファイルから取得を試行
+  try {
+    const configPath = path.join(__dirname, '..', 'mcp-config.json');
+    if (fs.existsSync(configPath)) {
+      const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
+      if (config.unityDataPath) {
+        // 設定ファイルの場所を基準にして相対パスを解決
+        const configDir = path.dirname(configPath);
+        const resolvedPath = path.resolve(configDir, '..', config.unityDataPath);
+        log(`Config path resolved: ${config.unityDataPath} -> ${resolvedPath}`);
+        return resolvedPath;
+      }
+    }
+  } catch (error) {
+    log('Config file read error:', error);
+  }
+  
+  // フォールバック: 相対パスから推測
+  const fallbackPath = path.resolve(process.cwd(), 'MCPLearning/UnityMCP/Data');
+  log(`Using fallback path: ${fallbackPath}`);
+  return fallbackPath;
+};
+
+const dataPath = getUnityDataPath();
+let cachedData: { [key: string]: any } = {};
+
 // 標準エラー出力にログを出力（デバッグ用）
 function log(...args: any[]) {
   console.error('[MCP Server]', ...args);
@@ -71,13 +102,6 @@ async function handleMethod(method: string, params: any): Promise<any> {
         nodeVersion: process.version
       };
     
-    case 'unity/info':
-      // Unityモックデータを取得
-      return generateMockUnityData();
-    
-    case 'unity/info/dynamic':
-      // 動的なUnityモックデータを取得（テスト用）
-      return generateDynamicMockData();
     
     case 'initialize':
       // プロトコルバージョンの検証
@@ -113,22 +137,17 @@ async function handleMethod(method: string, params: any): Promise<any> {
       return {
         tools: [
           {
-            name: 'unity_info',
-            description: 'Get Unity project information including scene, ' +
-              'gameobjects, and editor details',
+            name: 'unity_info_realtime',
+            description: 'Get real-time Unity project information from JSON files',
             inputSchema: {
               type: 'object',
-              properties: {},
-              required: []
-            }
-          },
-          {
-            name: 'unity_info_dynamic',
-            description: 'Get dynamic Unity project information with ' +
-              'randomized data for testing',
-            inputSchema: {
-              type: 'object',
-              properties: {},
+              properties: {
+                category: {
+                  type: 'string',
+                  enum: ['project', 'scene', 'gameobjects', 'assets', 'build', 'editor', 'all'],
+                  description: 'Information category to retrieve'
+                }
+              },
               required: []
             }
           },
@@ -147,22 +166,68 @@ async function handleMethod(method: string, params: any): Promise<any> {
     case 'tools/call':
       const toolName = params?.name;
       switch (toolName) {
-        case 'unity_info':
-          return {
-            content: [{
-              type: 'text',
-              text: JSON.stringify(generateMockUnityData(), null, 2)
-            }],
-            isError: false
-          };
-        case 'unity_info_dynamic':
-          return {
-            content: [{
-              type: 'text',
-              text: JSON.stringify(generateDynamicMockData(), null, 2)
-            }],
-            isError: false
-          };
+        case 'unity_info_realtime':
+          const category = params?.arguments?.category || 'all';
+          
+          // データの存在確認
+          const hasData = Object.keys(cachedData).length > 0;
+          log(`Unity data check: hasData=${hasData}, keys=${Object.keys(cachedData)}, dataPath=${dataPath}`);
+          
+          if (!hasData) {
+            // 強制的にデータ再読み込みを試行
+            loadAllData();
+            const hasDataAfterReload = Object.keys(cachedData).length > 0;
+            log(`After reload: hasData=${hasDataAfterReload}, keys=${Object.keys(cachedData)}`);
+            
+            if (!hasDataAfterReload) {
+              return {
+                content: [{
+                  type: 'text',
+                  text: `Unity project data is not available. Data path: ${path.resolve(dataPath)}. Please ensure Unity editor has been opened and MCP export scripts are running.`
+                }],
+                isError: false
+              };
+            }
+          }
+
+          if (category === 'all') {
+            return {
+              content: [{
+                type: 'text',
+                text: `# Unity Project Information (MCPLearning)\n\n${JSON.stringify(cachedData, null, 2)}`
+              }],
+              isError: false
+            };
+          } else {
+            const categoryMap: { [key: string]: string } = {
+              'project': 'project_info',
+              'scene': 'scene_info',
+              'gameobjects': 'gameobjects',
+              'assets': 'assets_info',
+              'build': 'build_info',
+              'editor': 'editor_state'
+            };
+            const dataKey = categoryMap[category];
+            const data = cachedData[dataKey];
+            
+            if (!data) {
+              return {
+                content: [{
+                  type: 'text',
+                  text: `No data found for category: ${category}. Available categories: ${Object.keys(categoryMap).join(', ')}`
+                }],
+                isError: false
+              };
+            }
+            
+            return {
+              content: [{
+                type: 'text',
+                text: `# Unity ${category.charAt(0).toUpperCase() + category.slice(1)} Information\n\n${JSON.stringify(data, null, 2)}`
+              }],
+              isError: false
+            };
+          }
         case 'ping':
           return {
             content: [{
@@ -192,11 +257,70 @@ async function handleMethod(method: string, params: any): Promise<any> {
   }
 }
 
+// データ監視開始
+function startFileWatching() {
+  const fullPath = path.resolve(dataPath);
+  if (fs.existsSync(fullPath)) {
+    log(`Watching Unity data directory: ${fullPath}`);
+    
+    fs.watch(fullPath, { recursive: false }, (eventType, filename) => {
+      if (filename && filename.endsWith('.json')) {
+        log(`Unity data file changed: ${filename}`);
+        loadDataFile(filename);
+      }
+    });
+    
+    // 初期データ読み込み
+    loadAllData();
+  } else {
+    log(`Unity data directory not found: ${fullPath}`);
+  }
+}
+
+// データファイル読み込み
+function loadDataFile(filename: string) {
+  try {
+    const filePath = path.join(path.resolve(dataPath), filename);
+    if (fs.existsSync(filePath)) {
+      const content = fs.readFileSync(filePath, 'utf-8');
+      const rawData = JSON.parse(content);
+      
+      // Unity側のSerializableDictフォーマット（items配列）を通常のオブジェクトに変換
+      let data = rawData;
+      if (rawData.items && Array.isArray(rawData.items)) {
+        data = {};
+        rawData.items.forEach((item: any) => {
+          if (item.key && item.value !== undefined) {
+            data[item.key] = item.value;
+          }
+        });
+      }
+      
+      const key = filename.replace('.json', '').replace('-', '_');
+      cachedData[key] = data;
+      log(`Loaded ${filename}: ${Object.keys(data).length} properties`);
+    }
+  } catch (error) {
+    log(`Error loading ${filename}:`, error);
+  }
+}
+
+// 全データ読み込み
+function loadAllData() {
+  const files = ['project-info.json', 'scene-info.json', 'gameobjects.json', 
+                 'assets-info.json', 'build-info.json', 'editor-state.json'];
+  
+  files.forEach(loadDataFile);
+}
+
 // メイン処理
 async function main() {
   log('Starting MCP Server...');
   log('Process ID:', process.pid);
   log('Working directory:', process.cwd());
+  
+  // ファイル監視開始
+  startFileWatching();
   
   // 標準入力からJSON-RPCメッセージを読み取る
   const rl = createInterface({
