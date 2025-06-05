@@ -5,26 +5,50 @@ execution_style: ".mdによるステップ分割ドキュメント指向"
 language_preference: 日本語で返答すること
 
 # プロジェクト進捗状況
-current_status: "Step 1 完了 + Unityプロジェクト追加完了 - MCPサーバーとClaude Desktopの通信確立済み、Unity開発環境準備完了"
+current_status: "Step 2 完了 - Unity ↔ MCP ↔ Claude Desktopのリアルタイムデータ連携確立済み"
 
 # 完了した機能
 completed_features:
-  - JSON-RPC 2.0プロトコル対応
-  - MCP プロトコル 2024-11-05 準拠
-  - stdio通信による安定した接続
-  - MCPツール機能の実装
-  - Claude Desktop統合の成功
-  - Unityモックデータの分離とテスト機能
-  - EditorConfig設定による統一フォーマット
-  - 独立したGitIgnore設定
-  - 包括的なテストスイート
-  - 詳細なドキュメント化
-  - 相対パス設定による移植性向上
-  - 個人情報の除去とプライバシー対応
-  - Unityプロジェクト（MCPLearning）の追加
-  - Unity用EditorConfig設定（UTF-8-BOM対応）
-  - Unity用GitAttributes設定（改行コード制御）
-  - Unity用GitIgnore設定
+  step_1_features:
+    - JSON-RPC 2.0プロトコル対応
+    - MCP プロトコル 2024-11-05 準拠
+    - stdio通信による安定した接続
+    - MCPツール機能の実装（unity_info, unity_info_dynamic, ping）
+    - Claude Desktop統合の成功
+    - Unityモックデータの分離とテスト機能
+    - EditorConfig設定による統一フォーマット
+    - 独立したGitIgnore設定
+    - 包括的なテストスイート
+    - 詳細なドキュメント化
+    - 相対パス設定による移植性向上
+    - 個人情報の除去とプライバシー対応
+  
+  step_2_features:
+    unity_side:
+      - Unityプロジェクト（MCPLearning）の追加・設定完了
+      - 6種類のデータエクスポーター実装（Project, Scene, GameObject, Asset, Build, Editor）
+      - インターフェース設計（IDataExporter, IChangeDetector）
+      - 自動変更検知システム（EditorApplication events）
+      - リアルタイム更新機能
+      - Unity用EditorConfig設定（UTF-8-BOM対応）
+      - Unity用GitAttributes設定（改行コード制御）
+      - Unity用GitIgnore設定（MCP Data Output除外）
+      - ファイルベースロギングシステム（MCPLogger）
+      - UnityMCPメニューシステム
+    
+    mcp_server_side:
+      - ファイル監視システム（fs.watch）
+      - unity_info_realtimeツール実装
+      - SerializableDict自動変換
+      - 相対パス対応による移植性向上
+      - エラーハンドリングとデバッグログ
+      - キャッシュ機能による高速アクセス
+    
+    integration:
+      - Unity → JSON → MCP → Claude Desktopのデータフロー確立
+      - リアルタイム更新（数秒以内での変更反映）
+      - 実データ取得（MCPLearning, Unity 6000.1.5f1）
+      - 6カテゴリの詳細情報提供
 
 environment:
   os: macOS
@@ -51,11 +75,15 @@ implemented_features:
   
   available_tools:
     - name: "unity_info"
-      description: "Unity プロジェクト情報取得（固定データ）"
+      description: "Unity プロジェクト情報取得（固定モックデータ）"
       status: "completed"
     - name: "unity_info_dynamic" 
-      description: "Unity プロジェクト情報取得（動的データ）"
+      description: "Unity プロジェクト情報取得（動的モックデータ）"
       status: "completed"
+    - name: "unity_info_realtime"
+      description: "Unity プロジェクト情報取得（実際のUnityデータ）"
+      status: "completed"
+      categories: ["project", "scene", "gameobjects", "assets", "build", "editor", "all"]
     - name: "ping"
       description: "サーバー生存確認"
       status: "completed"
@@ -81,26 +109,35 @@ file_structure:
     - package.json: "Node.jsプロジェクト設定"
     - package-lock.json: "依存関係ロック"
     - tsconfig.json: "TypeScript設定"
-    - mcp-config.json: "Claude Desktop設定例"
-    - test-ping.sh: "包括的テストスクリプト"
+    - mcp-config.json: "設定ファイル（パス指定・ポータブル対応）"
+    - .env.example: "環境変数設定例"
     - src/:
-      - index.ts: "MCPサーバーメイン実装"
-      - unity-mock-data.ts: "Unityモックデータ定義"
+      - index.ts: "MCPサーバーメイン実装（リアルタイムデータ取得）"
     - dist/: "コンパイル済みファイル（gitignore対象）"
   MCPLearning/:
     - .editorconfig: "Unity用フォーマット設定（UTF-8-BOM対応）"
     - .gitattributes: "改行コード制御設定"
-    - .gitignore: "Unity専用GitIgnore設定"
+    - .gitignore: "Unity専用GitIgnore設定（MCP Data除外）"
     - Assets/: "Unityアセットディレクトリ"
+    - Assets/UnityMCP/Editor/: "MCPデータエクスポートシステム"
+      - Common/: "共通機能（インターフェース、ロガー）"
+      - Exporters/: "6種類のデータエクスポーター"
+      - MCPDataExporter.cs: "メインエクスポーター・メニュー"
+    - UnityMCP/Data/: "JSON出力ディレクトリ（Assets外）"
+      - "6種類のJSONファイル自動生成"
     - ProjectSettings/: "Unityプロジェクト設定"
-    - Packages/: "Unity Package Manager設定"
+    - Packages/: "Unity Package Manager設定（Unity Logging含む）"
   docs/:
     - prompt/:
       - prompt.yaml: "プロジェクト基本仕様"
-      - prompt-updated.yaml: "現在の進捗状況"
+      - prompt-updated.yaml: "現在の進捗状況（ポータブル化対応完了版）"
     - tutorial/:
-      - step1-ping-api.md: "Step 1 実装ガイド"
-      - claude-desktop-setup.md: "Claude Desktop設定手順"
+      - 00-getting-started.md: "プロジェクト概要・前提知識・学習の流れ"
+      - 01-environment-setup.md: "環境設定・Claude Desktop設定ガイド"
+      - 02-step1-basic-communication.md: "Step 1: 基本通信確立"
+      - 03-step2-unity-integration.md: "Step 2: Unity連携システム実装"
+      - 04-troubleshooting.md: "包括的トラブルシューティング"
+      - 05-advanced-configuration.md: "高度な設定・カスタマイズ・配布"
 
 goals:
   step_1:
@@ -118,18 +155,44 @@ goals:
       - "初学者向けドキュメント作成"
     
   step_2:
-    description: "Unity → JSON出力 → MCPが読み取る設計"
-    status: "🔄 準備完了（Unityプロジェクト追加済み）"
-    requirements:
-      - "Unity Editor Script作成"
-      - "実際のUnity情報出力"
-      - "ファイル監視機能実装"
-      - "UnityMCP/ディレクトリの作成"
-    unity_project_status:
-      - "✅ MCPLearningプロジェクト作成済み"
-      - "✅ EditorConfig設定完了"
-      - "✅ GitAttributes設定完了"
-      - "✅ GitIgnore設定完了"
+    description: "Unity → JSON出力 → MCPリアルタイム監視システム"
+    status: "✅ 完了"
+    completion_date: "2025年6月5日"
+    achievements:
+      - "6種類のデータエクスポーター完全実装"
+      - "自動変更検知システム構築"
+      - "リアルタイム更新（数秒以内）"
+      - "unity_info_realtimeツール実装"
+      - "ファイル監視システム確立"
+      - "実データ取得成功（MCPLearning, Unity 6000.1.5f1）"
+      - "SerializableDict自動変換"
+      - "絶対パス対応による安定化"
+    
+    implemented_features:
+      unity_exporters:
+        - "ProjectInfoExporter（プロジェクト基本情報）"
+        - "SceneInfoExporter（シーン状態）"
+        - "GameObjectExporter（GameObject一覧・位置）"
+        - "AssetInfoExporter（アセット統計）"
+        - "BuildInfoExporter（ビルド設定）"
+        - "EditorStateExporter（エディター状態）"
+      
+      automation:
+        - "EditorApplication.hierarchyChanged監視"
+        - "EditorApplication.projectChanged監視"
+        - "Selection.selectionChanged監視"
+        - "変更検知による効率的更新"
+      
+      file_structure:
+        - "Assets/UnityMCP/Editor/（エクスポーター）"
+        - "UnityMCP/Data/（JSON出力先）"
+        - "6種類のJSONファイル自動生成"
+    
+    verified_functionality:
+      - "GameObject追加→即座反映確認"
+      - "実データ取得（vs モックデータ）"
+      - "タイムスタンプ付きリアルタイム更新"
+      - "Claude Desktopでの日本語表示"
     
   step_3:
     description: "Claude ⇨ MCP ⇨ Unity の実行ルートを通して、Cubeを生成"
@@ -187,25 +250,37 @@ git_commits:
 
 # 現在の開発状況
 development_status:
-  current_phase: "Step 2 設計完了、実装準備完了"
-  working_tree: "clean（設計ドキュメント更新済み）"
-  commits_ahead: "9+ commits ahead of origin/main"
-  build_status: "✅ 正常（TypeScript コンパイル成功）"
-  test_status: "✅ 全テスト通過"
-  claude_desktop_integration: "✅ 動作確認済み（相対パス設定）"
-  unity_project_status: "✅ MCPLearningプロジェクト作成・設定完了"
-  step2_design_status: "✅ インターフェース設計・Unity Logging・変更検知設計完了"
+  current_phase: "Step 2 完了・ポータブル化対応完了、Step 3 準備段階"
+  step2_completion: "✅ 2025年6月5日 完了"
+  portability_fixes: "✅ 2025年6月5日 パス設定問題解決・個人情報除去完了"
+  working_tree: "リアルタイム連携システム動作中（ポータブル設定）"
+  commits_ahead: "15+ commits ahead of origin/main（Step 2実装分 + ポータブル化）"
+  build_status: "✅ 正常（TypeScript コンパイル成功、動的パス解決対応）"
+  test_status: "✅ 全機能動作確認済み（相対パス・設定ファイル経由）"
+  claude_desktop_integration: "✅ 実データ取得成功（MCPLearning, Unity 6000.1.5f1）"
+  unity_project_status: "✅ 完全動作（自動エクスポート、リアルタイム更新）"
+  realtime_data_flow: "✅ Unity → JSON → MCP → Claude Desktop連携確立"
+  privacy_compliance: "✅ 個人情報除去完了（GitHub公開準備済み）"
 
 recent_improvements:
   privacy_security:
     - "個人情報（ユーザー名）の除去完了"
     - "ドキュメント内パスの汎用化"
     - "mcp-config.jsonの相対パス対応"
+    - "GitHub公開準備完了（unity-mcp-node + Assets/UnityMCP）"
   
   portability:
-    - "相対パス設定への移行"
+    - "動的パス解決システム実装"
+    - "環境変数・設定ファイル・フォールバック対応"
     - "Claude Desktop設定の最適化"
     - "プラットフォーム非依存の設定例"
+    - ".env.example設定テンプレート追加"
+  
+  path_resolution_fixes:
+    - "Claude Desktop起動時のprocess.cwd()問題解決"
+    - "設定ファイル基準の相対パス解決"
+    - "デバッグログ強化でトラブルシューティング改善"
+    - "3段階パス解決（環境変数→設定→フォールバック）"
   
   unity_environment:
     - "MCPLearningプロジェクト作成完了"
@@ -225,27 +300,35 @@ recent_improvements:
     - "将来機能ロードマップ策定"
 
 next_steps:
-  priority_high:
-    - "Unity Logging package導入"
-    - "インターフェース実装（IDataExporter, IChangeDetector）"
-    - "各エクスポーター実装（6種類）"
-    - "MCPサーバー側ファイル監視実装"
-    - "統合テスト実行"
+  step_3_requirements:
+    - "Claude Desktop → MCP → Unity制御実装"
+    - "GameObject生成・操作コマンド"
+    - "Unity Editor Script制御機能"
+    - "双方向完全連携の実現"
   
-  documentation:
-    - "実装進捗の記録"
-    - "テスト結果ドキュメント化"
+  documentation_completed:
+    - "✅ Step 2完了報告書作成"
+    - "✅ prompt-updated.yaml更新"
+    - "✅ 実装進捗の詳細記録"
+    - "✅ リアルタイム動作確認記録"
 
 # Claude Desktop設定
 claude_desktop_config:
   path: "~/Library/Application Support/Claude/claude_desktop_config.json"
   current_setup:
     mcpServers:
-      unity-mcp:
-        command: "npm"
-        args: ["run", "dev"]
-        cwd: "./unity-mcp-node"
+      unity-mcp-prod:
+        command: "node"
+        args: ["./unity-mcp-node/dist/index.js"]
   advantages:
-    - "相対パス使用で移植性向上"
-    - "開発用設定で自動リロード対応"
+    - "本番用ビルドファイル使用"
+    - "相対パス対応による移植性向上"
+    - "リアルタイム監視機能完全動作"
     - "個人情報を含まない汎用的設定"
+    - "配布可能な設定ファイル"
+  
+  verified_tools:
+    - "unity_info_realtime: ✅ 実データ取得成功"
+    - "unity_info: ✅ モックデータ（後方互換性）"
+    - "unity_info_dynamic: ✅ 動的モックデータ"
+    - "ping: ✅ 接続確認"
