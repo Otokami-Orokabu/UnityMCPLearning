@@ -70,6 +70,16 @@ const getUnityDataPath = () => {
 const dataPath = getUnityDataPath();
 let cachedData: { [key: string]: any } = {};
 
+// Unity コマンド実行関連
+const getUnityCommandPath = () => {
+  // Unityコマンドディレクトリのパス取得
+  const basePath = getUnityDataPath();
+  return path.resolve(path.dirname(basePath), 'Commands');
+};
+
+const COMMAND_FILE = 'command-queue.json';
+const RESULT_FILE = 'command-result.json';
+
 // 標準エラー出力にログを出力（デバッグ用）
 function log(...args: any[]) {
   console.error('[MCP Server]', ...args);
@@ -152,6 +162,78 @@ async function handleMethod(method: string, params: any): Promise<any> {
             }
           },
           {
+            name: 'create_cube',
+            description: 'Create a cube in Unity scene',
+            inputSchema: {
+              type: 'object',
+              properties: {
+                name: {
+                  type: 'string',
+                  description: 'Name of the cube',
+                  default: 'Cube'
+                },
+                position: {
+                  type: 'object',
+                  properties: {
+                    x: { type: 'number', default: 0 },
+                    y: { type: 'number', default: 0 },
+                    z: { type: 'number', default: 0 }
+                  },
+                  description: 'Position in 3D space'
+                },
+                scale: {
+                  type: 'object',
+                  properties: {
+                    x: { type: 'number', default: 1 },
+                    y: { type: 'number', default: 1 },
+                    z: { type: 'number', default: 1 }
+                  },
+                  description: 'Scale in 3D space'
+                },
+                color: {
+                  type: 'string',
+                  enum: ['red', 'green', 'blue', 'yellow', 'magenta', 'cyan', 'white', 'black'],
+                  description: 'Color of the cube',
+                  default: 'white'
+                }
+              },
+              required: []
+            }
+          },
+          {
+            name: 'create_sphere',
+            description: 'Create a sphere in Unity scene',
+            inputSchema: {
+              type: 'object',
+              properties: {
+                name: {
+                  type: 'string',
+                  description: 'Name of the sphere',
+                  default: 'Sphere'
+                },
+                position: {
+                  type: 'object',
+                  properties: {
+                    x: { type: 'number', default: 0 },
+                    y: { type: 'number', default: 0 },
+                    z: { type: 'number', default: 0 }
+                  },
+                  description: 'Position in 3D space'
+                },
+                scale: {
+                  type: 'object',
+                  properties: {
+                    x: { type: 'number', default: 1 },
+                    y: { type: 'number', default: 1 },
+                    z: { type: 'number', default: 1 }
+                  },
+                  description: 'Scale in 3D space'
+                }
+              },
+              required: []
+            }
+          },
+          {
             name: 'ping',
             description: 'Test server connection',
             inputSchema: {
@@ -228,6 +310,12 @@ async function handleMethod(method: string, params: any): Promise<any> {
               isError: false
             };
           }
+        case 'create_cube':
+          return await executeUnityCommand('create_cube', params?.arguments);
+        
+        case 'create_sphere':
+          return await executeUnityCommand('create_sphere', params?.arguments);
+
         case 'ping':
           return {
             content: [{
@@ -311,6 +399,229 @@ function loadAllData() {
                  'assets-info.json', 'build-info.json', 'editor-state.json'];
   
   files.forEach(loadDataFile);
+}
+
+// Unity コマンド実行
+async function executeUnityCommand(commandType: string, args: any): Promise<any> {
+  const commandId = randomUUID();
+  
+  try {
+    // 入力検証
+    if (!commandType || typeof commandType !== 'string') {
+      throw new Error('Invalid command type provided');
+    }
+    
+    // サポートされているコマンドタイプの検証
+    const supportedCommands = ['create_cube', 'create_sphere', 'create_plane', 'create_gameobject'];
+    if (!supportedCommands.includes(commandType)) {
+      throw new Error(`Unsupported command type: ${commandType}`);
+    }
+    
+    const commandPath = getUnityCommandPath();
+    
+    // コマンドディレクトリを作成
+    if (!fs.existsSync(commandPath)) {
+      try {
+        fs.mkdirSync(commandPath, { recursive: true });
+        log(`Created command directory: ${commandPath}`);
+      } catch (dirError: any) {
+        throw new Error(`Failed to create command directory: ${dirError.message}`);
+      }
+    }
+    
+    // パラメータの検証と正規化
+    const validatedParams = validateCommandParameters(commandType, args);
+    
+    // コマンドオブジェクトを作成
+    const command = {
+      commandId: commandId,
+      commandType: commandType,
+      parameters: validatedParams,
+      timestamp: new Date().toISOString(),
+      status: 'Pending',
+      retryCount: 0,
+      maxRetries: 3
+    };
+    
+    // コマンドファイルに書き込み
+    const commandFilePath = path.join(commandPath, COMMAND_FILE);
+    try {
+      fs.writeFileSync(commandFilePath, JSON.stringify(command, null, 2));
+      log(`Command sent to Unity: ${commandType} (ID: ${command.commandId})`);
+    } catch (writeError: any) {
+      throw new Error(`Failed to write command file: ${writeError.message}`);
+    }
+    
+    // 結果ファイルを監視して待機（タイムアウト拡張）
+    const result = await waitForCommandResult(commandPath, command.commandId, 15000); // 15秒タイムアウト
+    
+    // 結果の検証
+    if (result.status === 'Failed') {
+      throw new Error(`Unity command failed: ${result.errorMessage || 'Unknown error'}`);
+    }
+    
+    return {
+      content: [{
+        type: 'text',
+        text: `✅ Unity Command executed successfully: ${result.result || 'Command completed'}\n` +
+              `Command ID: ${commandId}\n` +
+              `Duration: ${calculateDuration(command.timestamp, new Date().toISOString())}`
+      }],
+      isError: false
+    };
+    
+  } catch (error: any) {
+    log(`❌ Unity command execution error [${commandId}]:`, error.message);
+    
+    // エラーの分類
+    let errorCategory = 'Unknown';
+    let userMessage = error.message;
+    
+    if (error.message.includes('timeout')) {
+      errorCategory = 'Timeout';
+      userMessage = 'Unity command timed out. Unity Editor may be busy or not responding.';
+    } else if (error.message.includes('directory')) {
+      errorCategory = 'FileSystem';
+      userMessage = 'Failed to access command directory. Check Unity project permissions.';
+    } else if (error.message.includes('Unsupported command')) {
+      errorCategory = 'InvalidCommand';
+    } else if (error.message.includes('Invalid')) {
+      errorCategory = 'ValidationError';
+    }
+    
+    return {
+      content: [{
+        type: 'text',
+        text: `❌ Unity Command Failed\n` +
+              `Error Category: ${errorCategory}\n` +
+              `Command ID: ${commandId}\n` +
+              `Message: ${userMessage}\n` +
+              `\nTroubleshooting:\n` +
+              `- Ensure Unity Editor is running\n` +
+              `- Check Unity project is open\n` +
+              `- Verify UnityMCP scripts are installed`
+      }],
+      isError: true
+    };
+  }
+}
+
+// コマンドパラメーターの検証
+function validateCommandParameters(commandType: string, args: any): any {
+  const params = args || {};
+  
+  switch (commandType) {
+    case 'create_cube':
+    case 'create_sphere':
+    case 'create_plane':
+      // 名前の検証
+      if (params.name && typeof params.name !== 'string') {
+        throw new Error('Name parameter must be a string');
+      }
+      
+      // 位置の検証
+      if (params.position) {
+        validateVector3Parameter('position', params.position);
+      }
+      
+      // スケールの検証
+      if (params.scale) {
+        validateVector3Parameter('scale', params.scale);
+      }
+      
+      // 色の検証（create_cubeのみ）
+      if (commandType === 'create_cube' && params.color) {
+        const validColors = ['red', 'green', 'blue', 'yellow', 'magenta', 'cyan', 'black', 'white'];
+        if (typeof params.color !== 'string' || !validColors.includes(params.color.toLowerCase())) {
+          throw new Error(`Invalid color. Supported colors: ${validColors.join(', ')}`);
+        }
+        params.color = params.color.toLowerCase();
+      }
+      break;
+      
+    case 'create_gameobject':
+      if (params.name && typeof params.name !== 'string') {
+        throw new Error('Name parameter must be a string');
+      }
+      if (params.position) {
+        validateVector3Parameter('position', params.position);
+      }
+      break;
+      
+    default:
+      throw new Error(`Unknown command type for validation: ${commandType}`);
+  }
+  
+  return params;
+}
+
+// Vector3パラメーターの検証
+function validateVector3Parameter(paramName: string, vector: any): void {
+  if (typeof vector !== 'object' || vector === null) {
+    throw new Error(`${paramName} must be an object with x, y, z properties`);
+  }
+  
+  ['x', 'y', 'z'].forEach(axis => {
+    if (vector[axis] !== undefined && typeof vector[axis] !== 'number') {
+      throw new Error(`${paramName}.${axis} must be a number`);
+    }
+    // 範囲チェック（過度に大きな値を防ぐ）
+    if (vector[axis] !== undefined && (vector[axis] < -1000 || vector[axis] > 1000)) {
+      throw new Error(`${paramName}.${axis} must be between -1000 and 1000`);
+    }
+  });
+}
+
+// 実行時間計算
+function calculateDuration(startTime: string, endTime: string): string {
+  const start = new Date(startTime).getTime();
+  const end = new Date(endTime).getTime();
+  const duration = end - start;
+  return `${duration}ms`;
+}
+
+// コマンド結果の待機
+async function waitForCommandResult(commandPath: string, commandId: string, timeoutMs: number): Promise<any> {
+  const resultFilePath = path.join(commandPath, RESULT_FILE);
+  const startTime = Date.now();
+  
+  return new Promise((resolve, reject) => {
+    const checkResult = () => {
+      // タイムアウトチェック
+      if (Date.now() - startTime > timeoutMs) {
+        reject(new Error('Command execution timeout'));
+        return;
+      }
+      
+      // 結果ファイルの存在確認
+      if (fs.existsSync(resultFilePath)) {
+        try {
+          const resultJson = fs.readFileSync(resultFilePath, 'utf-8');
+          const result = JSON.parse(resultJson);
+          
+          // コマンドIDが一致するかチェック
+          if (result.commandId === commandId) {
+            // 結果ファイルを削除
+            fs.unlinkSync(resultFilePath);
+            
+            if (result.status === 'Completed') {
+              resolve(result);
+            } else {
+              reject(new Error(result.errorMessage || 'Command execution failed'));
+            }
+            return;
+          }
+        } catch (error) {
+          // ファイル読み込みエラーは無視して再試行
+        }
+      }
+      
+      // 100ms後に再チェック
+      setTimeout(checkResult, 100);
+    };
+    
+    checkResult();
+  });
 }
 
 // メイン処理
