@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using System.Threading.Tasks;
 
 namespace UnityMCP.Editor
 {
@@ -14,12 +15,17 @@ namespace UnityMCP.Editor
         
         public static void WriteJsonFile(string fileName, Dictionary<string, object> data)
         {
+            WriteJsonFileAsync(fileName, data).ConfigureAwait(false);
+        }
+        
+        public static async Task WriteJsonFileAsync(string fileName, Dictionary<string, object> data)
+        {
             var stopwatch = System.Diagnostics.Stopwatch.StartNew();
             MCPLogger.LogExportStart(fileName);
             
             try
             {
-                EnsureDataDirectory();
+                await EnsureDataDirectoryAsync();
                 
                 // 時刻情報を追加
                 data["timestamp"] = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ");
@@ -27,7 +33,7 @@ namespace UnityMCP.Editor
                 var json = JsonUtility.ToJson(new SerializableDict(data), true);
                 var filePath = Path.Combine(DataPath, fileName);
                 
-                File.WriteAllText(filePath, json);
+                await WriteFileAsync(filePath, json);
                 stopwatch.Stop();
                 
                 var fileInfo = new FileInfo(filePath);
@@ -47,6 +53,21 @@ namespace UnityMCP.Editor
             {
                 Directory.CreateDirectory(DataPath);
             }
+        }
+        
+        private static async Task EnsureDataDirectoryAsync()
+        {
+            await Task.Yield(); // Switch to background thread
+            if (!Directory.Exists(DataPath))
+            {
+                Directory.CreateDirectory(DataPath);
+            }
+        }
+        
+        private static async Task WriteFileAsync(string filePath, string content)
+        {
+            await Task.Yield(); // Switch to background thread
+            File.WriteAllText(filePath, content);
         }
     }
     

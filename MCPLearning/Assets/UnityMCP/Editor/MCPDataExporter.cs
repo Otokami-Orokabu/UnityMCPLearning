@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace UnityMCP.Editor
 {
@@ -41,7 +42,7 @@ namespace UnityMCP.Editor
             stopwatch.Stop();
             MCPLogger.LogPerformanceMetrics(_exporters.Count, _exporters.Count, stopwatch.Elapsed.TotalMilliseconds);
             
-            Debug.Log($"[MCP] 全データのエクスポートが完了しました。({stopwatch.Elapsed.TotalMilliseconds:F2}ms)");
+            MCPLogger.Log($"全データのエクスポートが完了しました。({stopwatch.Elapsed.TotalMilliseconds:F2}ms)");
         }
         
         public static void ExportChangedData()
@@ -70,11 +71,11 @@ namespace UnityMCP.Editor
             if (changedExporters.Count > 0)
             {
                 MCPLogger.LogPerformanceMetrics(_exporters.Count, changedExporters.Count, stopwatch.Elapsed.TotalMilliseconds);
-                Debug.Log($"[MCP] {changedExporters.Count}個のデータをエクスポートしました。({stopwatch.Elapsed.TotalMilliseconds:F2}ms)");
+                MCPLogger.Log($"{changedExporters.Count}個のデータをエクスポートしました。({stopwatch.Elapsed.TotalMilliseconds:F2}ms)");
             }
             else
             {
-                Debug.Log("[MCP] 変更されたデータはありません。");
+                MCPLogger.Log("変更されたデータはありません。");
             }
         }
         
@@ -87,7 +88,7 @@ namespace UnityMCP.Editor
             Selection.selectionChanged += OnSelectionChanged;
             EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
             
-            Debug.Log("[MCP] データエクスポーターが初期化されました。");
+            MCPLogger.Log("データエクスポーターが初期化されました。");
         }
         
         private static void OnHierarchyChanged()
