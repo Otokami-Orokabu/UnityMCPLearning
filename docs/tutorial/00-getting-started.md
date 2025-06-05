@@ -15,10 +15,10 @@
 - 6種類のUnityデータエクスポート（プロジェクト、シーン、オブジェクト、アセット、ビルド、エディター）
 - 自動変更検知とリアルタイム更新
 
-### Step 3: Unity制御（今後予定）
+### Step 3: Unity制御（完了）
 - Claude Desktop → MCP → Unityの逆方向制御
-- GameObjectの生成・操作
-- Unityエディターの自動化
+- GameObjectの生成・操作（Cube、Sphere、Plane、空のGameObject）
+- リアルタイムコマンド実行とエラーハンドリング
 
 ## 📋 前提知識
 
@@ -70,6 +70,21 @@
 - カスタマイズ方法
 - 異なる環境での設定
 - 性能最適化
+
+### 6. Step 3: Unity制御 → `06-step3-unity-control.md`
+- Claude → Unity コマンドシステム
+- GameObject作成・操作
+- エラーハンドリング実装
+
+### 7. 機能一覧 → `07-current-capabilities.md`
+- 利用可能な全機能詳細
+- 活用方法と応用例
+- パフォーマンス指標
+
+### 8. クイックスタート → `08-quick-start-guide.md`
+- 5分で機能体験
+- 基本操作テスト
+- トラブルシューティング
 
 ## 🏗 プロジェクト構成
 
