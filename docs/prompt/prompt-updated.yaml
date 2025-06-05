@@ -96,35 +96,41 @@ implemented_features:
     - protocol: "2024-11-05"
   
   available_tools:
-    - name: "unity_info"
-      description: "Unity プロジェクト情報取得（固定モックデータ）"
-      status: "completed"
-    - name: "unity_info_dynamic" 
-      description: "Unity プロジェクト情報取得（動的モックデータ）"
-      status: "completed"
     - name: "unity_info_realtime"
-      description: "Unity プロジェクト情報取得（実際のUnityデータ）"
+      description: "Unity プロジェクト情報取得（リアルタイムデータ）"
       status: "completed"
       categories: ["project", "scene", "gameobjects", "assets", "build", "editor", "all"]
+      parameters: ["category (optional)"]
     - name: "ping"
       description: "サーバー生存確認"
       status: "completed"
+      parameters: []
     - name: "create_cube"
       description: "Unity Editor で立方体（Cube）GameObject を作成"
       status: "completed"
-      parameters: ["name (optional)", "x (optional)", "y (optional)", "z (optional)"]
+      parameters: ["name (optional)", "position (optional)", "scale (optional)", "color (optional)"]
     - name: "create_sphere"
       description: "Unity Editor で球体（Sphere）GameObject を作成"
       status: "completed"
-      parameters: ["name (optional)", "x (optional)", "y (optional)", "z (optional)"]
+      parameters: ["name (optional)", "position (optional)", "scale (optional)"]
+  
+  tools_in_preparation:
     - name: "create_plane"
       description: "Unity Editor で平面（Plane）GameObject を作成"
-      status: "completed"
-      parameters: ["name (optional)", "x (optional)", "y (optional)", "z (optional)"]
+      status: "validation_ready"
+      note: "バリデーション実装済み、ツールリスト未登録"
     - name: "create_empty_gameobject"
       description: "Unity Editor で空の GameObject を作成"
-      status: "completed"
-      parameters: ["name (optional)", "x (optional)", "y (optional)", "z (optional)"]
+      status: "validation_ready"
+      note: "バリデーション実装済み、ツールリスト未登録"
+  
+  removed_tools:
+    - name: "unity_info"
+      description: "固定モックデータ取得"
+      reason: "unity_info_realtime に統合"
+    - name: "unity_info_dynamic"
+      description: "動的モックデータ取得"
+      reason: "unity_info_realtime に統合"
   
   data_structure:
     - editorVersion: "Unity エディターバージョン"
@@ -349,12 +355,12 @@ git_commits:
 
 # 現在の開発状況
 development_status:
-  current_phase: "Step 3 完了・Claude Desktop ↔ Unity完全双方向制御システム確立済み"
+  current_phase: "品質改善フェーズ・Step 3完了後のテスト環境構築とドキュメント整理"
   step2_completion: "✅ 2025年6月5日 完了"
   step3_completion: "✅ 2025年6月5日 完了"
   portability_fixes: "✅ 2025年6月5日 パス設定問題解決・個人情報除去完了"
   working_tree: "リアルタイム双方向連携システム動作中（Unity制御対応）"
-  commits_ahead: "20+ commits ahead of origin/main（Step 3実装分 + エラーハンドリング強化）"
+  commits_ahead: "28+ commits ahead of origin/main（Step 3実装分 + 品質改善・ドキュメント整理）"
   build_status: "✅ 正常（TypeScript コンパイル成功、Unity C#コンパイル成功）"
   test_status: "✅ 全機能動作確認済み（GameObject作成・Claude操作）"
   claude_desktop_integration: "✅ 実データ取得・Unity制御成功（MCPLearning, Unity 6000.1.5f1）"
@@ -364,7 +370,9 @@ development_status:
   unity_control_system: "✅ GameObject作成・エラーハンドリング・非同期処理完全実装"
   documentation_organization: "✅ 2025年6月5日 ドキュメント構造整理完了（development/, legal/カテゴリ追加）"
   quality_improvement_planning: "✅ 2025年6月5日 コード品質改善計画策定・GitHub Issue #6作成"
-  test_framework_setup: "🔄 進行中 Jest設定完了、Unity Test Runner設定中"
+  test_framework_setup: "✅ 2025年6月5日 Jest・Unity Test Runner設定完了"
+  document_consolidation: "✅ 2025年6月5日 README.md統合・重複ドキュメント削除完了"
+  tutorial_updates: "✅ 2025年6月5日 チュートリアル修正・実装状況反映完了"
 
 recent_improvements:
   privacy_security:
@@ -430,6 +438,20 @@ recent_improvements:
     - "Jest設定ファイル作成・package.json更新"
     - "Unity Test用Assembly Definition作成"
 
+  document_integration:
+    - "README.md への情報統合（2025年6月5日）"
+    - "PROJECT_STATUS.md 削除・重複解消"
+    - "CURRENT_PRIORITIES.md 削除・GitHub Issue統合"
+    - "docs/README.md 更新・参照先修正"
+    - "技術スタック詳細・実装状況の一元化"
+
+  tutorial_corrections:
+    - "07-current-capabilities.md 修正（実装状況の正確化）"
+    - "08-quick-start-guide.md 修正（未実装コマンド削除）"
+    - "02-step1-basic-communication.md 修正（削除ツール除去）"
+    - "06-step3-unity-control.md 修正（実装準備中ツール分離）"
+    - "MCPツール情報の統一（4種類実装済み、2種類準備中）"
+
 next_steps:
   step_4_planning:
     - "MCPのAPI構成拡張・管理性向上"
@@ -440,9 +462,10 @@ next_steps:
     - "コンポーネント操作機能"
   
   immediate_priorities:
-    - "Jest テストスイート実装（TypeScript側）"
-    - "Unity Test Runner テスト実装（Unity側）"
-    - "エラーハンドリング統一実装"
+    - "Jest 依存関係インストール・テストスイート実装（TypeScript側）"
+    - "Unity Test Runner テストクラス実装（Unity側）"
+    - "エラーハンドリング統一実装（ErrorCode enum・MCPError class）"
+    - "create_plane・create_gameobject ツールリスト登録"
     - "JSON Schema設定検証機能追加"
     - "GitHub Actions CI/CD構築"
   
@@ -452,9 +475,12 @@ next_steps:
     - "✅ 包括的ドキュメント整備"
     - "✅ 初学者向けガイド・クイックスタート"
     - "✅ チュートリアル構成整理"
-    - "✅ README.md包括的更新"
+    - "✅ README.md包括的更新・情報統合"
     - "✅ ドキュメント構造整理（development/, legal/カテゴリ化）"
     - "✅ コード品質改善計画策定・GitHub Issue化"
+    - "✅ 重複ドキュメント削除・一元化"
+    - "✅ チュートリアル実装状況修正"
+    - "✅ MCPツール情報の正確化（4実装済み・2準備中）"
 
 # Claude Desktop設定
 claude_desktop_config:
@@ -472,11 +498,11 @@ claude_desktop_config:
     - "配布可能な設定ファイル"
   
   verified_tools:
-    - "unity_info_realtime: ✅ 実データ取得成功"
-    - "unity_info: ✅ モックデータ（後方互換性）"
-    - "unity_info_dynamic: ✅ 動的モックデータ"
-    - "ping: ✅ 接続確認"
-    - "create_cube: ✅ 立方体作成成功"
+    - "unity_info_realtime: ✅ リアルタイムデータ取得成功（カテゴリ指定対応）"
+    - "ping: ✅ 接続確認成功"
+    - "create_cube: ✅ 立方体作成成功（色指定対応）"
     - "create_sphere: ✅ 球体作成成功"
-    - "create_plane: ✅ 平面作成成功"
-    - "create_empty_gameobject: ✅ 空オブジェクト作成成功"
+  
+  tools_status_updated:
+    - "unity_info・unity_info_dynamic: 削除済み（unity_info_realtime に統合）"
+    - "create_plane・create_gameobject: 実装準備完了（バリデーション済み・ツールリスト未登録）"
