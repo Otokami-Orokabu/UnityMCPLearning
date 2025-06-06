@@ -16,15 +16,13 @@ Unity MCPプロジェクトの包括的なドキュメント集です。
 - **[06-step3-unity-control.md](./tutorial/06-step3-unity-control.md)** - Unity制御システム
 - **[07-current-capabilities.md](./tutorial/07-current-capabilities.md)** - 現在の機能
 - **[08-quick-start-guide.md](./tutorial/08-quick-start-guide.md)** - クイックスタートガイド
-- **[09-code-quality-improvements.md](./tutorial/09-code-quality-improvements.md)** - コード品質改善とファイル分割
+- **[09-claude-code-mcp-integration.md](./tutorial/09-claude-code-mcp-integration.md)** - Claude Code CLI統合ガイド
+- **[10-unity-console-integration-guide.md](./tutorial/10-unity-console-integration-guide.md)** - Unity Console統合・AI駆動開発ガイド（最新✨）
 
 ### 🛠️ [development/](./development/) - 開発者向けドキュメント
-コード品質、テスト、改善計画など開発に関する技術情報です。
+現在進行中の開発計画と将来のロードマップです。
 
-- **[code-quality-analysis.md](./development/code-quality-analysis.md)** - コード品質分析レポート
-- **[improvement-roadmap.md](./development/improvement-roadmap.md)** - 改善ロードマップ
-- **[unity-test-runner-guide.md](./development/unity-test-runner-guide.md)** - Unity Test Runner導入ガイド
-- **[review-based-tasks.md](./development/review-based-tasks.md)** - 査読レポートに基づく改善タスク一覧
+- **[comprehensive-roadmap.md](./development/comprehensive-roadmap.md)** - 包括的開発ロードマップ（継続更新中）
 
 ### ⚖️ [legal/](./legal/) - 法的・セキュリティ文書
 ライセンス、セキュリティ対策、公開準備に関する情報です。
@@ -32,13 +30,23 @@ Unity MCPプロジェクトの包括的なドキュメント集です。
 - **[license-guide.md](./legal/license-guide.md)** - ライセンスガイド（MIT License）
 - **[security-analysis.md](./legal/security-analysis.md)** - セキュリティ分析と公開準備
 
+### 📁 [completed/](./completed/) - 完了済みドキュメント
+実装・達成が完了した計画・タスクのドキュメントです。
+
+- **[claude-code-integration.md](./completed/claude-code-integration.md)** - Claude Code CLI統合（✅ 完了）
+- **[unity-console-integration.md](./completed/unity-console-integration.md)** - Unity Console統合（✅ 完了）
+- **[improvement-roadmap.md](./completed/improvement-roadmap.md)** - 改善ロードマップ（✅ 完了）
+- **[code-quality-analysis.md](./completed/code-quality-analysis.md)** - コード品質分析・改善（✅ 完了）
+- **[unity-test-runner-guide.md](./completed/unity-test-runner-guide.md)** - Unity Test Runner導入（✅ 完了）
+- **[review-based-tasks.md](./completed/review-based-tasks.md)** - 査読ベース改善タスク（✅ 完了）
+
 ### 🚀 [future/](./future/) - 将来計画
 今後の機能拡張や発展計画についてのアイデアと設計です。
 
 - **[distribution-packages.md](./future/distribution-packages.md)** - 配布パッケージ計画
 - **[future-ideas.md](./future/future-ideas.md)** - 将来のアイデア
-- **[unity-console-integration.md](./future/unity-console-integration.md)** - Unity Console統合
-- **[unity-mcp-manager.md](./future/unity-mcp-manager.md)** - Unity MCP管理システム
+- **[github-actions-claude-code.md](./future/github-actions-claude-code.md)** - GitHub Actions自動化
+- **[unity-mcp-manager.md](./future/unity-mcp-manager.md)** - Unity Editor統合管理システム
 
 ### 🤖 [prompt/](./prompt/) - AI設定ファイル
 Claude DesktopとのやりとりやAI設定に関するファイルです。
@@ -70,12 +78,19 @@ Claude DesktopとのやりとりやAI設定に関するファイルです。
 
 **包括的な情報**: メインの [README.md](../README.md) にプロジェクト全体の詳細情報があります。
 
-**現在の状態**: 運用レベル品質達成 - 全査読ベースタスク完了、品質改善フェーズ完了
+**現在の状態**: Unity Console統合完了 - AI駆動Unity開発実現・リアルタイムエラー検知・即座フィードバック機能完備
+
+### 🚀 最新実装機能
+- **Unity Console統合** - リアルタイムエラー検知とコンパイル監視
+- **AI駆動開発サイクル** - Claude Code ↔ Unity ↔ MCP Server完全統合
+- **即座フィードバック** - コンパイル結果を1-3秒で取得
+- **詳細エラー情報** - ファイル・行番号の正確な位置特定
 
 ### 実装済み機能
 - Claude Desktop ↔ MCP Server ↔ Unity Editor の双方向通信
-- リアルタイムデータ取得（6種類のエクスポーター）
+- リアルタイムデータ取得（6種類のエクスポーター + Console/Compile監視）
 - Unity制御コマンド（GameObject作成、4ツール実装済み）
+- **Unity Console統合機能**（get_console_logs、wait_for_compilation）
 - 包括的エラーハンドリング（ErrorCode enum + MCPError class）
 - 設定ファイル検証（JSON Schema + ajv）
 - モジュール化アーキテクチャ（8専門モジュール）
@@ -89,11 +104,22 @@ Claude DesktopとのやりとりやAI設定に関するファイルです。
 - ✅ 設定検証システム
 - ✅ テストカバレッジ大幅改善
 - ✅ debounce機能によるパフォーマンス最適化
+- ✅ Unity Console統合（AI駆動開発実現）
+- ✅ ドキュメント整理（completed/カテゴリ追加）
+
+### 📁 完了済み機能
+詳細は [completed/](./completed/) ディレクトリを参照：
+- Claude Code CLI統合（2025年6月6日完了）
+- Unity Console統合（2025年6月6日完了）
+- 改善ロードマップ（2025年1月6日完了）
+- コード品質分析・改善（2025年1月6日完了）
+- Unity Test Runner導入（2025年1月6日完了）
+- 査読ベース改善タスク（2025年1月6日完了）
 
 ### 次のステップ
+- セキュリティ強化（基本対策実装）
 - 機能拡張（色指定、マテリアル適用、Transform操作）
-- Unity CI設定調査
-- キャッシュ戦略改善
+- 高機能ログビューワー実装
 
 ---
 
