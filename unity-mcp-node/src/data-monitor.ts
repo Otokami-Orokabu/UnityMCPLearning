@@ -36,7 +36,9 @@ export function loadAllData(dataPath: string, log: (...args: any[]) => void): vo
     'gameobjects.json',
     'assets-info.json', 
     'build-info.json', 
-    'editor-state.json'
+    'editor-state.json',
+    'console-logs.json',
+    'compile-status.json'
   ];
   
   files.forEach(file => loadDataFile(file, dataPath, log));
@@ -99,5 +101,6 @@ export const CATEGORY_MAP: { [key: string]: string } = {
   'gameobjects': 'gameobjects',
   'assets': 'assets_info',
   'build': 'build_info',
-  'editor': 'editor_state'
+  'editor': 'editor_state',
+  'console': 'console_logs'
 };
