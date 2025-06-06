@@ -8,6 +8,8 @@ on:
   schedule:
     # 毎日午前2時（UTC）に実行
     - cron: '0 2 * * *'
+  workflow_dispatch:
+    # 手動実行を有効化
 
 jobs:
   security-audit:
