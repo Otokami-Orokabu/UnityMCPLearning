@@ -98,7 +98,20 @@ jobs:
         
         for pattern in "${SECRET_PATTERNS[@]}"; do
           echo "Checking pattern: $pattern"
-          if grep -r -E "$pattern" . --exclude-dir=.git --exclude-dir=node_modules --exclude-dir=.github --exclude="*.log" --exclude="*.yml" --exclude="*.yaml" 2>/dev/null; then
+          if grep -r -E "$pattern" . \
+            --exclude-dir=.git \
+            --exclude-dir=node_modules \
+            --exclude-dir=.github \
+            --exclude="*.log" \
+            --exclude="*.yml" \
+            --exclude="*.yaml" \
+            --exclude="*.shadergraph" \
+            --exclude="*.asset" \
+            --exclude="*.meta" \
+            --exclude-dir="TextMesh Pro" \
+            --exclude-dir="Library" \
+            --exclude-dir="Temp" \
+            2>/dev/null; then
             echo "⚠️ Potential secret found with pattern: $pattern"
             FOUND_SECRETS=true
           fi
