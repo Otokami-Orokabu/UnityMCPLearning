@@ -1,0 +1,6 @@
+{
+    "serverPath": "../unity-mcp-node",
+    "autoStartOnLaunch": false,
+    "defaultPort": 3000,
+    "lastModified": "2025-06-06T14:42:47Z"
+}
