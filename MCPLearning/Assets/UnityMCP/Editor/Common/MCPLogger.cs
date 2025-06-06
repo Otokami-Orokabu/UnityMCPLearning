@@ -60,6 +60,14 @@ namespace UnityMCP.Editor
         }
         
         /// <summary>
+        /// 警告ログ
+        /// </summary>
+        public static void LogWarning(string message)
+        {
+            LogToFile($"[WARNING] {message}");
+        }
+        
+        /// <summary>
         /// 一般的なエラーログ
         /// </summary>
         public static void LogError(string message)
