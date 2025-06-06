@@ -26,8 +26,8 @@ Unity MCP Learningプロジェクトを段階的に学習するための包括�
 6. **[07-current-capabilities.md](./07-current-capabilities.md)** - 全機能詳細と活用法
 7. **[05-advanced-configuration.md](./05-advanced-configuration.md)** - カスタマイズと最適化
 
-#### **Phase 4: 発展・品質向上**
-8. **[09-code-quality-improvements.md](./09-code-quality-improvements.md)** - コード品質改善とファイル分割（中級者向け）
+#### **Phase 4: 発展・統合**
+8. **[09-claude-code-mcp-integration.md](./09-claude-code-mcp-integration.md)** - Claude Code CLI統合（推奨）
 
 #### **Phase 5: サポート**
 9. **[04-troubleshooting.md](./04-troubleshooting.md)** - 問題解決ガイド
@@ -44,6 +44,8 @@ Unity MCP Learningプロジェクトを段階的に学習するための包括�
     ↓
 08-quick-start-guide.md (再実行)
     ↓
+09-claude-code-mcp-integration.md (Claude Code統合)
+    ↓
 07-current-capabilities.md (機能理解)
 ```
 
@@ -59,9 +61,9 @@ Unity MCP Learningプロジェクトを段階的に学習するための包括�
     ↓
 06-step3-unity-control.md
     ↓
-07-current-capabilities.md
+09-claude-code-mcp-integration.md (Claude Code統合)
     ↓
-09-code-quality-improvements.md (コード品質向上)
+07-current-capabilities.md
 ```
 
 ### **🚀 上級者（プログラミング経験豊富）**
@@ -72,11 +74,11 @@ Unity MCP Learningプロジェクトを段階的に学習するための包括�
     ↓
 06-step3-unity-control.md (実装詳細)
     ↓
+09-claude-code-mcp-integration.md (Claude Code統合)
+    ↓
 07-current-capabilities.md (全機能)
     ↓
 05-advanced-configuration.md (カスタマイズ)
-    ↓
-09-code-quality-improvements.md (品質改善)
 ```
 
 ## 📊 各チュートリアルの詳細
@@ -92,7 +94,7 @@ Unity MCP Learningプロジェクトを段階的に学習するための包括�
 | 06-step3-unity-control.md | 中級以上 | 90分 | Unity制御システム |
 | 07-current-capabilities.md | 全員 | 20分 | 全機能詳細・活用法 |
 | 08-quick-start-guide.md | 全員 | 15分 | 機能体験・動作確認 |
-| 09-code-quality-improvements.md | 中級以上 | 60分 | コード品質改善・ファイル分割 |
+| 09-claude-code-mcp-integration.md | 全員 | 30分 | Claude Code CLI統合ガイド |
 
 ## 🎯 学習目標
 
