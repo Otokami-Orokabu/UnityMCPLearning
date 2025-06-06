@@ -28,10 +28,15 @@ Unity MCP Learningプロジェクトを段階的に学習するための包括�
 
 #### **Phase 4: 発展・統合**
 8. **[09-claude-code-mcp-integration.md](./09-claude-code-mcp-integration.md)** - Claude Code CLI統合（推奨）
-9. **[10-unity-console-integration-guide.md](./10-unity-console-integration-guide.md)** - Unity Console統合・AI駆動開発（最新✨）
+9. **[10-unity-console-integration-guide.md](./10-unity-console-integration-guide.md)** - Unity Console統合・AI駆動開発
+10. **[11-unity-editor-dependency-guide.md](./11-unity-editor-dependency-guide.md)** - Unity Editor依存機能ガイド
 
-#### **Phase 5: サポート**
-10. **[04-troubleshooting.md](./04-troubleshooting.md)** - 問題解決ガイド
+#### **Phase 5: セキュリティ・公開準備**
+11. **[12-security-implementation-guide.md](./12-security-implementation-guide.md)** - エンタープライズレベルセキュリティ（最新✨）
+12. **[13-github-release-preparation-guide.md](./13-github-release-preparation-guide.md)** - GitHub公開準備ガイド（最新✨）
+
+#### **Phase 6: サポート**
+13. **[04-troubleshooting.md](./04-troubleshooting.md)** - 問題解決ガイド
 
 ## 🎓 学習レベル別推奨パス
 
@@ -96,6 +101,10 @@ Unity MCP Learningプロジェクトを段階的に学習するための包括�
 | 07-current-capabilities.md | 全員 | 20分 | 全機能詳細・活用法 |
 | 08-quick-start-guide.md | 全員 | 15分 | 機能体験・動作確認 |
 | 09-claude-code-mcp-integration.md | 全員 | 30分 | Claude Code CLI統合ガイド |
+| 10-unity-console-integration-guide.md | 中級以上 | 45分 | Unity Console統合・AI駆動開発 |
+| 11-unity-editor-dependency-guide.md | 全員 | 15分 | Unity Editor依存機能ガイド |
+| 12-security-implementation-guide.md | 上級 | 60分 | エンタープライズレベルセキュリティ |
+| 13-github-release-preparation-guide.md | 上級 | 45分 | GitHub公開準備ガイド |
 
 ## 🎯 学習目標
 
