@@ -12,8 +12,17 @@ Unity MCP Learningプロジェクトで現在利用可能な全機能をまと�
 |---------|------|------|---------|------|
 | `create a cube` | 立方体を作成 | Unity シーンに Cube オブジェクト追加 | ~50-100ms | ✅ 実装済み |
 | `create a sphere` | 球体を作成 | Unity シーンに Sphere オブジェクト追加 | ~50-100ms | ✅ 実装済み |
-| `create a plane` | 平面を作成 | Unity シーンに Plane オブジェクト追加 | - | ⚠️ 実装準備中 |
-| `create a gameobject` | 空のオブジェクト作成 | Unity シーンに空の GameObject 追加 | - | ⚠️ 実装準備中 |
+| `create a plane` | 平面を作成 | Unity シーンに Plane オブジェクト追加 | ~50-100ms | ✅ 実装済み |
+| `create a gameobject` | 空のオブジェクト作成 | Unity シーンに空の GameObject 追加 | ~50-100ms | ✅ 実装済み |
+
+### **Unity Console統合機能（最新✨）**
+
+| コマンド | 説明 | 取得情報 | 活用例 | 状況 |
+|---------|------|---------|--------|------|
+| `get console logs` | Unity Consoleログ取得 | エラー・警告・情報ログ | デバッグ・問題解決 | ✅ 実装済み |
+| `get console logs --filter errors` | エラーのみ取得 | コンパイルエラー詳細 | エラー解決 | ✅ 実装済み |
+| `get console logs --filter warnings` | 警告のみ取得 | コンパイル警告 | コード改善 | ✅ 実装済み |
+| `wait for compilation` | コンパイル完了待機 | コンパイル結果・時間 | AI駆動開発 | ✅ 実装済み |
 
 ### **情報取得コマンド**
 
@@ -35,6 +44,33 @@ Unity MCP Learningプロジェクトで現在利用可能な全機能をまと�
 
 ## 🏗️ システム機能詳細
 
+### **🔧 Unity Console統合システム**
+
+#### **AI駆動開発フロー**
+```
+従来: Claude Code → C#コード → Unity手動確認 → 手動エラーコピペ
+    ↓
+統合後: Claude Code → C#保存 → Unity自動コンパイル → 即座エラー取得 → 自動修正
+```
+
+#### **リアルタイムログ収集**
+```
+収集対象:
+✅ Unity Console出力（Error, Warning, Log, Assert, Exception）
+✅ スタックトレース情報（ファイル名・行番号）
+✅ タイムスタンプ付きログエントリー
+✅ ログ統計情報（エラー数・警告数等）
+```
+
+#### **コンパイル監視システム**
+```
+監視機能:
+✅ コンパイル開始・完了の検知
+✅ コンパイル時間の正確測定（ms単位）
+✅ エラー・警告数の集計
+✅ 成功・失敗ステータスの判定
+```
+
 ### **⚡ リアルタイム機能**
 
 #### **自動データ監視**
@@ -44,6 +80,8 @@ Unity MCP Learningプロジェクトで現在利用可能な全機能をまと�
 ✅ プロジェクト変更 → アセットの変更
 ✅ エディター状態 → 選択オブジェクト・ビューの変更
 ✅ ビルド設定 → ターゲット・設定の変更
+✅ Console出力 → エラー・ログのリアルタイム収集
+✅ コンパイル状態 → 開始・完了・結果の監視
 ```
 
 #### **効率的エクスポート**
@@ -52,6 +90,7 @@ Unity MCP Learningプロジェクトで現在利用可能な全機能をまと�
 ✅ 変更検知ベース → 変更があった項目のみ処理
 ✅ パフォーマンス最適化 → 無駄な処理を排除
 ✅ 自動ファイル更新 → JSON形式でリアルタイム出力
+✅ ログ蓄積システム → 最大1000件の自動管理
 ```
 
 ### **🛡️ エラーハンドリング**
@@ -97,6 +136,8 @@ enum ErrorCategory {
 | `assets-info.json` | アセット統計 | ~1.1KB | アセット変更時 |
 | `build-info.json` | ビルド設定 | ~955B | 設定変更時 |
 | `editor-state.json` | エディター状態 | ~835B | 選択・ビュー変更時 |
+| `console-logs.json` | Unity Consoleログ | 可変 | ログ出力時 |
+| `compile-status.json` | コンパイル状態 | ~400B | コンパイル時 |
 
 ### **データ構造例**
 
@@ -128,6 +169,40 @@ enum ErrorCategory {
   "companyName": "DefaultCompany",
   "dataPath": "/path/to/Assets",
   "persistentDataPath": "/path/to/persistent"
+}
+```
+
+#### **Console Logデータ**
+```json
+{
+  "logs": [
+    {
+      "message": "Hello, World!",
+      "stackTrace": "UnityEngine.Debug:Log (object)\nHelloWorld:Start () (at Assets/HelloWorld.cs:7)",
+      "type": "Log",
+      "timestamp": "2025-06-06 17:48:55.321"
+    }
+  ],
+  "summary": {
+    "totalLogs": 10,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 10
+  },
+  "lastUpdate": "2025-06-06 17:49:01.082"
+}
+```
+
+#### **コンパイル状態データ**
+```json
+{
+  "status": "SUCCESS",
+  "startTime": "2025-06-06T17:48:54.123Z",
+  "endTime": "2025-06-06T17:48:55.923Z",
+  "duration": 1800,
+  "errorCount": 0,
+  "warningCount": 0,
+  "timestamp": "2025-06-06T17:48:55.923Z"
 }
 ```
 
@@ -173,6 +248,11 @@ get scene info
 create a cube at (1,0,0)
 create a sphere at (-1,0,0)
 get gameobjects
+
+# エラー理解・解決の学習
+create new script with compilation error
+wait for compilation
+get console logs --filter errors
 ```
 
 #### **プログラミング教育**
@@ -186,6 +266,11 @@ create a plane
 # データ構造の理解
 get project info
 get gameobjects
+
+# AI駆動開発の体験
+create simple script "PlayerController"
+wait for compilation
+get console logs
 ```
 
 ### **開発効率化シーナリオ**
@@ -196,6 +281,23 @@ get gameobjects
 create a plane        # 床
 create a cube         # 建物
 create a sphere       # 装飾
+
+# 開発プロセス確認
+get console logs      # 作成ログ確認
+get scene info        # シーン状態確認
+```
+
+#### **高速反復開発**
+```bash
+# 新機能実装フロー
+create new script "FeatureScript" with player movement
+wait for compilation
+get console logs --filter errors
+
+# エラーがあれば即座修正
+fix compilation errors in FeatureScript
+wait for compilation
+get console logs --filter all
 ```
 
 #### **テストシーン準備**
@@ -205,6 +307,11 @@ create a cube
 create a sphere
 create a plane
 get scene info        # 確認
+
+# テスト用スクリプト追加
+create test script for object interaction
+wait for compilation
+get console logs      # 問題確認
 ```
 
 ### **研究・実験シーナリオ**
@@ -213,11 +320,15 @@ get scene info        # 確認
 - 自然言語による3D空間操作
 - インタラクティブなシーン構築
 - リアルタイムデータ分析
+- **AI駆動開発サイクル実験**
+- **エラー自動検知・修正システム**
 
 #### **インターフェース研究**
 - 音声入力 → Claude → Unity制御
 - チャットボット → 3D空間操作
 - 新しいUXパターンの探索
+- **リアルタイムフィードバックシステム**
+- **コンパイルエラー即座解決フロー**
 
 ## 📈 監視・分析機能
 
@@ -254,18 +365,21 @@ Export batch completed - Total: 6, Changed: 3, Duration: 108.81ms
 ## 🚀 拡張計画
 
 ### **近日実装予定**
-- 🎨 色指定パラメータ
+- 🎨 色指定パラメータ（create a red cube）
 - 📐 詳細な位置・サイズ指定
 - 🎭 マテリアル適用機能
+- 🔧 セキュリティ強化（基本対策）
 
 ### **中期計画**
 - 🔄 Transform操作コマンド
 - 🧩 コンポーネント操作
 - 🎞️ アニメーション制御
+- 📊 高機能ログビューワー
 
 ### **長期ビジョン**
 - 🌐 WebSocket通信への移行
 - 🖱️ Unity UI操作の自動化
 - 📝 C#コード自動生成
+- 🤖 AI駆動開発環境の完全自動化
 
-**Unity MCP Learning**は現在でも強力な基盤機能を提供し、様々な用途で活用できる成熟したシステムです！🎉
+**Unity MCP Learning**は現在でも強力な基盤機能を提供し、特に**Unity Console統合により実現されたAI駆動開発サイクル**で革新的な開発体験を提供する成熟したシステムです！🚀✨

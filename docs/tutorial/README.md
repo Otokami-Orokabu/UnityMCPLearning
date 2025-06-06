@@ -28,9 +28,10 @@ Unity MCP Learningプロジェクトを段階的に学習するための包括�
 
 #### **Phase 4: 発展・統合**
 8. **[09-claude-code-mcp-integration.md](./09-claude-code-mcp-integration.md)** - Claude Code CLI統合（推奨）
+9. **[10-unity-console-integration-guide.md](./10-unity-console-integration-guide.md)** - Unity Console統合・AI駆動開発（最新✨）
 
 #### **Phase 5: サポート**
-9. **[04-troubleshooting.md](./04-troubleshooting.md)** - 問題解決ガイド
+10. **[04-troubleshooting.md](./04-troubleshooting.md)** - 問題解決ガイド
 
 ## 🎓 学習レベル別推奨パス
 
@@ -42,9 +43,9 @@ Unity MCP Learningプロジェクトを段階的に学習するための包括�
     ↓
 01-environment-setup.md
     ↓
-08-quick-start-guide.md (再実行)
-    ↓
 09-claude-code-mcp-integration.md (Claude Code統合)
+    ↓
+10-unity-console-integration-guide.md (AI駆動開発体験✨)
     ↓
 07-current-capabilities.md (機能理解)
 ```
