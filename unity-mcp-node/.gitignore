@@ -199,6 +199,7 @@ Desktop.ini
 # Generated documentation
 docs-build/
 api-docs/
+docs/api/
 
 # Temporary documentation files
 *.draft.md
