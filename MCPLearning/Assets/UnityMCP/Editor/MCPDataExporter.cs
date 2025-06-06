@@ -18,7 +18,8 @@ namespace UnityMCP.Editor
             new GameObjectExporter(),
             new AssetInfoExporter(),
             new BuildInfoExporter(),
-            new EditorStateExporter()
+            new EditorStateExporter(),
+            new ConsoleLogExporter()
         };
         
         [MenuItem("UnityMCP/Export All Data")]
