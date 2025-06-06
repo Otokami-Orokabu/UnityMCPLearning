@@ -12,10 +12,15 @@
     "test:ci": "jest --ci --coverage --watchAll=false",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",
+    "lint:security": "eslint src/**/*.ts --config .eslintrc.security.js",
     "docs": "typedoc",
     "docs:watch": "typedoc --watch",
     "docs:serve": "typedoc && npx http-server docs/api -p 8080 -o",
-    "docs:clean": "rm -rf docs/api"
+    "docs:clean": "rm -rf docs/api",
+    "utils:test-connection": "node scripts/test-connection.js",
+    "clean": "rm -rf dist coverage",
+    "clean:all": "rm -rf dist coverage node_modules",
+    "setup": "npm install && npm run build"
   },
   "keywords": [
     "mcp",
