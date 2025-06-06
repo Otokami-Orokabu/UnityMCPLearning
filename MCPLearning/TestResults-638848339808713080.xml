@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="29" result="Passed" total="29" passed="29" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2025-06-06 10:13:00Z" end-time="2025-06-06 10:13:00Z" duration="0.3008829">
+  <test-suite type="TestSuite" id="1000" name="MCPLearning" fullname="MCPLearning" runstate="Runnable" testcasecount="29" result="Passed" start-time="2025-06-06 10:13:00Z" end-time="2025-06-06 10:13:00Z" duration="0.300883" total="29" passed="29" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1003" name="Unity.Addressables.DocExampleCode.Editor.Tests.dll" fullname="/Users/sakabesou/ProjectGit/UnityMCPLearning/MCPLearning/Library/ScriptAssemblies/Unity.Addressables.DocExampleCode.Editor.Tests.dll" runstate="Runnable" testcasecount="1" result="Passed" start-time="2025-06-06 10:13:00Z" end-time="2025-06-06 10:13:00Z" duration="0.010946" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="4345" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1004" name="AddressableAssets" fullname="AddressableAssets" runstate="Runnable" testcasecount="1" result="Passed" start-time="2025-06-06 10:13:00Z" end-time="2025-06-06 10:13:00Z" duration="0.010611" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1005" name="DocExampleCode" fullname="AddressableAssets.DocExampleCode" runstate="Runnable" testcasecount="1" result="Passed" start-time="2025-06-06 10:13:00Z" end-time="2025-06-06 10:13:00Z" duration="0.010367" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1001" name="TestStub" fullname="AddressableAssets.DocExampleCode.TestStub" classname="AddressableAssets.DocExampleCode.TestStub" runstate="Runnable" testcasecount="1" result="Passed" start-time="2025-06-06 10:13:00Z" end-time="2025-06-06 10:13:00Z" duration="0.009669" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1002" name="RequiredTest" fullname="AddressableAssets.DocExampleCode.TestStub.RequiredTest" methodname="RequiredTest" classname="AddressableAssets.DocExampleCode.TestStub" runstate="Runnable" seed="538791869" result="Passed" start-time="2025-06-06 10:13:00Z" end-time="2025-06-06 10:13:00Z" duration="0.003347" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+    <test-suite type="Assembly" id="1041" name="UnityMCP.Tests.Editor.dll" fullname="/Users/sakabesou/ProjectGit/UnityMCPLearning/MCPLearning/Library/ScriptAssemblies/UnityMCP.Tests.Editor.dll" runstate="Runnable" testcasecount="28" result="Passed" start-time="2025-06-06 10:13:00Z" end-time="2025-06-06 10:13:00Z" duration="0.285668" total="28" passed="28" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="4345" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1042" name="UnityMCP" fullname="UnityMCP" runstate="Runnable" testcasecount="28" result="Passed" start-time="2025-06-06 10:13:00Z" end-time="2025-06-06 10:13:00Z" duration="0.285359" total="28" passed="28" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1043" name="Tests" fullname="UnityMCP.Tests" runstate="Runnable" testcasecount="28" result="Passed" start-time="2025-06-06 10:13:00Z" end-time="2025-06-06 10:13:00Z" duration="0.285227" total="28" passed="28" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestSuite" id="1044" name="Editor" fullname="UnityMCP.Tests.Editor" runstate="Runnable" testcasecount="28" result="Passed" start-time="2025-06-06 10:13:00Z" end-time="2025-06-06 10:13:00Z" duration="0.285057" total="28" passed="28" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestFixture" id="1011" name="MCPCommandProcessorTests" fullname="UnityMCP.Tests.Editor.MCPCommandProcessorTests" classname="UnityMCP.Tests.Editor.MCPCommandProcessorTests" runstate="Runnable" testcasecount="9" result="Passed" start-time="2025-06-06 10:13:00Z" end-time="2025-06-06 10:13:00Z" duration="0.013407" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1014" name="CommandStatus_Enum_ShouldHaveCorrectValues" fullname="UnityMCP.Tests.Editor.MCPCommandProcessorTests.CommandStatus_Enum_ShouldHaveCorrectValues" methodname="CommandStatus_Enum_ShouldHaveCorrectValues" classname="UnityMCP.Tests.Editor.MCPCommandProcessorTests" runstate="Runnable" seed="217522966" result="Passed" start-time="2025-06-06 10:13:00Z" end-time="2025-06-06 10:13:00Z" duration="0.003641" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1013" name="CommandTypes_Constants_ShouldHaveCorrectValues" fullname="UnityMCP.Tests.Editor.MCPCommandProcessorTests.CommandTypes_Constants_ShouldHaveCorrectValues" methodname="CommandTypes_Constants_ShouldHaveCorrectValues" classname="UnityMCP.Tests.Editor.MCPCommandProcessorTests" runstate="Runnable" seed="1210902726" result="Passed" start-time="2025-06-06 10:13:00Z" end-time="2025-06-06 10:13:00Z" duration="0.000070" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1017" name="CreatePrimitive_Cube_ShouldCreateSuccessfully" fullname="UnityMCP.Tests.Editor.MCPCommandProcessorTests.CreatePrimitive_Cube_ShouldCreateSuccessfully" methodname="CreatePrimitive_Cube_ShouldCreateSuccessfully" classname="UnityMCP.Tests.Editor.MCPCommandProcessorTests" runstate="Runnable" seed="1630053523" result="Passed" start-time="2025-06-06 10:13:00Z" end-time="2025-06-06 10:13:00Z" duration="0.004664" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1018" name="CreatePrimitive_Sphere_ShouldCreateSuccessfully" fullname="UnityMCP.Tests.Editor.MCPCommandProcessorTests.CreatePrimitive_Sphere_ShouldCreateSuccessfully" methodname="CreatePrimitive_Sphere_ShouldCreateSuccessfully" classname="UnityMCP.Tests.Editor.MCPCommandProcessorTests" runstate="Runnable" seed="966905039" result="Passed" start-time="2025-06-06 10:13:00Z" end-time="2025-06-06 10:13:00Z" duration="0.001491" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1019" name="GameObject_Transform_ShouldModifyCorrectly" fullname="UnityMCP.Tests.Editor.MCPCommandProcessorTests.GameObject_Transform_ShouldModifyCorrectly" methodname="GameObject_Transform_ShouldModifyCorrectly" classname="UnityMCP.Tests.Editor.MCPCommandProcessorTests" runstate="Runnable" seed="2054842312" result="Passed" start-time="2025-06-06 10:13:00Z" end-time="2025-06-06 10:13:00Z" duration="0.000813" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1012" name="MCPCommand_CreateValidCommand_ShouldInitialize" fullname="UnityMCP.Tests.Editor.MCPCommandProcessorTests.MCPCommand_CreateValidCommand_ShouldInitialize" methodname="MCPCommand_CreateValidCommand_ShouldInitialize" classname="UnityMCP.Tests.Editor.MCPCommandProcessorTests" runstate="Runnable" seed="1802620490" result="Passed" start-time="2025-06-06 10:13:00Z" end-time="2025-06-06 10:13:00Z" duration="0.000260" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1015" name="MCPCommand_JsonSerialization_ShouldWork" fullname="UnityMCP.Tests.Editor.MCPCommandProcessorTests.MCPCommand_JsonSerialization_ShouldWork" methodname="MCPCommand_JsonSerialization_ShouldWork" classname="UnityMCP.Tests.Editor.MCPCommandProcessorTests" runstate="Runnable" seed="16472263" result="Passed" start-time="2025-06-06 10:13:00Z" end-time="2025-06-06 10:13:00Z" duration="0.000238" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1016" name="MCPLogger_LogMethods_ShouldNotThrow" fullname="UnityMCP.Tests.Editor.MCPCommandProcessorTests.MCPLogger_LogMethods_ShouldNotThrow" methodname="MCPLogger_LogMethods_ShouldNotThrow" classname="UnityMCP.Tests.Editor.MCPCommandProcessorTests" runstate="Runnable" seed="367558117" result="Passed" start-time="2025-06-06 10:13:00Z" end-time="2025-06-06 10:13:00Z" duration="0.000834" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1020" name="Path_Combine_ShouldWorkCorrectly" fullname="UnityMCP.Tests.Editor.MCPCommandProcessorTests.Path_Combine_ShouldWorkCorrectly" methodname="Path_Combine_ShouldWorkCorrectly" classname="UnityMCP.Tests.Editor.MCPCommandProcessorTests" runstate="Runnable" seed="210646529" result="Passed" start-time="2025-06-06 10:13:00Z" end-time="2025-06-06 10:13:00Z" duration="0.000069" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1021" name="SecurityTests" fullname="UnityMCP.Tests.Editor.SecurityTests" classname="UnityMCP.Tests.Editor.SecurityTests" runstate="Runnable" testcasecount="19" result="Passed" start-time="2025-06-06 10:13:00Z" end-time="2025-06-06 10:13:00Z" duration="0.271252" total="19" passed="19" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1028" name="PathSecurityValidator_CreateSafeDirectory_CreatesOnlyAllowedDirectories" fullname="UnityMCP.Tests.Editor.SecurityTests.PathSecurityValidator_CreateSafeDirectory_CreatesOnlyAllowedDirectories" methodname="PathSecurityValidator_CreateSafeDirectory_CreatesOnlyAllowedDirectories" classname="UnityMCP.Tests.Editor.SecurityTests" runstate="Runnable" seed="1316623155" result="Passed" start-time="2025-06-06 10:13:00Z" end-time="2025-06-06 10:13:00Z" duration="0.000770" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1025" name="PathSecurityValidator_CreateSafePath_GeneratesValidPath" fullname="UnityMCP.Tests.Editor.SecurityTests.PathSecurityValidator_CreateSafePath_GeneratesValidPath" methodname="PathSecurityValidator_CreateSafePath_GeneratesValidPath" classname="UnityMCP.Tests.Editor.SecurityTests" runstate="Runnable" seed="18525407" result="Passed" start-time="2025-06-06 10:13:00Z" end-time="2025-06-06 10:13:00Z" duration="0.000243" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1023" name="PathSecurityValidator_PathTraversalAttack_ReturnsFalse" fullname="UnityMCP.Tests.Editor.SecurityTests.PathSecurityValidator_PathTraversalAttack_ReturnsFalse" methodname="PathSecurityValidator_PathTraversalAttack_ReturnsFalse" classname="UnityMCP.Tests.Editor.SecurityTests" runstate="Runnable" seed="825172257" result="Passed" start-time="2025-06-06 10:13:00Z" end-time="2025-06-06 10:13:00Z" duration="0.000501" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1026" name="PathSecurityValidator_SanitizeFilename_RemovesDangerousCharacters" fullname="UnityMCP.Tests.Editor.SecurityTests.PathSecurityValidator_SanitizeFilename_RemovesDangerousCharacters" methodname="PathSecurityValidator_SanitizeFilename_RemovesDangerousCharacters" classname="UnityMCP.Tests.Editor.SecurityTests" runstate="Runnable" seed="155986531" result="Passed" start-time="2025-06-06 10:13:00Z" end-time="2025-06-06 10:13:00Z" duration="0.000146" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1024" name="PathSecurityValidator_UnauthorizedDirectory_ReturnsFalse" fullname="UnityMCP.Tests.Editor.SecurityTests.PathSecurityValidator_UnauthorizedDirectory_ReturnsFalse" methodname="PathSecurityValidator_UnauthorizedDirectory_ReturnsFalse" classname="UnityMCP.Tests.Editor.SecurityTests" runstate="Runnable" seed="1188978890" result="Passed" start-time="2025-06-06 10:13:00Z" end-time="2025-06-06 10:13:00Z" duration="0.000425" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1022" name="PathSecurityValidator_ValidOutputPath_ReturnsTrue" fullname="UnityMCP.Tests.Editor.SecurityTests.PathSecurityValidator_ValidOutputPath_ReturnsTrue" methodname="PathSecurityValidator_ValidOutputPath_ReturnsTrue" classname="UnityMCP.Tests.Editor.SecurityTests" runstate="Runnable" seed="389414471" result="Passed" start-time="2025-06-06 10:13:00Z" end-time="2025-06-06 10:13:00Z" duration="0.000109" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1027" name="PathSecurityValidator_ValidReadPath_ReturnsTrue" fullname="UnityMCP.Tests.Editor.SecurityTests.PathSecurityValidator_ValidReadPath_ReturnsTrue" methodname="PathSecurityValidator_ValidReadPath_ReturnsTrue" classname="UnityMCP.Tests.Editor.SecurityTests" runstate="Runnable" seed="304436019" result="Passed" start-time="2025-06-06 10:13:00Z" end-time="2025-06-06 10:13:00Z" duration="0.000516" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1039" name="Security_IntegratedPathAndDataFiltering_WorksTogether" fullname="UnityMCP.Tests.Editor.SecurityTests.Security_IntegratedPathAndDataFiltering_WorksTogether" methodname="Security_IntegratedPathAndDataFiltering_WorksTogether" classname="UnityMCP.Tests.Editor.SecurityTests" runstate="Runnable" seed="182412330" result="Passed" start-time="2025-06-06 10:13:00Z" end-time="2025-06-06 10:13:00Z" duration="0.004879" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1040" name="Security_Performance_FilteringLargeText" fullname="UnityMCP.Tests.Editor.SecurityTests.Security_Performance_FilteringLargeText" methodname="Security_Performance_FilteringLargeText" classname="UnityMCP.Tests.Editor.SecurityTests" runstate="Runnable" seed="411128781" result="Passed" start-time="2025-06-06 10:13:00Z" end-time="2025-06-06 10:13:00Z" duration="0.256041" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1029" name="SensitiveDataFilter_ApiKeyDetection_DetectsApiKeys" fullname="UnityMCP.Tests.Editor.SecurityTests.SensitiveDataFilter_ApiKeyDetection_DetectsApiKeys" methodname="SensitiveDataFilter_ApiKeyDetection_DetectsApiKeys" classname="UnityMCP.Tests.Editor.SecurityTests" runstate="Runnable" seed="58988928" result="Passed" start-time="2025-06-06 10:13:00Z" end-time="2025-06-06 10:13:00Z" duration="0.000551" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1037" name="SensitiveDataFilter_CreateSafeConfig_GeneratesSafeConfiguration" fullname="UnityMCP.Tests.Editor.SecurityTests.SensitiveDataFilter_CreateSafeConfig_GeneratesSafeConfiguration" methodname="SensitiveDataFilter_CreateSafeConfig_GeneratesSafeConfiguration" classname="UnityMCP.Tests.Editor.SecurityTests" runstate="Runnable" seed="1034216380" result="Passed" start-time="2025-06-06 10:13:00Z" end-time="2025-06-06 10:13:00Z" duration="0.000489" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1031" name="SensitiveDataFilter_EmailDetection_DetectsEmails" fullname="UnityMCP.Tests.Editor.SecurityTests.SensitiveDataFilter_EmailDetection_DetectsEmails" methodname="SensitiveDataFilter_EmailDetection_DetectsEmails" classname="UnityMCP.Tests.Editor.SecurityTests" runstate="Runnable" seed="795671287" result="Passed" start-time="2025-06-06 10:13:00Z" end-time="2025-06-06 10:13:00Z" duration="0.000182" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1034" name="SensitiveDataFilter_FilePathFiltering_CleansFilePaths" fullname="UnityMCP.Tests.Editor.SecurityTests.SensitiveDataFilter_FilePathFiltering_CleansFilePaths" methodname="SensitiveDataFilter_FilePathFiltering_CleansFilePaths" classname="UnityMCP.Tests.Editor.SecurityTests" runstate="Runnable" seed="1239927935" result="Passed" start-time="2025-06-06 10:13:00Z" end-time="2025-06-06 10:13:00Z" duration="0.001040" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1038" name="SensitiveDataFilter_GetFilterStatistics_ReturnsValidStatistics" fullname="UnityMCP.Tests.Editor.SecurityTests.SensitiveDataFilter_GetFilterStatistics_ReturnsValidStatistics" methodname="SensitiveDataFilter_GetFilterStatistics_ReturnsValidStatistics" classname="UnityMCP.Tests.Editor.SecurityTests" runstate="Runnable" seed="1526058060" result="Passed" start-time="2025-06-06 10:13:00Z" end-time="2025-06-06 10:13:00Z" duration="0.001141" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1033" name="SensitiveDataFilter_JsonSensitiveDataFiltering_FiltersJsonFields" fullname="UnityMCP.Tests.Editor.SecurityTests.SensitiveDataFilter_JsonSensitiveDataFiltering_FiltersJsonFields" methodname="SensitiveDataFilter_JsonSensitiveDataFiltering_FiltersJsonFields" classname="UnityMCP.Tests.Editor.SecurityTests" runstate="Runnable" seed="1132381337" result="Passed" start-time="2025-06-06 10:13:00Z" end-time="2025-06-06 10:13:00Z" duration="0.000202" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1035" name="SensitiveDataFilter_MultipleDataTypes_DetectsAllTypes" fullname="UnityMCP.Tests.Editor.SecurityTests.SensitiveDataFilter_MultipleDataTypes_DetectsAllTypes" methodname="SensitiveDataFilter_MultipleDataTypes_DetectsAllTypes" classname="UnityMCP.Tests.Editor.SecurityTests" runstate="Runnable" seed="934624369" result="Passed" start-time="2025-06-06 10:13:00Z" end-time="2025-06-06 10:13:00Z" duration="0.001134" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1030" name="SensitiveDataFilter_PasswordMasking_MasksPasswords" fullname="UnityMCP.Tests.Editor.SecurityTests.SensitiveDataFilter_PasswordMasking_MasksPasswords" methodname="SensitiveDataFilter_PasswordMasking_MasksPasswords" classname="UnityMCP.Tests.Editor.SecurityTests" runstate="Runnable" seed="1290895078" result="Passed" start-time="2025-06-06 10:13:00Z" end-time="2025-06-06 10:13:00Z" duration="0.000444" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1032" name="SensitiveDataFilter_PersonalInfoFiltering_FiltersUserPaths" fullname="UnityMCP.Tests.Editor.SecurityTests.SensitiveDataFilter_PersonalInfoFiltering_FiltersUserPaths" methodname="SensitiveDataFilter_PersonalInfoFiltering_FiltersUserPaths" classname="UnityMCP.Tests.Editor.SecurityTests" runstate="Runnable" seed="1983989082" result="Passed" start-time="2025-06-06 10:13:00Z" end-time="2025-06-06 10:13:00Z" duration="0.000236" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1036" name="SensitiveDataFilter_RemoveMode_RemovesSensitiveData" fullname="UnityMCP.Tests.Editor.SecurityTests.SensitiveDataFilter_RemoveMode_RemovesSensitiveData" methodname="SensitiveDataFilter_RemoveMode_RemovesSensitiveData" classname="UnityMCP.Tests.Editor.SecurityTests" runstate="Runnable" seed="1271695990" result="Passed" start-time="2025-06-06 10:13:00Z" end-time="2025-06-06 10:13:00Z" duration="0.000217" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Saving results to: /Users/sakabesou/Library/Application Support/orLab/MCPLearning/TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

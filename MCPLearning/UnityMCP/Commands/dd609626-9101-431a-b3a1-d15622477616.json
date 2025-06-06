@@ -1,0 +1,22 @@
+{
+  "commandId": "dd609626-9101-431a-b3a1-d15622477616",
+  "commandType": "create_cube",
+  "parameters": {
+    "name": "ClaudeCodeTestCube",
+    "position": {
+      "x": 0,
+      "y": 1,
+      "z": 0
+    },
+    "scale": {
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "color": "red"
+  },
+  "timestamp": "2025-06-06T09:58:13.337Z",
+  "status": "Pending",
+  "result": null,
+  "error": null
+}

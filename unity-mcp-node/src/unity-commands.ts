@@ -254,6 +254,203 @@ function validateVector3Parameter(paramName: string, vector: any): void {
   }
 }
 
+// Unityコンパイル完了を待機
+export async function waitForCompilation(
+  dataPath: string,
+  timeoutMs: number = 60000
+): Promise<any> {
+  return new Promise((resolve, reject) => {
+    const compileStatusPath = path.join(dataPath, 'compile-status.json');
+    const startTime = Date.now();
+    
+    const timeout = setTimeout(() => {
+      reject(new MCPError(
+        ErrorCode.TIMEOUT_ERROR,
+        `Compilation wait timed out after ${timeoutMs}ms`
+      ));
+    }, timeoutMs);
+    
+    const checkCompilation = () => {
+      try {
+        if (fs.existsSync(compileStatusPath)) {
+          const compileData = JSON.parse(fs.readFileSync(compileStatusPath, 'utf-8'));
+          
+          if (compileData.status === 'SUCCESS') {
+            clearTimeout(timeout);
+            resolve({
+              content: [{
+                type: 'text',
+                text: `✅ Compilation Successful\n` +
+                      `Duration: ${compileData.duration}ms\n` +
+                      `Errors: ${compileData.errorCount}\n` +
+                      `Warnings: ${compileData.warningCount}\n` +
+                      `Message: ${compileData.message}`
+              }],
+              isError: false
+            });
+            return;
+          } else if (compileData.status === 'FAILED') {
+            clearTimeout(timeout);
+            reject(new MCPError(
+              ErrorCode.UNITY_COMMAND_FAILED,
+              `Compilation failed: ${compileData.message}`
+            ));
+            return;
+          }
+        }
+        
+        // まだ完了していない場合は、500ms後に再チェック
+        setTimeout(checkCompilation, 500);
+      } catch (error) {
+        clearTimeout(timeout);
+        reject(new MCPError(
+          ErrorCode.FILE_READ_ERROR,
+          `Failed to read compilation status: ${error}`
+        ));
+      }
+    };
+    
+    // 初回チェック
+    checkCompilation();
+  });
+}
+
+// Unityコンソールログを取得
+export async function getConsoleLogs(dataPath: string): Promise<any> {
+  try {
+    const consoleLogsPath = path.join(dataPath, 'console-logs.json');
+    
+    if (!fs.existsSync(consoleLogsPath)) {
+      return {
+        content: [{
+          type: 'text',
+          text: 'No console logs available. Ensure Unity is running and data export is enabled.'
+        }],
+        isError: false
+      };
+    }
+    
+    const logsData = JSON.parse(fs.readFileSync(consoleLogsPath, 'utf-8'));
+    
+    if (!logsData.logs || logsData.logs.length === 0) {
+      return {
+        content: [{
+          type: 'text',
+          text: 'Console logs are empty.'
+        }],
+        isError: false
+      };
+    }
+    
+    // ログを分類
+    const errors = logsData.logs.filter((log: any) => log.type === 'Error');
+    const warnings = logsData.logs.filter((log: any) => log.type === 'Warning');
+    const infos = logsData.logs.filter((log: any) => log.type === 'Log');
+    const exceptions = logsData.logs.filter((log: any) => log.type === 'Exception');
+    const asserts = logsData.logs.filter((log: any) => log.type === 'Assert');
+    
+    // ログサマリーを構築
+    let logSummary = '📋 Unity Console Logs Summary\n\n';
+    
+    // サマリー情報を表示
+    if (logsData.summary) {
+      logSummary += `📊 Summary:\n`;
+      logSummary += `  Total Logs: ${logsData.summary.totalLogs}\n`;
+      logSummary += `  Errors: ${logsData.summary.errorCount}\n`;
+      logSummary += `  Warnings: ${logsData.summary.warningCount}\n`;
+      logSummary += `  Info Logs: ${logsData.summary.logCount}\n`;
+      logSummary += `  Exceptions: ${logsData.summary.exceptionCount}\n`;
+      logSummary += `  Asserts: ${logsData.summary.assertCount}\n\n`;
+    }
+    
+    // エラーログの詳細
+    if (errors.length > 0) {
+      logSummary += `❌ Errors (${errors.length}):\n`;
+      errors.slice(0, 5).forEach((error: any, index: number) => {
+        logSummary += `  ${index + 1}. ${error.message}\n`;
+        if (error.stackTrace) {
+          const stackLines = error.stackTrace.split('\n').slice(0, 2);
+          stackLines.forEach((line: string) => {
+            if (line.trim()) {
+              logSummary += `     ${line.trim()}\n`;
+            }
+          });
+        }
+      });
+      if (errors.length > 5) {
+        logSummary += `     ... and ${errors.length - 5} more errors\n`;
+      }
+      logSummary += '\n';
+    }
+    
+    // 警告ログの詳細
+    if (warnings.length > 0) {
+      logSummary += `⚠️ Warnings (${warnings.length}):\n`;
+      warnings.slice(0, 3).forEach((warning: any, index: number) => {
+        logSummary += `  ${index + 1}. ${warning.message}\n`;
+      });
+      if (warnings.length > 3) {
+        logSummary += `     ... and ${warnings.length - 3} more warnings\n`;
+      }
+      logSummary += '\n';
+    }
+    
+    // 例外の詳細
+    if (exceptions.length > 0) {
+      logSummary += `💥 Exceptions (${exceptions.length}):\n`;
+      exceptions.slice(0, 3).forEach((exception: any, index: number) => {
+        logSummary += `  ${index + 1}. ${exception.message}\n`;
+        if (exception.stackTrace) {
+          const stackLines = exception.stackTrace.split('\n').slice(0, 2);
+          stackLines.forEach((line: string) => {
+            if (line.trim()) {
+              logSummary += `     ${line.trim()}\n`;
+            }
+          });
+        }
+      });
+      if (exceptions.length > 3) {
+        logSummary += `     ... and ${exceptions.length - 3} more exceptions\n`;
+      }
+      logSummary += '\n';
+    }
+    
+    // 最近のインフォログ
+    if (infos.length > 0) {
+      logSummary += `ℹ️ Recent Info Logs (${Math.min(infos.length, 3)} of ${infos.length}):\n`;
+      infos.slice(-3).forEach((info: any, index: number) => {
+        logSummary += `  ${index + 1}. ${info.message} (${info.timestamp})\n`;
+      });
+      logSummary += '\n';
+    }
+    
+    if (errors.length === 0 && warnings.length === 0 && exceptions.length === 0) {
+      logSummary += '✅ No errors, warnings, or exceptions found.\n\n';
+    }
+    
+    // タイムスタンプを追加
+    if (logsData.lastUpdate) {
+      logSummary += `Last updated: ${logsData.lastUpdate}`;
+    }
+    
+    const hasErrors = errors.length > 0 || exceptions.length > 0 || asserts.length > 0;
+    
+    return {
+      content: [{
+        type: 'text',
+        text: logSummary
+      }],
+      isError: hasErrors
+    };
+    
+  } catch (error: any) {
+    throw new MCPError(
+      ErrorCode.FILE_READ_ERROR,
+      `Failed to read console logs: ${error.message}`
+    );
+  }
+}
+
 // Unityコマンドの結果を待機
 async function waitForCommandResult(
   commandFilePath: string, 

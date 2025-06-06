@@ -46,6 +46,24 @@ Unity MCP Learningプロジェクトで現在利用可能な全機能をまと�
 
 ### **🔧 Unity Console統合システム**
 
+## 🔄 Unity Editor開閉状態での機能差
+
+### ✅ **Unity Editor開いている時の機能**
+- **Unity制御系**: GameObject作成、シーン操作、リアルタイム情報取得
+- **Console統合**: コンパイル監視、エラー検知、Test Runner実行
+- **AI駆動開発**: コード生成→コンパイル→エラー修正の自動サイクル
+- **データエクスポート**: 6種類のJSON自動更新・監視
+
+### ✅ **Unity Editor閉じていてもできること**
+- **MCPサーバー機能**: ping、Node.js処理、ファイル監視
+- **セキュリティ機能**: PathSecurityValidator、SensitiveDataFilter
+- **プロジェクト管理**: ドキュメント更新、設定変更、Git操作
+- **テスト実行**: Jest単体テスト（125テスト）、コード品質チェック
+
+### 💡 **実用的な使い分け**
+- **Editor開く**: Unity開発・デバッグ・プロトタイプ作成時
+- **Editor閉じる**: ドキュメント作業・システム管理・品質管理時
+
 #### **AI駆動開発フロー**
 ```
 従来: Claude Code → C#コード → Unity手動確認 → 手動エラーコピペ
