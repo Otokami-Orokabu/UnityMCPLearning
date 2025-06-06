@@ -1,0 +1,177 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://schema.unity-mcp.local/mcp-config.schema.json",
+  "title": "Unity MCP Server Configuration",
+  "description": "Configuration schema for Unity MCP Server settings",
+  "type": "object",
+  "properties": {
+    "mcpServers": {
+      "description": "MCP server configurations",
+      "type": "object",
+      "patternProperties": {
+        "^[a-zA-Z][a-zA-Z0-9_-]*$": {
+          "description": "MCP server configuration",
+          "type": "object",
+          "properties": {
+            "command": {
+              "description": "Command to run the server",
+              "type": "string",
+              "minLength": 1,
+              "examples": ["node", "python", "./bin/server"]
+            },
+            "args": {
+              "description": "Arguments for the command",
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "examples": [
+                ["./dist/index.js"],
+                ["--verbose", "--config", "config.json"]
+              ]
+            },
+            "cwd": {
+              "description": "Working directory for the command",
+              "type": "string",
+              "default": ".",
+              "examples": [".", "./server", "/path/to/server"]
+            },
+            "env": {
+              "description": "Environment variables",
+              "type": "object",
+              "patternProperties": {
+                "^[A-Z_][A-Z0-9_]*$": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "required": ["command", "args"],
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false,
+      "minProperties": 1
+    },
+    "unityDataPath": {
+      "description": "Path to Unity data directory (relative or absolute)",
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(\\.|\\.\\/|\\.\\\\|[a-zA-Z]:|\\/).*",
+      "examples": [
+        "./MCPLearning/UnityMCP/Data",
+        "../Unity/Data",
+        "/absolute/path/to/unity/data"
+      ]
+    },
+    "logLevel": {
+      "description": "Logging level for the server",
+      "type": "string",
+      "enum": ["error", "warn", "info", "debug"],
+      "default": "info"
+    },
+    "timeout": {
+      "description": "Timeout settings",
+      "type": "object",
+      "properties": {
+        "unityCommandTimeout": {
+          "description": "Timeout for Unity commands in milliseconds",
+          "type": "integer",
+          "minimum": 1000,
+          "maximum": 300000,
+          "default": 30000
+        },
+        "dataWaitTimeout": {
+          "description": "Timeout for data availability check in milliseconds",
+          "type": "integer",
+          "minimum": 100,
+          "maximum": 60000,
+          "default": 5000
+        }
+      },
+      "additionalProperties": false
+    },
+    "server": {
+      "description": "Server-specific settings",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Server name",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100,
+          "default": "unity-mcp-server"
+        },
+        "version": {
+          "description": "Server version",
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+(-[a-zA-Z0-9]+)?$",
+          "default": "1.0.0"
+        },
+        "protocol": {
+          "description": "MCP protocol version",
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+          "default": "2024-11-05"
+        }
+      },
+      "additionalProperties": false
+    },
+    "unity": {
+      "description": "Unity-specific settings",
+      "type": "object",
+      "properties": {
+        "projectPath": {
+          "description": "Path to Unity project directory",
+          "type": "string",
+          "minLength": 1,
+          "examples": ["./MCPLearning", "../UnityProject"]
+        },
+        "autoDetectChanges": {
+          "description": "Automatically detect Unity data changes",
+          "type": "boolean",
+          "default": true
+        },
+        "watchFilePattern": {
+          "description": "File pattern to watch for changes",
+          "type": "string",
+          "default": "*.json"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "mcpServers",
+    "unityDataPath"
+  ],
+  "additionalProperties": false,
+  "examples": [
+    {
+      "mcpServers": {
+        "unity-mcp-prod": {
+          "command": "node",
+          "args": ["./unity-mcp-node/dist/index.js"],
+          "cwd": "."
+        }
+      },
+      "unityDataPath": "./MCPLearning/UnityMCP/Data",
+      "logLevel": "info",
+      "timeout": {
+        "unityCommandTimeout": 30000,
+        "dataWaitTimeout": 5000
+      },
+      "server": {
+        "name": "unity-mcp-server",
+        "version": "1.0.0",
+        "protocol": "2024-11-05"
+      },
+      "unity": {
+        "projectPath": "./MCPLearning",
+        "autoDetectChanges": true,
+        "watchFilePattern": "*.json"
+      }
+    }
+  ]
+}
