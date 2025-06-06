@@ -99,8 +99,9 @@ function initializeConfig(): void {
     // 設定ファイル検証と読み込み
     globalConfig = loadAndValidateConfig(configPath);
     
-    // データパスを設定
-    dataPath = path.resolve(globalConfig.unityDataPath);
+    // データパスを設定（設定ファイルのディレクトリを基準とする）
+    const configDir = path.dirname(configPath);
+    dataPath = path.resolve(configDir, globalConfig.unityDataPath);
     
     log(getMessage('server.config.loaded'));
     log(`- Unity Data Path: ${dataPath}`);
