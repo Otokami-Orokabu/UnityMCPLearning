@@ -169,20 +169,21 @@ namespace UnityMCP.Editor
         
         /// <summary>
         /// 手動でコンパイル状態をクリア（テスト用）
+        /// 注意: このメニューアイテムはMCP Server Managerに統合されました
         /// </summary>
-        [MenuItem("UnityMCP/Clear Compile Status")]
-        public static void ClearCompileStatus()
-        {
-            if (File.Exists(CompileStatusPath))
-            {
-                File.Delete(CompileStatusPath);
-                MCPLogger.Log("Compile status file cleared");
-            }
-            else
-            {
-                MCPLogger.Log("No compile status file found");
-            }
-        }
+        // [MenuItem("UnityMCP/Clear Compile Status")]
+        // public static void ClearCompileStatus()
+        // {
+        //     if (File.Exists(CompileStatusPath))
+        //     {
+        //         File.Delete(CompileStatusPath);
+        //         MCPLogger.Log("Compile status file cleared");
+        //     }
+        //     else
+        //     {
+        //         MCPLogger.Log("No compile status file found");
+        //     }
+        // }
     }
     
     /// <summary>

@@ -8,7 +8,8 @@ namespace UnityMCP.Editor
     /// </summary>
     public static class TestConsoleOutput
     {
-        [MenuItem("UnityMCP/Test Console/Generate Test Logs")]
+        // [MenuItem("UnityMCP/Test Console/Generate Test Logs")]
+        // DEPRECATED: This menu item has been integrated into MCP Server Manager
         public static void GenerateTestLogs()
         {
             // 通常のログメッセージ
@@ -35,7 +36,8 @@ namespace UnityMCP.Editor
             MCPLogger.Log("Test logs have been generated successfully!");
         }
         
-        [MenuItem("UnityMCP/Test Console/Generate Compilation Error")]
+        // [MenuItem("UnityMCP/Test Console/Generate Compilation Error")]
+        // DEPRECATED: This menu item has been integrated into MCP Server Manager
         public static void GenerateCompilationError()
         {
             // わざとコンパイルエラーを生成するコードを作成
@@ -66,7 +68,8 @@ namespace UnityMCP.Editor
                 "OK");
         }
         
-        [MenuItem("UnityMCP/Test Console/Clear Compilation Error")]
+        // [MenuItem("UnityMCP/Test Console/Clear Compilation Error")]
+        // DEPRECATED: This menu item has been integrated into MCP Server Manager
         public static void ClearCompilationError()
         {
             var testFilePath = System.IO.Path.Combine(Application.dataPath, "UnityMCP/Editor/TempCompileError.cs");

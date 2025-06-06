@@ -22,13 +22,14 @@ namespace UnityMCP.Editor
             new ConsoleLogExporter()
         };
         
-        [MenuItem("UnityMCP/Export All Data")]
+        // メニューアイテムを削除 - MCP Server Managerに統合済み
+        // [MenuItem("UnityMCP/Export All Data")]
         public static void ExportAllData()
         {
             ExportChangedData();
         }
         
-        [MenuItem("UnityMCP/Force Export All Data")]
+        // [MenuItem("UnityMCP/Force Export All Data")]
         public static void ForceExportAllData()
         {
             var stopwatch = System.Diagnostics.Stopwatch.StartNew();
@@ -133,7 +134,7 @@ namespace UnityMCP.Editor
             }
         }
         
-        [MenuItem("UnityMCP/Open Data Folder")]
+        // [MenuItem("UnityMCP/Open Data Folder")]
         public static void OpenDataFolder()
         {
             var dataPath = System.IO.Path.Combine(Application.dataPath, "../UnityMCP/Data");
