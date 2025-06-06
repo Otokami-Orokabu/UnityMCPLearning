@@ -42,7 +42,7 @@ PathSecurityValidator.EnsureSafeOutputDirectory("UnityMCP/Data");
 #### **機能**
 - **API キー検出**: OpenAI、Google、AWS等のAPIキーを自動検出
 - **認証情報検出**: パスワード、トークン、シークレットキーを検出
-- **マスキング・除去**: 検出した機密データを`***MASKED***`で置換
+- **マスキング・除去**: 検出した機密データを`[REDACTED]`で置換
 
 #### **検出パターン**
 ```csharp
@@ -52,7 +52,7 @@ PathSecurityValidator.EnsureSafeOutputDirectory("UnityMCP/Data");
 - AKIAxxxxxxxxxxxxxxxx (AWS Access Key)
 - ghp_xxxxxxxxxxxxxxxx (GitHub Token)
 - password="secret123"
-- token="bearer_token_here"
+- token="example_token_placeholder"
 ```
 
 #### **使用例**

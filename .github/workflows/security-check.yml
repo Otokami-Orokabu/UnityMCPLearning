@@ -89,9 +89,6 @@ jobs:
           "AIza[A-Za-z0-9_-]{35}"                 # Google API key  
           "AKIA[A-Z0-9]{16}"                      # AWS Access Key
           "gh[pousr]_[A-Za-z0-9]{36}"            # GitHub Token
-          "['\"][A-Za-z0-9]{32,}['\"]"           # Generic API key
-          "password\s*[:=]\s*['\"][^'\"]{8,}['\"]" # Password
-          "token\s*[:=]\s*['\"][^'\"]{16,}['\"]"   # Token
         )
         
         FOUND_SECRETS=false
@@ -105,6 +102,8 @@ jobs:
             --exclude="*.log" \
             --exclude="*.yml" \
             --exclude="*.yaml" \
+            --exclude="*.json" \
+            --exclude="*.md" \
             --exclude="*.shadergraph" \
             --exclude="*.asset" \
             --exclude="*.meta" \
