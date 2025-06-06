@@ -2,6 +2,123 @@
 
 ## 🚨 よくある問題と解決方法
 
+### MCP Server Manager 関連
+
+#### ❌ MCP Server Manager が開かない
+**症状**: メニューから `Tools > MCP Server Manager` を選択しても何も起こらない
+**原因**: コンパイルエラーまたはスクリプトの問題
+
+**解決方法**:
+1. **Unity Console でエラー確認**
+   - Window > General > Console
+   - 赤いエラーメッセージをすべて解決
+
+2. **アセンブリ定義確認**
+   ```
+   Assets/UnityMCP/Editor/UnityMCP.Editor.asmdef が存在するか確認
+   ```
+
+3. **スクリプト再コンパイル**
+   - Assets > Reimport All
+
+#### ❌ "Settings loaded" ログが表示されない
+**症状**: MCP Server Manager を開いても設定が読み込まれない
+**原因**: 設定ファイルの権限または場所の問題
+
+**解決方法**:
+1. **設定ファイル確認**
+   ```bash
+   ls -la UnityMCP/settings.json
+   ```
+
+2. **ディレクトリ作成**
+   ```bash
+   mkdir -p UnityMCP
+   ```
+
+3. **手動設定ファイル作成**
+   ```json
+   {
+       "serverPath": "../unity-mcp-node",
+       "autoStartOnLaunch": true,
+       "defaultPort": 3000,
+       "lastModified": "2025-06-06T00:00:00Z"
+   }
+   ```
+
+#### ❌ Server Status が "Running" にならない
+**症状**: Start Server をクリックしても "Stopped" のまま
+**原因**: Node.js パスまたはサーバーファイルの問題
+
+**解決方法**:
+1. **Node.js パス確認**
+   ```bash
+   which node
+   # /usr/local/bin/node または /opt/homebrew/bin/node
+   ```
+
+2. **サーバーファイル確認**
+   ```bash
+   ls -la unity-mcp-node/dist/index.js
+   ```
+
+3. **手動サーバー起動テスト**
+   ```bash
+   cd unity-mcp-node
+   node dist/index.js
+   ```
+
+#### ❌ Connection Status が "Not Connected" のまま
+**症状**: サーバーは動作しているが接続できない
+**原因**: ファイル監視またはコマンドディレクトリの問題
+
+**解決方法**:
+1. **Test Connection ボタン使用**
+   - 詳細なテスト結果をログで確認
+
+2. **コマンドディレクトリ確認**
+   ```bash
+   ls -la UnityMCP/Commands/
+   ```
+
+3. **ファイル権限確認**
+   ```bash
+   chmod -R 755 UnityMCP/
+   ```
+
+#### ❌ Auto Start が動作しない
+**症状**: Unity起動時にサーバーが自動起動しない
+
+**解決方法**:
+1. **設定確認**
+   - Auto Start on Unity Launch にチェックが入っているか確認
+
+2. **設定ファイル確認**
+   ```json
+   {
+       "autoStartOnLaunch": true
+   }
+   ```
+
+3. **Unity Console でログ確認**
+   ```
+   [MCPServerSettings] Settings loaded from: ...
+   ```
+
+#### ❌ Data Status が常に 🔴赤
+**症状**: Clear Data をしてもすぐに赤になる
+**原因**: データ生成の頻度が高すぎる
+
+**解決方法**:
+1. **自動エクスポート無効化**
+   - Auto Export を一時的に無効に
+
+2. **ログ生成の抑制**
+   - Debug.Log の頻度を減らす
+
+3. **定期的なクリア**
+   - 作業開始時に Clear Data 実行
+
 ### 環境設定関連
 
 #### ❌ 「Command not found: node」
