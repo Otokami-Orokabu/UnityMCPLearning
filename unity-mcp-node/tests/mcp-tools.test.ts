@@ -18,7 +18,7 @@ jest.mock('../src/unity-commands', () => ({
 
 describe('MCP_TOOLS definition', () => {
   it('should have correct number of tools', () => {
-    expect(MCP_TOOLS).toHaveLength(6);
+    expect(MCP_TOOLS).toHaveLength(8);
   });
 
   it('should have unity_info_realtime tool', () => {
@@ -74,6 +74,23 @@ describe('MCP_TOOLS definition', () => {
     expect(tool).toBeDefined();
     expect(tool?.description).toBe('Test server connection');
     expect(tool?.inputSchema.properties).toEqual({});
+  });
+
+  it('should have get_console_logs tool', () => {
+    const tool = MCP_TOOLS.find(t => t.name === 'get_console_logs');
+    
+    expect(tool).toBeDefined();
+    expect(tool?.description).toBe('Get Unity Console logs (errors, warnings, logs)');
+    expect(tool?.inputSchema.properties).toHaveProperty('filter');
+    expect(tool?.inputSchema.properties).toHaveProperty('limit');
+  });
+
+  it('should have wait_for_compilation tool', () => {
+    const tool = MCP_TOOLS.find(t => t.name === 'wait_for_compilation');
+    
+    expect(tool).toBeDefined();
+    expect(tool?.description).toBe('Wait for Unity compilation to complete and return results');
+    expect(tool?.inputSchema.properties).toHaveProperty('timeout');
   });
 
   it('should have consistent schema structure', () => {

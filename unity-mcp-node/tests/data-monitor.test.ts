@@ -217,7 +217,8 @@ describe('data-monitor', () => {
         'gameobjects': 'gameobjects',
         'assets': 'assets_info',
         'build': 'build_info',
-        'editor': 'editor_state'
+        'editor': 'editor_state',
+        'console': 'console_logs'
       });
     });
 
