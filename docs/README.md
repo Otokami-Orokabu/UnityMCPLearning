@@ -17,12 +17,14 @@ Unity MCPプロジェクトの包括的なドキュメント集です。
 - **[07-current-capabilities.md](./tutorial/07-current-capabilities.md)** - 現在の機能
 - **[08-quick-start-guide.md](./tutorial/08-quick-start-guide.md)** - クイックスタートガイド
 - **[09-claude-code-mcp-integration.md](./tutorial/09-claude-code-mcp-integration.md)** - Claude Code CLI統合ガイド
-- **[10-unity-console-integration-guide.md](./tutorial/10-unity-console-integration-guide.md)** - Unity Console統合・AI駆動開発ガイド（最新✨）
+- **[10-complete-user-guide.md](./tutorial/10-complete-user-guide.md)** - 完全初心者ガイド（✨ 新規追加）
+- **[11-mcp-server-manager-guide.md](./tutorial/11-mcp-server-manager-guide.md)** - MCP Server Manager完全ガイド（✨ 新規追加）
 
 ### 🛠️ [development/](./development/) - 開発者向けドキュメント
 現在進行中の開発計画と将来のロードマップです。
 
 - **[comprehensive-roadmap.md](./development/comprehensive-roadmap.md)** - 包括的開発ロードマップ（継続更新中）
+- **[settings-system-guide.md](./development/settings-system-guide.md)** - 設定システム詳細ガイド（✨ 新規追加）
 
 ### ⚖️ [legal/](./legal/) - 法的・セキュリティ文書
 ライセンス、セキュリティ対策、公開準備に関する情報です。
