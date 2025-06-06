@@ -1,0 +1,45 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "name": "Unity MCP Server API Documentation",
+  "entryPoints": [
+    "src/index.ts",
+    "src/errors.ts",
+    "src/config-validator.ts",
+    "src/unity-commands.ts",
+    "src/mcp-tools.ts",
+    "src/data-monitor.ts",
+    "src/json-rpc.ts",
+    "src/i18n.ts"
+  ],
+  "out": "docs/api",
+  "theme": "default",
+  "readme": "README.md",
+  "excludePrivate": true,
+  "excludeProtected": false,
+  "excludeInternal": true,
+  "hideGenerator": false,
+  "disableSources": false,
+  "includeVersion": true,
+  "sort": ["source-order"],
+  "categorizeByGroup": false,
+  "searchInComments": true,
+  "cleanOutputDir": true,
+  "treatWarningsAsErrors": false,
+  "validation": {
+    "notExported": false,
+    "invalidLink": false,
+    "notDocumented": false
+  },
+  "tsconfig": "tsconfig.json",
+  "exclude": [
+    "**/*.test.ts",
+    "**/*.spec.ts",
+    "**/tests/**/*",
+    "**/node_modules/**/*",
+    "**/dist/**/*"
+  ],
+  "plugin": [
+    "typedoc-plugin-markdown"
+  ],
+  "gitRevision": "main"
+}
