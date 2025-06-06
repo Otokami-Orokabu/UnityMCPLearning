@@ -1,0 +1,237 @@
+# Unity MCP Learning - ファイル構成・アーキテクチャ
+# セッション復元チェーン: Step 3/4
+
+# プロジェクト全体構成
+project_structure:
+  root_directory: "/Users/sakabesou/ProjectGit/UnityMCPLearning"
+  
+  main_components:
+    mcp_server: "unity-mcp-node/ - MCPサーバー（Node.js/TypeScript）"
+    unity_project: "MCPLearning/ - Unityプロジェクト（C#）"
+    documentation: "docs/ - ドキュメント・ガイド"
+    project_files: "README.md, LICENSE, SECURITY.md"
+
+# 詳細ディレクトリ構成
+directory_structure:
+  unity_mcp_node:
+    path: "unity-mcp-node/"
+    description: "MCPサーバー本体・TypeScript実装"
+    structure:
+      source_code:
+        - "src/ - ソースコード（8専門モジュール）"
+        - "src/index.ts - メインエントリーポイント（211行）"
+        - "src/errors.ts - エラーハンドリング統一"
+        - "src/config-validator.ts - JSON Schema設定検証"
+        - "src/json-rpc.ts - JSON-RPCプロトコル処理"
+        - "src/mcp-tools.ts - MCPツール定義・実行"
+        - "src/unity-commands.ts - Unityコマンド処理"
+        - "src/data-monitor.ts - データ監視・debounce機能"
+        - "src/i18n.ts - 多言語対応"
+      
+      build_output:
+        - "dist/ - コンパイル済みJavaScript（gitignore対象）"
+        - "dist/index.js - 本番実行ファイル"
+      
+      testing:
+        - "tests/ - Jestテストコード（125テスト実装）"
+        - "jest.config.js - Jest設定"
+        - "coverage/ - テストカバレッジレポート"
+      
+      configuration:
+        - "package.json - Node.jsプロジェクト設定"
+        - "package-lock.json - 依存関係ロック"
+        - "tsconfig.json - TypeScript設定"
+        - "mcp-config.json - MCP設定ファイル（JSON Schema検証）"
+        - ".env.example - 環境変数設定例"
+      
+      documentation:
+        - "docs/api/ - TypeDoc自動生成APIドキュメント"
+        - "typedoc.json - TypeDocドキュメント生成設定"
+        - "README.md - MCPサーバー専用ドキュメント"
+      
+      utility_scripts:
+        - "get-unity-info.js - JavaScript版情報取得テスト"
+        - "get-unity-info.ts - TypeScript版情報取得テスト"
+        - "test-connection.js - 包括的接続テスト"
+
+  mcp_learning:
+    path: "MCPLearning/"
+    description: "Unityプロジェクト・Unity 6000.1.5f1"
+    structure:
+      unity_mcp_integration:
+        - "Assets/UnityMCP/ - MCP統合システム"
+        - "Assets/UnityMCP/Editor/ - エディター専用スクリプト"
+        - "Assets/UnityMCP/Editor/Common/ - 共通機能・インターフェース"
+        - "Assets/UnityMCP/Editor/Exporters/ - データエクスポーター（6種類）"
+        - "Assets/UnityMCP/Tests/Editor/ - Unity Test Runner テストコード"
+        - "Assets/UnityMCP/Scripts/ - ランタイムスクリプト（将来用）"
+      
+      data_output:
+        - "UnityMCP/Data/ - JSON出力ディレクトリ（Assets外）"
+        - "UnityMCP/Commands/ - コマンドファイル置き場"
+      
+      unity_standard:
+        - "Assets/Scenes/ - Unityシーンファイル"
+        - "Assets/Settings/ - レンダリング・UI設定"
+        - "Assets/TextMesh Pro/ - TextMeshPro設定"
+        - "ProjectSettings/ - Unityプロジェクト設定"
+        - "Packages/ - Unity Package Manager設定"
+        - "Library/ - Unity内部ファイル（gitignore）"
+        - "Logs/ - Unityログファイル"
+
+  documentation:
+    path: "docs/"
+    description: "プロジェクトドキュメント・学習リソース"
+    structure:
+      tutorial:
+        - "tutorial/ - 学習用チュートリアル（10ファイル）"
+        - "tutorial/README.md - チュートリアル全体案内・学習パス"
+        - "tutorial/00-getting-started.md - プロジェクト概要"
+        - "tutorial/01-environment-setup.md - 環境設定"
+        - "tutorial/09-claude-code-mcp-integration.md - Claude Code統合"
+        - "tutorial/10-unity-console-integration-guide.md - Unity Console統合"
+      
+      development:
+        - "development/ - 開発者向けドキュメント"
+        - "development/comprehensive-roadmap.md - 包括的開発ロードマップ"
+      
+      completed:
+        - "completed/ - 完了済みドキュメント（6ファイル）"
+        - "completed/claude-code-integration.md - Claude Code統合完了"
+        - "completed/unity-console-integration.md - Unity Console統合完了"
+        - "completed/improvement-roadmap.md - 改善ロードマップ完了"
+      
+      legal:
+        - "legal/ - 法的・セキュリティ文書"
+        - "legal/license-guide.md - ライセンスガイド"
+        - "legal/security-analysis.md - セキュリティ分析"
+      
+      future:
+        - "future/ - 将来計画・アイデア"
+        - "future/distribution-packages.md - 配布パッケージ計画"
+        - "future/unity-mcp-manager.md - Unity Editor統合管理システム"
+      
+      prompt:
+        - "prompt/ - AI設定ファイル（セッション復元用）"
+        - "prompt/starter-prompt.yaml - セッション復元起点"
+        - "prompt/01-project-specs.yaml - プロジェクト基本仕様"
+        - "prompt/02-current-status.yaml - 現在の実装状況"
+        - "prompt/03-file-structure.yaml - ファイル構成（このファイル）"
+        - "prompt/04-configuration.yaml - 設定・環境情報"
+
+# 重要ファイルの詳細
+critical_files:
+  mcp_server_core:
+    index_ts:
+      path: "unity-mcp-node/src/index.ts"
+      lines: 211
+      role: "MCPサーバーメインエントリーポイント"
+      key_functions: ["MCP Protocol処理", "ツール登録", "Unity通信管理"]
+    
+    mcp_tools_ts:
+      path: "unity-mcp-node/src/mcp-tools.ts"
+      role: "MCPツール定義・実装"
+      tools: ["8種MCPツール", "パラメータ検証", "エラーハンドリング"]
+    
+    unity_commands_ts:
+      path: "unity-mcp-node/src/unity-commands.ts"
+      role: "Unityコマンド処理・実行"
+      features: ["コマンドキュー", "FileSystemWatcher", "非同期処理"]
+
+  unity_integration_core:
+    mcp_data_exporter:
+      path: "MCPLearning/Assets/UnityMCP/Editor/MCPDataExporter.cs"
+      role: "メインエクスポーター・Unityメニュー"
+      features: ["6種エクスポーター管理", "自動更新", "メニュー統合"]
+    
+    mcp_command_processor:
+      path: "MCPLearning/Assets/UnityMCP/Editor/Common/MCPCommandProcessor.cs"
+      role: "コマンド処理エンジン"
+      features: ["FileSystemWatcher", "非同期処理", "エラーハンドリング"]
+    
+    console_log_exporter:
+      path: "MCPLearning/Assets/UnityMCP/Editor/Exporters/ConsoleLogExporter.cs"
+      role: "Unity Console統合・ログ取得"
+      features: ["Application.logMessageReceived", "フィルタリング", "リアルタイム更新"]
+
+  configuration_files:
+    claude_desktop_config:
+      path: "~/Library/Application Support/Claude/claude_desktop_config.json"
+      role: "Claude Desktop MCP設定"
+      content: "MCPサーバー登録・起動設定"
+    
+    mcp_config:
+      path: "unity-mcp-node/mcp-config.json"
+      role: "MCP設定・パス管理"
+      features: ["JSON Schema検証", "相対パス対応", "環境変数サポート"]
+
+# データフロー・ファイル関係
+data_flow_files:
+  unity_to_mcp:
+    data_files:
+      - "UnityMCP/Data/project-info.json - プロジェクト基本情報"
+      - "UnityMCP/Data/scene-info.json - シーン状態"
+      - "UnityMCP/Data/gameobjects.json - GameObject一覧"
+      - "UnityMCP/Data/assets-info.json - アセット統計"
+      - "UnityMCP/Data/build-info.json - ビルド設定"
+      - "UnityMCP/Data/editor-state.json - エディター状態"
+    
+    monitoring:
+      - "FileSystemWatcher による自動監視"
+      - "debounce機能（300ms）による効率化"
+      - "変更検知による即座更新"
+
+  mcp_to_unity:
+    command_files:
+      - "UnityMCP/Commands/*.json - コマンドファイル"
+      - "FileSystemWatcher による監視"
+      - "非同期処理による実行"
+
+# ビルド・配布構成
+build_configuration:
+  development:
+    mcp_server: "npm run build → dist/index.js生成"
+    unity_project: "Unity Editor → 自動コンパイル"
+    testing: "npm test → Jest実行, Unity Test Runner"
+  
+  distribution_ready:
+    mcp_server: "dist/index.js → 本番実行ファイル"
+    unity_package: "Assets/UnityMCP → Package化準備"
+    documentation: "docs/ → 包括的ガイド"
+
+# Git管理・無視設定
+version_control:
+  gitignore_strategy:
+    global: ".gitignore - プロジェクト全体"
+    mcp_server: "unity-mcp-node/.gitignore - Node.js専用"
+    unity_project: "MCPLearning/.gitignore - Unity専用"
+  
+  key_exclusions:
+    - "node_modules/ - Node.js依存関係"
+    - "dist/ - ビルド成果物"
+    - "Library/ - Unity内部ファイル"
+    - "coverage/ - テストカバレッジ"
+    - "*.log - ログファイル"
+
+# アーキテクチャ特徴
+architecture_highlights:
+  modular_design:
+    mcp_server: "8専門モジュール・単一責任原則"
+    unity_integration: "インターフェース分離・疎結合"
+    error_handling: "統一的エラー処理・多言語対応"
+  
+  scalability:
+    tool_addition: "mcp-tools.ts での簡単ツール追加"
+    exporter_expansion: "インターフェース準拠で容易拡張"
+    configuration: "JSON Schema による厳密検証"
+  
+  maintainability:
+    code_organization: "用途別ファイル分割"
+    documentation: "自動生成API仕様・包括的ガイド"
+    testing: "125テスト・Unity Test Runner"
+
+# 次のファイル案内
+next_file:
+  file: "docs/prompt/04-configuration.yaml"
+  purpose: "Claude Desktop設定・MCP設定・環境構築の詳細確認"
+  content_summary: "設定例、パス情報、起動手順、トラブルシューティング"

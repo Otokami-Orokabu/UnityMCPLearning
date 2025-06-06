@@ -1,0 +1,253 @@
+# Unity MCP Learning - 設定・環境構築
+# セッション復元チェーン: Step 4/4
+
+# Claude Desktop設定
+claude_desktop_configuration:
+  config_file_path:
+    macos: "~/Library/Application Support/Claude/claude_desktop_config.json"
+    windows: "~/AppData/Roaming/Claude/claude_desktop_config.json"
+    linux: "~/.config/claude/claude_desktop_config.json"
+  
+  current_working_config:
+    mcpServers:
+      unity-mcp-prod:
+        command: "node"
+        args: ["./unity-mcp-node/dist/index.js"]
+        env: {}
+    
+    advantages:
+      - "本番用ビルドファイル使用（安定性向上）"
+      - "相対パス対応による移植性向上"
+      - "リアルタイム監視機能完全動作"
+      - "個人情報を含まない汎用的設定"
+      - "配布可能な設定ファイル"
+
+# MCP設定ファイル
+mcp_config_details:
+  file_path: "unity-mcp-node/mcp-config.json"
+  
+  configuration_structure:
+    unity_project_path: "相対パス対応・環境に応じた自動解決"
+    data_output_path: "UnityMCP/Data/"
+    commands_path: "UnityMCP/Commands/"
+    logging_enabled: true
+    debug_mode: false
+  
+  path_resolution:
+    method: "3段階パス解決システム"
+    priority:
+      1: "環境変数 MCP_CONFIG_PATH"
+      2: "設定ファイル基準の相対パス"
+      3: "フォールバック（デフォルトパス）"
+  
+  json_schema_validation:
+    validator: "ajv + JSON Schema"
+    schema_file: "schema/mcp-config.schema.json"
+    validation_timing: "起動時・設定変更時"
+
+# 環境要件
+environment_requirements:
+  essential:
+    unity: "Unity 6.0以降（NamedBuildTarget API使用）"
+    nodejs: "Node.js 18.0以降（MCPサーバー実行）"
+    claude_desktop: "Claude Desktop（MCP対応版）"
+  
+  recommended:
+    ide: "Visual Studio Code（コード編集）"
+    version_control: "Git（バージョン管理）"
+    unity_knowledge: "基本的なUnity操作知識"
+
+# 起動手順
+startup_procedures:
+  full_setup:
+    step_1: "Unityプロジェクト開く（Unity Hub → Add → MCPLearning フォルダ選択）"
+    step_2: "MCPサーバービルド（cd unity-mcp-node && npm install && npm run build）"
+    step_3: "Claude Desktop設定更新（claude_desktop_config.json編集）"
+    step_4: "Claude Desktop再起動（設定反映）"
+    step_5: "接続確認（Claude Desktop で ping 実行）"
+  
+  quick_start:
+    step_1: "Unity プロジェクト開く"
+    step_2: "MCPサーバー起動（cd unity-mcp-node && npm start）"
+    step_3: "Claude Desktop でテスト（ping → create a cube）"
+  
+  development_mode:
+    mcp_server: "npm run dev（開発モード・自動リロード）"
+    unity_project: "エディターで通常通り作業"
+    testing: "npm test（Jestテスト実行）"
+
+# 設定例・テンプレート
+configuration_templates:
+  claude_desktop_minimal:
+    mcpServers:
+      unity-mcp:
+        command: "node"
+        args: ["./unity-mcp-node/dist/index.js"]
+  
+  claude_desktop_with_env:
+    mcpServers:
+      unity-mcp:
+        command: "node"
+        args: ["./unity-mcp-node/dist/index.js"]
+        env:
+          DEBUG: "true"
+          MCP_LOG_LEVEL: "verbose"
+  
+  mcp_config_basic:
+    unity_project_path: "../MCPLearning"
+    data_output_path: "UnityMCP/Data"
+    commands_path: "UnityMCP/Commands"
+    logging:
+      enabled: true
+      level: "info"
+    
+  environment_variables:
+    MCP_CONFIG_PATH: "/absolute/path/to/mcp-config.json"
+    UNITY_PROJECT_PATH: "/absolute/path/to/MCPLearning"
+    DEBUG: "true"
+
+# 接続確認・テストコマンド
+verification_commands:
+  basic_connectivity:
+    ping: "MCP Server接続確認（~5ms）"
+    unity_info_realtime: "Unity情報取得確認（~15ms）"
+  
+  functionality_test:
+    create_cube: "GameObject作成確認（~50-100ms）"
+    get_console_logs: "Console統合確認"
+    wait_for_compilation: "コンパイル監視確認"
+  
+  comprehensive_test:
+    all_categories: "unity_info_realtime all（6カテゴリ全取得）"
+    error_handling: "無効パラメータでエラー処理確認"
+    performance: "連続実行でパフォーマンス確認"
+
+# パス設定・移植性
+path_configuration:
+  relative_path_strategy:
+    base_directory: "UnityMCPLearning/"
+    mcp_server: "./unity-mcp-node/"
+    unity_project: "./MCPLearning/"
+    configuration: "設定ファイル基準の相対パス解決"
+  
+  absolute_path_fallback:
+    claude_desktop: "絶対パス指定によるClaude Desktop統合"
+    environment_override: "環境変数による上書き可能"
+    debug_logging: "パス解決過程の詳細ログ"
+  
+  cross_platform_support:
+    path_separator: "Node.js path.join()による自動対応"
+    home_directory: "process.env.HOME または process.env.USERPROFILE"
+    config_locations: "OS別標準ディレクトリ対応"
+
+# デバッグ・ログ設定
+debug_configuration:
+  mcp_server_logging:
+    console_output: "リアルタイムログ表示"
+    file_output: "unity-mcp-node/logs/mcp-server.log"
+    log_levels: ["error", "warn", "info", "debug", "verbose"]
+  
+  unity_logging:
+    unity_console: "Unity Consoleでの表示"
+    mcp_logger: "MCPLogger.cs による統一ログ"
+    debug_log_disabled: "Debug.Log使用禁止・Unity Logging準拠"
+  
+  debug_commands:
+    verbose_mode: "DEBUG=true環境変数設定"
+    connection_test: "test-connection.js実行"
+    unity_info_debug: "get-unity-info.ts実行"
+
+# エラー対処・トラブルシューティング
+troubleshooting_guide:
+  common_issues:
+    connection_failed:
+      symptoms: "ping コマンドが失敗する"
+      solutions: ["Claude Desktop再起動", "設定ファイル確認", "MCPサーバー起動確認"]
+    
+    path_not_found:
+      symptoms: "Unity情報が取得できない"
+      solutions: ["mcp-config.json確認", "Unityプロジェクトパス確認", "相対パス設定確認"]
+    
+    compilation_errors:
+      symptoms: "wait_for_compilation がタイムアウト"
+      solutions: ["Unity Console確認", "コンパイルエラー修正", "Unity再起動"]
+  
+  diagnostic_commands:
+    mcp_server_status: "ps aux | grep node（プロセス確認）"
+    config_validation: "npm run validate-config（設定検証）"
+    unity_process: "ps aux | grep Unity（Unity起動確認）"
+  
+  recovery_procedures:
+    reset_claude_config: "claude_desktop_config.json.backup から復元"
+    rebuild_mcp_server: "npm run clean && npm install && npm run build"
+    unity_reimport: "Reimport All（Unity Assets再インポート）"
+
+# パフォーマンス最適化
+performance_optimization:
+  mcp_server:
+    debounce_settings: "300ms遅延でファイル監視効率化"
+    async_processing: "非同期処理による応答性向上"
+    memory_management: "適切なリソース管理・メモリリーク防止"
+  
+  unity_integration:
+    export_frequency: "変更検知ベースの効率的更新"
+    file_size_optimization: "JSON構造最適化・不要データ除外"
+    background_processing: "EditorApplication events活用"
+  
+  claude_desktop:
+    response_caching: "15分セルフクリーニングキャッシュ"
+    connection_pooling: "stdio接続の効率的管理"
+    batch_processing: "複数コマンドの一括処理対応"
+
+# セキュリティ考慮事項
+security_considerations:
+  local_environment_only:
+    network_isolation: "外部ネットワーク通信なし"
+    file_access_scope: "プロジェクトディレクトリ内のみ"
+    process_separation: "Unity・Node.js・Claude Desktop独立実行"
+  
+  configuration_security:
+    sensitive_data: "個人情報（ユーザー名等）除去済み"
+    path_sanitization: "パスインジェクション防止"
+    permission_restriction: "最小権限での実行"
+  
+  backup_strategy:
+    config_backup: "Claude Desktop設定の自動バックアップ"
+    version_control: "設定ファイルのGit管理"
+    recovery_plan: "問題発生時の復元手順"
+
+# 開発環境設定
+development_environment:
+  ide_setup:
+    vscode_extensions: ["TypeScript", "Unity Tools", "JSON Schema"]
+    workspace_settings: "プロジェクト固有の設定"
+    debug_configuration: "Node.js + Unity デバッグ設定"
+  
+  testing_setup:
+    jest_configuration: "jest.config.js（125テスト実装）"
+    unity_test_runner: "Assembly Definition + Test Runner"
+    coverage_reporting: "Istanbul/nyc カバレッジレポート"
+  
+  build_automation:
+    npm_scripts: "build, test, dev, start, clean"
+    watch_mode: "ファイル変更による自動リビルド"
+    linting: "ESLint + TypeScript規則"
+
+# 完了通知
+session_restore_complete:
+  message: "セッション復元チェーン完了"
+  files_loaded: 4
+  total_information: "プロジェクト仕様・実装状況・ファイル構成・設定情報"
+  
+  ready_for_work:
+    - "TodoRead - 現在のタスク状況確認"
+    - "現在の状況を教えて - 実装状況サマリー"
+    - "ping - MCP接続確認"
+    - "unity_info_realtime - Unity状態確認"
+    - "get_console_logs - Console動作確認"
+  
+  additional_resources:
+    tutorial_start: "docs/tutorial/README.md"
+    quick_start: "docs/tutorial/08-quick-start-guide.md"
+    troubleshooting: "docs/tutorial/04-troubleshooting.md"
+    current_capabilities: "docs/tutorial/07-current-capabilities.md"

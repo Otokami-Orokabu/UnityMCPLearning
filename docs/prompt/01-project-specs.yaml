@@ -1,0 +1,167 @@
+# Unity MCP Learning - プロジェクト基本仕様
+# セッション復元チェーン: Step 1/4
+
+project_core:
+  name: "Unity MCP Learning"
+  organization: "orlab"
+  description: "Claude DesktopからUnity Editorを自然言語で操作できる革新的なMCPサーバーの学習プロジェクト"
+  
+  vision: "AI駆動Unity開発環境の実現"
+  mission: "自然言語でのGameObject作成・Unity操作を可能にするMCPサーバー構築"
+
+# 技術スタック
+technical_specifications:
+  runtime_environment:
+    os: "macOS (主要開発環境)"
+    node_version: "18.0+"
+    unity_version: "6000.1.5f1"
+    
+  mcp_server:
+    language: "TypeScript 5.0+"
+    runtime: "Node.js"
+    protocol: "MCP (Model Context Protocol) 2024-11-05"
+    communication: "JSON-RPC 2.0 over stdio"
+    build_tool: "tsc (TypeScript Compiler)"
+    
+  unity_client:
+    version: "Unity 6以上"
+    language: "C#"
+    ui_framework: "UIToolkit"
+    async_system: "Task/await"
+    render_pipeline: "Universal Render Pipeline"
+    input_system: "Unity Input System"
+    logging: "Unity Logging Package"
+    
+  communication_protocol:
+    primary: "stdio (JSON-RPC 2.0)"
+    secondary: "JSON file monitoring"
+    data_format: "JSON"
+    file_watching: "FileSystemWatcher"
+
+# アーキテクチャ設計
+architecture:
+  communication_flow: "Claude Desktop ↔ MCP Server (Node.js) ↔ Unity Editor (C#)"
+  
+  data_flow:
+    request: "Claude Desktop → MCP Protocol → Unity Command → Unity Editor"
+    response: "Unity Editor → JSON Export → File Monitor → MCP Server → Claude Desktop"
+    realtime: "Unity State Changes → Auto Export → Real-time Update"
+  
+  component_structure:
+    mcp_server: "8専門モジュール（index.ts 211行）"
+    unity_integration: "6データエクスポーター + コマンド処理システム"
+    error_handling: "ErrorCode enum + MCPError class統一化"
+
+# 開発方針・制約
+development_constraints:
+  methodology: "HaaS（Human-as-a-Service）駆動開発"
+  implementation_style: "フルスクラッチ構築・外部SDK使用禁止"
+  documentation_approach: ".mdによるステップ分割ドキュメント指向"
+  language_preference: "日本語での返答・ドキュメント作成"
+  
+  technical_constraints:
+    unity_output: "Assets外に限定 (./UnityMCP/)"
+    platform: "macOS前提"
+    control_interface: "Claude Desktop (GUI操作前提)"
+    meta_files: "Unity関連ファイル作成時は.metaファイル作成禁止"
+    logging: "Debug.Log使用禁止・Unity Logging準拠"
+
+# プロジェクト目標（Step構成）
+project_goals:
+  step_1:
+    description: "Claude Desktop と MCPサーバー間での通信確立"
+    api_example: "ping ツール実装"
+    test_method: "JSON-RPC 2.0によるデータ送受信確認"
+    status: "✅ 完了"
+    
+  step_2:
+    description: "Unity → JSON出力 → MCPリアルタイム監視システム"
+    implementation: "ファイル監視による自動データ取得"
+    status: "✅ 完了"
+    
+  step_3:
+    description: "Claude ⇨ MCP ⇨ Unity の実行ルートを通してGameObject生成"
+    intent: "コマンドがEditorに反映される構成"
+    status: "✅ 完了"
+    
+  step_4:
+    description: "MCPのAPI構成拡張・管理性向上"
+    scope: "色指定パラメータ・詳細位置指定・マテリアル適用等"
+    status: "⏳ 未開始"
+
+# セキュリティ要件
+security_requirements:
+  environment: "ローカル開発環境限定"
+  network: "外部ネットワーク通信なし"
+  access_scope: "プロジェクトディレクトリ内のみ"
+  process_isolation: "Unity・Node.js・Claude Desktop独立実行"
+  
+  prohibited_usage:
+    - "本番環境・商用サーバーでの使用"
+    - "機密情報を含むプロジェクトでの使用"
+    - "外部公開サービスでの使用"
+  
+  privacy_measures:
+    - "個人情報（ユーザー名等）の除去完了"
+    - "設定ファイルの汎用化"
+    - "相対パス対応による移植性確保"
+
+# インターフェース設計原則
+interface_design:
+  user_experience:
+    primary_interface: "自然言語コマンド (Claude Desktop)"
+    command_style: "create a cube, get scene info, ping"
+    response_format: "構造化JSON + 人間可読メッセージ"
+    
+  api_consistency:
+    naming_convention: "小文字スネークケース (create_cube)"
+    parameter_style: "全てオプショナル・デフォルト値提供"
+    error_format: "ErrorCode enum + 詳細メッセージ"
+    
+  extensibility:
+    tool_registration: "mcp-tools.ts での統一管理"
+    command_processing: "unity-commands.ts での統一処理"
+    validation: "JSON Schema + Ajv での厳密検証"
+
+# 品質基準
+quality_standards:
+  code_quality:
+    architecture: "モジュール分割・単一責任原則"
+    error_handling: "包括的エラーハンドリング・多言語対応"
+    testing: "Jest単体テスト + Unity Test Runner"
+    documentation: "JSDoc/XMLコメント + TypeDoc自動生成"
+    
+  performance_requirements:
+    command_execution: "平均50-100ms"
+    file_monitoring: "リアルタイム（<1ms検知）"
+    memory_usage: "非同期処理による最小化"
+    startup_time: "5秒以内での接続確立"
+    
+  reliability_standards:
+    error_recovery: "自動リトライ・フォールバック機能"
+    validation: "厳密なパラメータ検証"
+    logging: "詳細なデバッグログ・トレーサビリティ"
+    backwards_compatibility: "設定ファイル互換性維持"
+
+# 学習目標
+learning_objectives:
+  technical_skills:
+    - "MCP (Model Context Protocol) の理解と実装"
+    - "Unity Editor Scripting の実践"
+    - "AI-Unity連携システムの構築"
+    - "リアルタイム通信の設計・実装"
+    - "エラーハンドリングとログ設計"
+    - "非同期プログラミングの実装"
+    
+  practical_achievements:
+    - "自然言語インターフェースの開発"
+    - "堅牢なエラーハンドリング設計"
+    - "パフォーマンス最適化技術"
+    - "AI技術とゲーム開発の融合"
+    - "リアルタイム通信システムの構築"
+
+# 次のファイル案内
+next_file:
+  file: "docs/prompt/02-current-status.yaml"
+  purpose: "現在の実装状況・完了機能・利用可能ツールの詳細確認"
+  content_summary: "Step1-3完了状況、Unity Console統合、Claude Code統合、8種MCPツール"

@@ -1,0 +1,109 @@
+# Unity MCP Learning - セッション復元用スタートアップ
+# セッション開始時にこのファイルを読み込むことで、プロジェクト全体の文脈を段階的に復元します
+
+session_restore_info:
+  message: "セッション復元のため、以下の順序でファイルを読み込んでください："
+  
+  read_order:
+    step_1:
+      file: "docs/prompt/01-project-specs.yaml"
+      purpose: "プロジェクト基本仕様・技術スタック・制約の理解"
+      content: "基本的なプロジェクト要件とアーキテクチャ"
+    
+    step_2:
+      file: "docs/prompt/02-current-status.yaml"
+      purpose: "現在の実装状況・利用可能ツール・完了機能の把握"
+      content: "Step1-3完了状況、Unity Console統合、Claude Code統合完了"
+    
+    step_3:
+      file: "docs/prompt/03-file-structure.yaml"
+      purpose: "ファイル構成・アーキテクチャ・モジュール構造の理解"
+      content: "プロジェクト構成、重要ファイルパス、モジュール分割"
+    
+    step_4:
+      file: "docs/prompt/04-configuration.yaml"
+      purpose: "Claude Desktop設定・MCP設定・環境構築の確認"
+      content: "設定例、パス情報、起動手順"
+
+# クイックコンテキスト - 最重要情報の即座把握
+quick_context:
+  project_name: "Unity MCP Learning"
+  organization: "orlab"
+  current_phase: "Unity Console統合完了・実用レベル品質達成フェーズ"
+  
+  main_achievement: 
+    - "AI駆動Unity開発サイクル実現"
+    - "リアルタイムエラー検知・即座フィードバック完備"
+    - "Claude Code CLI統合による実用レベル制御"
+    - "品質改善完了（テスト・エラーハンドリング・モジュール化）"
+  
+  technical_stack:
+    mcp_server: "Node.js 18+ / TypeScript 5+"
+    unity_client: "Unity 6000.1.5f1 / C#"
+    protocol: "MCP 2024-11-05 / JSON-RPC 2.0"
+    communication: "stdio + JSON file monitoring"
+  
+  implemented_tools_count: 8
+  test_coverage: "125 Jest tests + Unity Test Runner"
+  architecture_summary: "Claude Desktop ↔ MCP Server (Node.js) ↔ Unity Editor (C#)"
+
+# 現在の開発状況サマリー
+current_state:
+  completed_phases:
+    - "Step 1: 基本通信確立 ✅"
+    - "Step 2: Unity連携システム ✅"
+    - "Step 3: Unity制御システム ✅"
+    - "Unity Console統合 ✅"
+    - "Claude Code CLI統合 ✅"
+    - "品質改善 (GitHub Issue #6) ✅"
+  
+  available_mcp_tools:
+    unity_control: ["create_cube", "create_sphere", "create_plane", "create_gameobject"]
+    unity_console: ["get_console_logs", "wait_for_compilation"]
+    system: ["unity_info_realtime", "ping"]
+  
+  working_features:
+    - "自然言語でのUnityオブジェクト作成"
+    - "リアルタイムUnity状態監視"
+    - "コンパイルエラーの即座検知・詳細取得"
+    - "AI駆動開発サイクル（コード生成→コンパイル→エラー検知→修正）"
+
+# セッション復元後の推奨アクション
+session_start_commands:
+  immediate_check:
+    - "TodoRead - 現在のタスク状況確認"
+    - "現在の状況を教えて - 実装状況サマリー"
+  
+  verification_commands:
+    - "ping - MCP接続確認"
+    - "unity_info_realtime - Unity状態取得"
+    - "get_console_logs - Console動作確認"
+  
+  common_workflows:
+    development: "コード生成 → wait_for_compilation → get_console_logs → エラー修正"
+    testing: "create_cube → unity_info_realtime → 動作確認"
+
+# 重要な注意事項
+important_notes:
+  security: "ローカル開発環境限定・機密プロジェクト使用禁止"
+  constraints: "Unity出力先はAssets外・macOS前提・Claude Desktop起動制御"
+  paths: "相対パス対応・移植性確保・個人情報除去済み"
+  
+  current_priorities:
+    pending: "セキュリティ強化Phase 1 (#5)"
+    next_phase: "配布パッケージ作成・Unity Package化"
+
+# ファイル履歴情報
+file_evolution:
+  original: "prompt.yaml (43行) - 初期基本計画"
+  previous: "prompt-updated.yaml (615行) - 包括的進捗記録"
+  current: "starter-prompt.yaml + 分割構成 - セッション復元最適化"
+  
+  reorganization_reason: "セッション復元性向上・情報整理・メンテナンス性向上"
+
+# バージョン情報
+metadata:
+  created: "2025年6月6日"
+  purpose: "セッション復元用統合スタートアップファイル"
+  usage: "新しいセッション開始時にこのファイルを最初に読み込む"
+  next_files: "01-project-specs.yaml → 02-current-status.yaml → 03-file-structure.yaml → 04-configuration.yaml"
