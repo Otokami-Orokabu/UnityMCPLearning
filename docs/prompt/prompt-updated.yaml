@@ -5,7 +5,7 @@ execution_style: ".mdによるステップ分割ドキュメント指向"
 language_preference: 日本語で返答すること
 
 # プロジェクト進捗状況
-current_status: "全査読ベースタスク完了 - 運用レベル品質達成・ドキュメント整理完了・初学者向け学習環境完備"
+current_status: "Claude Code統合完了 - CLI環境でのUnity制御実現・初学者向け統合ガイド完備・実用レベル品質達成"
 
 # 完了した機能
 completed_features:
@@ -132,6 +132,17 @@ implemented_features:
       status: "completed"
       parameters: ["name (optional)", "position (optional)"]
   
+  integration_features:
+    claude_code_integration:
+      - "Claude Code CLI との完全統合"
+      - "コマンドライン環境でのUnity制御"
+      - "TypeScript + JavaScript両方対応テストスクリプト"
+      - "Claude Desktop設定の最適化（絶対パス対応）"
+      - "相対パス問題の完全解決"
+      - "初学者向け詳細統合ガイド"
+      - "包括的トラブルシューティング"
+      - "15分でできるクイック統合手順"
+  
   
   removed_tools:
     - name: "unity_info"
@@ -198,6 +209,7 @@ file_structure:
       - prompt.yaml: "プロジェクト基本仕様"
       - prompt-updated.yaml: "現在の進捗状況（ポータブル化対応完了版）"
     - tutorial/:
+      - README.md: "チュートリアル全体案内・学習パス・Node.jsライブラリ解説"
       - 00-getting-started.md: "プロジェクト概要・前提知識・学習の流れ"
       - 01-environment-setup.md: "環境設定・Claude Desktop設定ガイド"
       - 02-step1-basic-communication.md: "Step 1: 基本通信確立"
@@ -207,6 +219,7 @@ file_structure:
       - 06-step3-unity-control.md: "Step 3: Unity制御システム"
       - 07-current-capabilities.md: "現在の機能"
       - 08-quick-start-guide.md: "クイックスタートガイド"
+      - 09-claude-code-mcp-integration.md: "Claude Code CLI統合ガイド（初学者向け）"
 
 goals:
   step_1:
@@ -315,6 +328,52 @@ goals:
       - "非同期処理パフォーマンス確認"
       - "ログシステム動作確認"
     
+  claude_code_integration:
+    description: "Claude Code CLI統合によるコマンドライン環境でのUnity制御"
+    status: "✅ 完了"
+    completion_date: "2025年6月6日"
+    achievements:
+      - "Claude Code CLI完全統合"
+      - "相対パス問題の完全解決"
+      - "TypeScript + JavaScript両対応テストスクリプト"
+      - "初学者向け詳細統合ガイド作成"
+      - "Claude Desktop設定最適化"
+      - "包括的トラブルシューティング整備"
+      - "15分クイック統合手順確立"
+      - "Unity制御の実用性確認"
+    
+    implemented_features:
+      cli_integration:
+        - "Claude Code CLIからのUnity情報取得"
+        - "コマンドライン経由でのGameObject作成"
+        - "リアルタイム監視機能の活用"
+        - "Unity MCPサーバーの安定動作"
+      
+      testing_framework:
+        - "get-unity-info.js（JavaScript版情報取得）"
+        - "get-unity-info.ts（TypeScript版情報取得）"
+        - "test-connection.js（包括的接続テスト）"
+        - "125個のJestユニットテスト"
+      
+      configuration_optimization:
+        - "相対パス設定ファイル基準解決"
+        - "絶対パス指定によるClaude Desktop統合"
+        - "環境変数MCP_CONFIG_PATH対応"
+        - "個人情報除去済み設定例"
+      
+      documentation:
+        - "09-claude-code-mcp-integration.md（初学者向け完全ガイド）"
+        - "tutorial/README.md更新（学習パス追加）"
+        - "包括的トラブルシューティング"
+        - "実践的なコマンド例とエラー対処法"
+    
+    verified_functionality:
+      - "Claude Code → Unity情報取得（6カテゴリ全て）"
+      - "Claude Code → GameObject作成（Cube, Sphere, Plane, Empty）"
+      - "相対パス設定による移植性確認"
+      - "初学者による手順実行可能性確認"
+      - "TypeScript環境での直接実行確認"
+
   step_4:
     description: "MCPのAPI構成を拡張・管理性を高める"
     status: "⏳ 未開始"
@@ -364,17 +423,19 @@ git_commits:
 
 # 現在の開発状況
 development_status:
-  current_phase: "品質改善フェーズ・Step 3完了後のテスト環境構築とドキュメント整理"
+  current_phase: "Claude Code統合完了・実用レベル品質達成フェーズ"
   step2_completion: "✅ 2025年6月5日 完了"
   step3_completion: "✅ 2025年6月5日 完了"
+  claude_code_integration_completion: "✅ 2025年6月6日 完了"
   portability_fixes: "✅ 2025年6月5日 パス設定問題解決・個人情報除去完了"
-  working_tree: "リアルタイム双方向連携システム動作中（Unity制御対応）"
-  commits_ahead: "28+ commits ahead of origin/main（Step 3実装分 + 品質改善・ドキュメント整理）"
+  working_tree: "Claude Code CLI統合システム完全動作中（Unity制御対応）"
+  commits_ahead: "30+ commits ahead of origin/main（Claude Code統合 + 全機能実装完了）"
   build_status: "✅ 正常（TypeScript コンパイル成功、Unity C#コンパイル成功）"
-  test_status: "✅ 全機能動作確認済み（GameObject作成・Claude操作）"
+  test_status: "✅ 全機能動作確認済み（Claude Code統合・GameObject作成・CLI操作）"
   claude_desktop_integration: "✅ 実データ取得・Unity制御成功（MCPLearning, Unity 6000.1.5f1）"
+  claude_code_integration: "✅ CLI環境統合完了（相対パス問題解決・初学者対応）"
   unity_project_status: "✅ 完全動作（自動エクスポート、リアルタイム更新、コマンド実行）"
-  realtime_data_flow: "✅ Claude Desktop ↔ MCP Server ↔ Unity Editor完全双方向連携確立"
+  realtime_data_flow: "✅ Claude Code ↔ MCP Server ↔ Unity Editor完全双方向連携確立"
   privacy_compliance: "✅ 個人情報除去完了（GitHub公開準備済み）"
   unity_control_system: "✅ GameObject作成・エラーハンドリング・非同期処理完全実装"
   documentation_organization: "✅ 2025年6月5日 ドキュメント構造整理完了（development/, legal/カテゴリ追加）"
@@ -384,8 +445,21 @@ development_status:
   tutorial_updates: "✅ 2025年6月5日 チュートリアル修正・実装状況反映完了"
   review_based_tasks_completion: "✅ 2025年1月6日 全査読ベースタスク完了・GitHub Issue #6クローズ"
   documentation_comprehensive_update: "✅ 2025年1月6日 ドキュメント包括的整理・初学者向け学習環境完備"
+  claude_code_integration_guide: "✅ 2025年6月6日 初学者向け統合ガイド完成・実用性確認"
 
 recent_improvements:
+  claude_code_integration_final:
+    - "Claude Code CLI完全統合（2025年6月6日）"
+    - "相対パス問題の完全解決（設定ファイル基準パス解決）"
+    - "TypeScript + JavaScript両対応テストスクリプト"
+    - "09-claude-code-mcp-integration.md作成（初学者向け完全ガイド）"
+    - "tutorial/README.md学習パス更新（Claude Code統合追加）"
+    - "Claude Desktop設定最適化（絶対パス指定）"
+    - "包括的トラブルシューティング整備"
+    - "15分クイック統合手順確立"
+    - "Unity制御実用性確認（6カテゴリ情報取得・4種GameObject作成）"
+    - "125個Jestテスト + TypeScript直接実行テスト"
+
   documentation_updates_final:
     - "tutorial/README.md完全更新（09ファイル追加、学習パス修正）"
     - "メインREADME.md現状反映（品質改善完了状況）"
