@@ -84,22 +84,30 @@ directory_structure:
     description: "プロジェクトドキュメント・学習リソース"
     structure:
       tutorial:
-        - "tutorial/ - 学習用チュートリアル（10ファイル）"
+        - "tutorial/ - 学習用チュートリアル（17ファイル）"
         - "tutorial/README.md - チュートリアル全体案内・学習パス"
         - "tutorial/00-getting-started.md - プロジェクト概要"
         - "tutorial/01-environment-setup.md - 環境設定"
+        - "tutorial/02-13-*.md - ステップバイステップガイド（番号順）"
         - "tutorial/09-claude-code-mcp-integration.md - Claude Code統合"
         - "tutorial/10-unity-console-integration-guide.md - Unity Console統合"
+        - "tutorial/11-mcp-server-manager-guide.md - MCP Server Manager"
+        - "tutorial/12-security-implementation-guide.md - セキュリティ実装"
+        - "tutorial/13-github-release-preparation-guide.md - GitHub公開準備"
       
       development:
         - "development/ - 開発者向けドキュメント"
         - "development/comprehensive-roadmap.md - 包括的開発ロードマップ"
+        - "development/git-url-installation-guide.md - Git URL配布ガイド"
+        - "development/claude-code-auto-approve-guide.md - 自動承認設定"
+        - "development/settings-system-guide.md - 設定システム詳細"
       
       completed:
         - "completed/ - 完了済みドキュメント（6ファイル）"
         - "completed/claude-code-integration.md - Claude Code統合完了"
         - "completed/unity-console-integration.md - Unity Console統合完了"
         - "completed/improvement-roadmap.md - 改善ロードマップ完了"
+        - "completed/code-quality-analysis.md - コード品質分析完了"
       
       legal:
         - "legal/ - 法的・セキュリティ文書"
@@ -107,9 +115,14 @@ directory_structure:
         - "legal/security-analysis.md - セキュリティ分析"
       
       future:
-        - "future/ - 将来計画・アイデア"
+        - "future/ - 将来計画・AI哲学・ゲーム設計思想"
         - "future/distribution-packages.md - 配布パッケージ計画"
-        - "future/unity-mcp-manager.md - Unity Editor統合管理システム"
+        - "future/unity-mcp-manager.md - Unity Editor統合管理"
+        - "future/self-resolving-ai-development-cycle.md - 自己解決型AI開発"
+        - "future/debug-as-gameplay-philosophy.md - デバッグゲームプレイ化"
+        - "future/data-driven-game-design-philosophy.md - データ駆動設計"
+        - "future/ai-blind-spot-coverage.md - AI盲点カバレッジ"
+        - "future/static-map-dynamic-improv-architecture.md - 静的動的アーキテクチャ"
       
       prompt:
         - "prompt/ - AI設定ファイル（セッション復元用）"
