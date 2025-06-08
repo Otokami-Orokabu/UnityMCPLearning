@@ -130,11 +130,11 @@ UnityMCPLearning/
 │   └── mcp-config.json       # 設定ファイル（JSON Schema検証）
 └── docs/                     # ドキュメント
     ├── completed/            # 完了済みドキュメント（6ファイル）
-    ├── development/          # 開発ロードマップ（継続更新中）
+    ├── development/          # 開発ロードマップ・Git URLガイド等
     ├── legal/                # 法的・セキュリティ文書
-    ├── future/               # 将来計画・アイデア
-    ├── prompt/               # AI設定ファイル
-    └── tutorial/             # 学習用チュートリアル（10ファイル）
+    ├── future/               # 将来計画・AI哲学・ゲーム設計思想
+    ├── prompt/               # AI設定ファイル（セッション復元用）
+    └── tutorial/             # 学習用チュートリアル（17ファイル）
 ```
 
 ## 📚 ドキュメント
@@ -149,23 +149,31 @@ UnityMCPLearning/
 
 ### **🛠️ 開発リソース**
 - **[包括的開発ロードマップ](docs/development/comprehensive-roadmap.md)** - 継続更新中の開発計画
+- **[Git URL インストールガイド](docs/development/git-url-installation-guide.md)** - Git URL経由パッケージ配布
+- **[Claude Code自動承認ガイド](docs/development/claude-code-auto-approve-guide.md)** - 開発効率化設定
 - **[完了済み機能](docs/completed/README.md)** - 実装完了した機能・改善の詳細
+
+### **🚀 将来構想**
+- **[AI哲学・ゲーム設計思想](docs/future/)** - 自己解決型開発・データ駆動設計・デバッグゲームプレイ化等の革新的アイデア集
 
 ### **📖 チュートリアル構成**
 1. **[プロジェクト概要](docs/tutorial/00-getting-started.md)** - 全体像の理解
 2. **[環境構築](docs/tutorial/01-environment-setup.md)** - セットアップ手順
 3. **[基本通信](docs/tutorial/02-step1-basic-communication.md)** - MCP通信実装
 4. **[Unity連携](docs/tutorial/03-step2-unity-integration.md)** - データエクスポート
-5. **[Unity制御](docs/tutorial/06-step3-unity-control.md)** - コマンド実行システム
-6. **[現在の機能](docs/tutorial/07-current-capabilities.md)** - 利用可能な全機能
-7. **[高度な設定](docs/tutorial/05-advanced-configuration.md)** - カスタマイズ・配布
-8. **[Claude Code CLI統合](docs/tutorial/09-claude-code-mcp-integration.md)** - CLI環境でのUnity制御
-9. **[Unity Console統合](docs/tutorial/10-unity-console-integration-guide.md)** - AI駆動開発・即座フィードバック
-10. **[Unity Editor依存ガイド](docs/tutorial/11-unity-editor-dependency-guide.md)** - Editor開閉時の機能差異
-11. **[セキュリティ実装ガイド](docs/tutorial/12-security-implementation-guide.md)** - エンタープライズレベルセキュリティ（最新✨）
-12. **[GitHub公開準備ガイド](docs/tutorial/13-github-release-preparation-guide.md)** - オープンソース公開手順（最新✨）
-13. **[5分クイックスタート](docs/tutorial/08-quick-start-guide.md)** - 機能体験・動作確認
-14. **[トラブルシューティング](docs/tutorial/04-troubleshooting.md)** - 問題解決ガイド
+5. **[トラブルシューティング](docs/tutorial/04-troubleshooting.md)** - 問題解決ガイド
+6. **[高度な設定](docs/tutorial/05-advanced-configuration.md)** - カスタマイズ・配布
+7. **[Unity制御](docs/tutorial/06-step3-unity-control.md)** - コマンド実行システム
+8. **[現在の機能](docs/tutorial/07-current-capabilities.md)** - 利用可能な全機能
+9. **[5分クイックスタート](docs/tutorial/08-quick-start-guide.md)** - 機能体験・動作確認
+10. **[Claude Code CLI統合](docs/tutorial/09-claude-code-mcp-integration.md)** - CLI環境でのUnity制御
+11. **[コード品質改善ガイド](docs/tutorial/09-code-quality-improvements.md)** - 品質向上手法
+12. **[完全初心者ガイド](docs/tutorial/10-complete-user-guide.md)** - 初学者向け包括ガイド
+13. **[Unity Console統合](docs/tutorial/10-unity-console-integration-guide.md)** - AI駆動開発・即座フィードバック
+14. **[MCP Server Manager](docs/tutorial/11-mcp-server-manager-guide.md)** - Unity Editor統合管理
+15. **[Unity Editor依存ガイド](docs/tutorial/11-unity-editor-dependency-guide.md)** - Editor開閉時の機能差異
+16. **[セキュリティ実装ガイド](docs/tutorial/12-security-implementation-guide.md)** - エンタープライズレベルセキュリティ
+17. **[GitHub公開準備ガイド](docs/tutorial/13-github-release-preparation-guide.md)** - オープンソース公開手順
 
 ## 🛠️ 技術スタック
 

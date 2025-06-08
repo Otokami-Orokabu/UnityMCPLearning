@@ -17,14 +17,21 @@ Unity MCPプロジェクトの包括的なドキュメント集です。
 - **[07-current-capabilities.md](./tutorial/07-current-capabilities.md)** - 現在の機能
 - **[08-quick-start-guide.md](./tutorial/08-quick-start-guide.md)** - クイックスタートガイド
 - **[09-claude-code-mcp-integration.md](./tutorial/09-claude-code-mcp-integration.md)** - Claude Code CLI統合ガイド
+- **[09-code-quality-improvements.md](./tutorial/09-code-quality-improvements.md)** - コード品質改善ガイド
 - **[10-complete-user-guide.md](./tutorial/10-complete-user-guide.md)** - 完全初心者ガイド（✨ 新規追加）
+- **[10-unity-console-integration-guide.md](./tutorial/10-unity-console-integration-guide.md)** - Unity Console統合ガイド
 - **[11-mcp-server-manager-guide.md](./tutorial/11-mcp-server-manager-guide.md)** - MCP Server Manager完全ガイド（✨ 新規追加）
+- **[11-unity-editor-dependency-guide.md](./tutorial/11-unity-editor-dependency-guide.md)** - Unity Editor依存関係ガイド
+- **[12-security-implementation-guide.md](./tutorial/12-security-implementation-guide.md)** - セキュリティ実装ガイド
+- **[13-github-release-preparation-guide.md](./tutorial/13-github-release-preparation-guide.md)** - GitHub Release準備ガイド
 
 ### 🛠️ [development/](./development/) - 開発者向けドキュメント
 現在進行中の開発計画と将来のロードマップです。
 
 - **[comprehensive-roadmap.md](./development/comprehensive-roadmap.md)** - 包括的開発ロードマップ（継続更新中）
 - **[settings-system-guide.md](./development/settings-system-guide.md)** - 設定システム詳細ガイド（✨ 新規追加）
+- **[git-url-installation-guide.md](./development/git-url-installation-guide.md)** - Git URL経由パッケージインストールガイド
+- **[claude-code-auto-approve-guide.md](./development/claude-code-auto-approve-guide.md)** - Claude Code自動承認設定ガイド
 
 ### ⚖️ [legal/](./legal/) - 法的・セキュリティ文書
 ライセンス、セキュリティ対策、公開準備に関する情報です。
@@ -49,6 +56,14 @@ Unity MCPプロジェクトの包括的なドキュメント集です。
 - **[future-ideas.md](./future/future-ideas.md)** - 将来のアイデア
 - **[github-actions-claude-code.md](./future/github-actions-claude-code.md)** - GitHub Actions自動化
 - **[unity-mcp-manager.md](./future/unity-mcp-manager.md)** - Unity Editor統合管理システム
+- **[self-resolving-ai-development-cycle.md](./future/self-resolving-ai-development-cycle.md)** - 自己解決型AI開発サイクル
+- **[debug-as-gameplay-philosophy.md](./future/debug-as-gameplay-philosophy.md)** - デバッグをゲームプレイとする設計思想
+- **[play-data-analysis-philosophy.md](./future/play-data-analysis-philosophy.md)** - プレイデータ分析哲学
+- **[advanced-self-resolving-systems.md](./future/advanced-self-resolving-systems.md)** - 高度な自己解決システム
+- **[full-game-auto-generation.md](./future/full-game-auto-generation.md)** - 完全ゲーム自動生成
+- **[data-driven-game-design-philosophy.md](./future/data-driven-game-design-philosophy.md)** - データ駆動ゲームデザイン哲学
+- **[ai-blind-spot-coverage.md](./future/ai-blind-spot-coverage.md)** - AI盲点カバレッジ
+- **[static-map-dynamic-improv-architecture.md](./future/static-map-dynamic-improv-architecture.md)** - 静的マップ動的即興アーキテクチャ
 
 ### 🤖 [prompt/](./prompt/) - AI設定ファイル
 Claude DesktopとのやりとりやAI設定に関するファイルです。
