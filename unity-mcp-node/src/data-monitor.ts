@@ -90,7 +90,8 @@ export function startFileWatching(dataPath: string, log: (...args: any[]) => voi
     // 初期データ読み込み
     loadAllData(dataPath, log);
   } else {
-    log(`Unity data directory not found: ${fullPath}`);
+    log(`Warning: Unity data directory not found: ${fullPath}`);
+    log(`The server will continue running but data monitoring is disabled.`);
   }
 }
 

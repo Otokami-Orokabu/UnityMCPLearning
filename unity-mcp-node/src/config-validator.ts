@@ -186,6 +186,12 @@ export class ConfigValidator {
         { dataPath, resolvedPath }
       );
     }
+
+    // ディレクトリの存在確認（警告のみ、エラーにはしない）
+    if (!fs.existsSync(resolvedPath)) {
+      console.warn(`[MCP Server] Warning: Unity data directory not found: ${resolvedPath}`);
+      console.warn(`[MCP Server] The server will start but may not function correctly until the directory is created.`);
+    }
   }
 
   /**
@@ -261,6 +267,11 @@ export function loadAndValidateConfig(configPath: string): MCPConfig {
         `Failed to parse configuration file: ${parseError.message}`,
         { configPath, parseError: parseError.message }
       );
+    }
+
+    // 環境変数で設定を上書き
+    if (process.env.UNITY_DATA_PATH) {
+      config.unityDataPath = process.env.UNITY_DATA_PATH;
     }
 
     // 検証実行
