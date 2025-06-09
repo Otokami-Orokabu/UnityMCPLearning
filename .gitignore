@@ -143,9 +143,6 @@ ehthumbs.db
 Desktop.ini
 $RECYCLE.BIN/
 
-# Linux
-*~
-
 # Backup files
 *.bak
 *.backup

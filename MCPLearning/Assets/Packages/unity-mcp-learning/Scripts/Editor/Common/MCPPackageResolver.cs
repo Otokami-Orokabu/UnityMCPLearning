@@ -19,6 +19,13 @@ namespace UnityMCP.Editor
         private static string _cachedPackagePath;
         private static bool _pathResolved = false;
         
+        // Static constructor to reset cache when script reloads
+        static MCPPackageResolver()
+        {
+            _cachedPackagePath = null;
+            _pathResolved = false;
+        }
+        
         /// <summary>
         /// パッケージのルートパスを取得
         /// </summary>
@@ -257,7 +264,12 @@ namespace UnityMCP.Editor
             
             MCPLogger.LogInfo($"{LOG_PREFIX} Final server path: {defaultServerPath}");
             
-            if (Directory.Exists(defaultServerPath))
+            // Force check directory existence with debug info
+            MCPLogger.LogInfo($"{LOG_PREFIX} Checking Server~ directory at: {defaultServerPath}");
+            var directoryExists = Directory.Exists(defaultServerPath);
+            MCPLogger.LogInfo($"{LOG_PREFIX} Directory.Exists result: {directoryExists}");
+            
+            if (directoryExists)
             {
                 MCPLogger.LogInfo($"{LOG_PREFIX} Server~ found at default path: {defaultServerPath}");
             }

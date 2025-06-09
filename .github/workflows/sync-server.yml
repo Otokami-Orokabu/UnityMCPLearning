@@ -1,0 +1,87 @@
+name: Sync MCP Server to Package
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'unity-mcp-node/**'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'unity-mcp-node/**'
+  workflow_dispatch:
+
+jobs:
+  sync-server:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          
+      - name: Build MCP Server
+        run: |
+          cd unity-mcp-node
+          npm install
+          npm run build
+          
+      - name: Clean existing Server~ directory
+        run: |
+          rm -rf MCPLearning/Assets/Packages/unity-mcp-learning/Server~
+          
+      - name: Create and populate Server~ directory
+        run: |
+          # Create Server~ directory
+          mkdir -p MCPLearning/Assets/Packages/unity-mcp-learning/Server~
+          
+          # Copy built dist files
+          cp -r unity-mcp-node/dist MCPLearning/Assets/Packages/unity-mcp-learning/Server~/
+          
+          # Copy essential files
+          cp unity-mcp-node/package.json MCPLearning/Assets/Packages/unity-mcp-learning/Server~/
+          cp unity-mcp-node/mcp-config.json MCPLearning/Assets/Packages/unity-mcp-learning/Server~/
+          cp -r unity-mcp-node/schema MCPLearning/Assets/Packages/unity-mcp-learning/Server~/
+          
+          # Copy TypeScript source for debugging (optional)
+          cp -r unity-mcp-node/src MCPLearning/Assets/Packages/unity-mcp-learning/Server~/
+          
+          # Create manifest file
+          echo "MCP Server files auto-synced by GitHub Actions on $(date)" > MCPLearning/Assets/Packages/unity-mcp-learning/Server~/AUTO_SYNC_INFO.txt
+          echo "Built from unity-mcp-node commit: ${{ github.sha }}" >> MCPLearning/Assets/Packages/unity-mcp-learning/Server~/AUTO_SYNC_INFO.txt
+          
+      - name: Check for changes
+        id: verify-changed-files
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
+          
+      - name: Commit and push changes
+        if: steps.verify-changed-files.outputs.changed == 'true'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add MCPLearning/Assets/Packages/unity-mcp-learning/Server~
+          git commit -m "🤖 Auto-sync: Update Server~ from unity-mcp-node
+          
+          - Built MCP server from latest unity-mcp-node changes
+          - Updated dist/ files and dependencies
+          - Synchronized at $(date)
+          
+          🤖 Generated with GitHub Actions"
+          git push
+          
+      - name: Summary
+        run: |
+          echo "✅ MCP Server sync completed"
+          echo "📁 Server~ directory updated with latest unity-mcp-node build"
+          echo "🔄 Changes automatically committed and pushed"
