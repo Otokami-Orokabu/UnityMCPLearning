@@ -85,7 +85,7 @@ crashlytics-build.properties
 /[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Core/Property Providers.meta
 
 # MCP Data Output
-/UnityMCP/Data/*.json
+/UnityMCP/*
 
 # Unity Logging
 /Logs/

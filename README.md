@@ -29,7 +29,23 @@ Claude Desktop> create a cube
 
 ## 🚀 クイックスタート
 
-### **🏃‍♂️ 5分で体験**
+### **🎯 Git URL インストール（推奨）**
+```bash
+# 1. Unity Package Manager でインストール
+# Window > Package Manager > + > Add package from git URL...
+# 以下のURLを入力：
+```
+```
+https://github.com/Otokami-Orokabu/UnityMCPLearning.git?path=MCPLearning/Assets/Packages/unity-mcp-learning#v0.1.12
+```
+
+```bash
+# 2. Tools > MCP Server Manager で自動セットアップ
+# 3. Claude Desktop でテスト
+# "ping" → "create a cube" → "get scene info"
+```
+
+### **🏃‍♂️ 開発環境での体験**
 ```bash
 # 1. Unity プロジェクト開く
 # Unity Hub → Add → MCPLearning フォルダ選択

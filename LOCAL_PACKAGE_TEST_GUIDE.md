@@ -56,7 +56,7 @@ Assets/Packages/unity-mcp-learning/
 3. 「Add package from disk...」を選択
 4. 以下のパスに移動してpackage.jsonを選択：
    ```
-   /Users/sakabesou/ProjectGit/UnityMCPLearning/MCPLearning/Assets/Packages/unity-mcp-learning/package.json
+   /path/to/UnityMCPLearning/MCPLearning/Assets/Packages/unity-mcp-learning/package.json
    ```
 
 ### Step 3: インポート確認
