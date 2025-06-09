@@ -34,7 +34,9 @@ echo -e "${YELLOW}📦 MCPサーバーをビルド中...${NC}"
 
 # MCPサーバーのビルド
 cd unity-mcp-node
+echo -e "${BLUE}Installing dependencies...${NC}"
 npm install --silent
+echo -e "${BLUE}Building TypeScript...${NC}"
 npm run build
 
 # ビルド成功確認
@@ -42,6 +44,14 @@ if [ ! -d "dist" ]; then
     echo -e "${RED}❌ ビルドに失敗しました (dist/が生成されませんでした)${NC}"
     exit 1
 fi
+
+# node_modules存在確認
+if [ ! -d "node_modules" ]; then
+    echo -e "${RED}❌ node_modules が生成されませんでした${NC}"
+    exit 1
+fi
+
+echo -e "${GREEN}✅ Dependencies and build completed${NC}"
 
 cd ..
 

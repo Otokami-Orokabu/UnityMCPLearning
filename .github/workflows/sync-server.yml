@@ -29,11 +29,13 @@ jobs:
         with:
           node-version: '18'
           
-      - name: Build MCP Server
+      - name: Install dependencies and build MCP Server
         run: |
           cd unity-mcp-node
           npm install
           npm run build
+          echo "✅ Dependencies installed and build completed"
+          ls -la node_modules | head -10
           
       - name: Clean existing Server~ directory
         run: |
