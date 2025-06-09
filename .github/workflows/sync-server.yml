@@ -50,6 +50,7 @@ jobs:
           # Copy essential files
           cp unity-mcp-node/package.json MCPLearning/Assets/Packages/unity-mcp-learning/Server~/
           cp unity-mcp-node/mcp-config.json MCPLearning/Assets/Packages/unity-mcp-learning/Server~/
+          cp unity-mcp-node/tsconfig.json MCPLearning/Assets/Packages/unity-mcp-learning/Server~/
           cp -r unity-mcp-node/schema MCPLearning/Assets/Packages/unity-mcp-learning/Server~/
           
           # Copy TypeScript source for debugging (optional)

@@ -59,6 +59,7 @@ echo -e "${YELLOW}📋 ファイルをコピー中...${NC}"
 cp -r unity-mcp-node/dist "$PACKAGE_DIR/Server~/"
 cp unity-mcp-node/package.json "$PACKAGE_DIR/Server~/"
 cp unity-mcp-node/mcp-config.json "$PACKAGE_DIR/Server~/"
+cp unity-mcp-node/tsconfig.json "$PACKAGE_DIR/Server~/"
 cp -r unity-mcp-node/schema "$PACKAGE_DIR/Server~/"
 
 # オプション: ソースファイルもコピー（デバッグ用）
