@@ -1,0 +1,46 @@
+name: Build and Deploy unity-mcp-node
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'unity-mcp-node/**'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: チェックアウト
+        uses: actions/checkout@v4
+
+      - name: Node.js セットアップ
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 依存関係のインストール
+        run: npm ci
+        working-directory: unity-mcp-node
+
+      - name: ビルド
+        run: npm run build
+        working-directory: unity-mcp-node
+
+      - name: dist の存在確認
+        run: |
+          echo "dist フォルダの内容:"
+          ls -la unity-mcp-node/dist || echo "dist が生成されておりません"
+
+      - name: Unity MCP Server~ へのコピー
+        run: |
+          mkdir -p MCPLearning/Assets/Packages/unity-mcp-learning/Server~
+          cp -vr unity-mcp-node/dist/* MCPLearning/Assets/Packages/unity-mcp-learning/Server~/
+          cp -v unity-mcp-node/package.json MCPLearning/Assets/Packages/unity-mcp-learning/Server~/
+          cp -v unity-mcp-node/tsconfig.json MCPLearning/Assets/Packages/unity-mcp-learning/Server~/
+          cp -vr unity-mcp-node/schema MCPLearning/Assets/Packages/unity-mcp-learning/Server~/
+          
+      - name: Server~ 内容確認
+        run: |
+          echo "Server~ の内容:"
+          ls -la MCPLearning/Assets/Packages/unity-mcp-learning/Server~/
