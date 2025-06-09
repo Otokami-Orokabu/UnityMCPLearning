@@ -1,6 +1,6 @@
 {
   "name": "com.orlab.unity-mcp-learning",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "displayName": "Unity MCP Learning",
   "description": "AI-driven Unity development environment using Model Context Protocol (MCP). Enables natural language control of Unity Editor through Claude Desktop/Code integration.",
   "unity": "6000.0",

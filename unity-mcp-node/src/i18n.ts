@@ -42,7 +42,7 @@ export type MessageKey = keyof typeof messages.en;
 const messages = {
   en: {
     // Server startup messages
-    'server.starting': 'Starting MCP Server... 🧪 GitHub Actions test',
+    'server.starting': 'Starting MCP Server...',
     'server.config.loading': 'Loading configuration from: {configPath}',
     'server.config.loaded': 'Configuration loaded successfully',
     'server.config.error': 'Configuration error [{code}]: {message}',
