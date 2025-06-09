@@ -19,8 +19,72 @@ namespace UnityMCP.Editor
     public class MCPServerManagerWindow : EditorWindow
     {
         private const string WINDOW_TITLE = "MCP Server Manager";
-        private const string USS_PATH = "Assets/Packages/unity-mcp-learning/Scripts/Editor/Windows/MCPServerManagerWindow.uss";
-        private const string UXML_PATH = "Assets/Packages/unity-mcp-learning/Scripts/Editor/Windows/MCPServerManagerWindow.uxml";
+
+        // パス取得ヘルパーメソッド
+        private static string GetUIAssetPath(string fileName)
+        {
+            try
+            {
+                var packagePath = MCPPackageResolver.GetPackageRootPath();
+                MCPLogger.LogInfo($"[MCPServerManagerWindow] Package path resolved to: {packagePath}");
+                
+                var relativeAssetPath = Path.Combine(packagePath, "Scripts/Editor/Windows", fileName).Replace('\\', '/');
+                MCPLogger.LogInfo($"[MCPServerManagerWindow] Trying relative path: {relativeAssetPath}");
+                
+                // まず相対パスで試す
+                var asset = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(relativeAssetPath);
+                if (asset != null)
+                {
+                    MCPLogger.LogInfo($"[MCPServerManagerWindow] Successfully found {fileName} at: {relativeAssetPath}");
+                    return relativeAssetPath;
+                }
+                
+                // AssetDatabase.FindAssetsでファイルを検索
+                var guids = AssetDatabase.FindAssets($"{Path.GetFileNameWithoutExtension(fileName)} t:{(fileName.EndsWith(".uxml") ? "VisualTreeAsset" : "StyleSheet")}");
+                foreach (var guid in guids)
+                {
+                    var foundPath = AssetDatabase.GUIDToAssetPath(guid);
+                    if (foundPath.Contains("MCPServerManagerWindow") && foundPath.EndsWith(fileName))
+                    {
+                        MCPLogger.LogInfo($"[MCPServerManagerWindow] Found {fileName} via AssetDatabase.FindAssets: {foundPath}");
+                        return foundPath;
+                    }
+                }
+                
+                // PackageInfo APIを使用した検索
+                var packageInfo = UnityEditor.PackageManager.PackageInfo.FindForAssetPath(packagePath);
+                if (packageInfo != null && !string.IsNullOrEmpty(packageInfo.assetPath))
+                {
+                    var packageAssetPath = Path.Combine(packageInfo.assetPath, "Scripts/Editor/Windows", fileName).Replace('\\', '/');
+                    MCPLogger.LogInfo($"[MCPServerManagerWindow] Trying PackageInfo path: {packageAssetPath}");
+                    
+                    asset = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(packageAssetPath);
+                    if (asset != null)
+                    {
+                        MCPLogger.LogInfo($"[MCPServerManagerWindow] Successfully found {fileName} at PackageInfo path: {packageAssetPath}");
+                        return packageAssetPath;
+                    }
+                }
+                
+                MCPLogger.LogWarning($"[MCPServerManagerWindow] Could not locate {fileName} in any expected location");
+                return relativeAssetPath; // フォールバック
+            }
+            catch (Exception ex)
+            {
+                MCPLogger.LogError($"[MCPServerManagerWindow] Failed to resolve {fileName} path: {ex.Message}");
+                return $"Assets/Packages/unity-mcp-learning/Scripts/Editor/Windows/{fileName}"; // 最終フォールバック
+            }
+        }
+
+        private static string GetUXMLPath()
+        {
+            return GetUIAssetPath("MCPServerManagerWindow.uxml");
+        }
+
+        private static string GetUSSPath()
+        {
+            return GetUIAssetPath("MCPServerManagerWindow.uss");
+        }
 
         // UI要素
         private Label _statusLabel;
@@ -136,30 +200,36 @@ namespace UnityMCP.Editor
             // UIセットアップ
             var root = rootVisualElement;
 
-            // UXMLロード（存在する場合）
-            var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(UXML_PATH);
+            // UXMLロード（動的パス解決）
+            var uxmlPath = GetUXMLPath();
+            MCPLogger.LogInfo($"[MCPServerManagerWindow] Attempting to load UXML from: {uxmlPath}");
+            
+            var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(uxmlPath);
             if (visualTree != null)
             {
                 visualTree.CloneTree(root);
-                MCPLogger.LogInfo("[MCPServerManagerWindow] Using UXML-based UI");
+                MCPLogger.LogInfo("[MCPServerManagerWindow] Successfully loaded UXML-based UI");
             }
             else
             {
                 // プログラマティックUI作成（フォールバック）
-                MCPLogger.LogWarning("[MCPServerManagerWindow] UXML not found, creating programmatic UI");
+                MCPLogger.LogWarning($"[MCPServerManagerWindow] UXML not found at {uxmlPath}, creating programmatic UI");
                 CreateProgrammaticUI(root);
             }
 
-            // スタイルシート適用
-            var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>(USS_PATH);
+            // スタイルシート適用（動的パス解決）
+            var ussPath = GetUSSPath();
+            MCPLogger.LogInfo($"[MCPServerManagerWindow] Attempting to load USS from: {ussPath}");
+            
+            var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>(ussPath);
             if (styleSheet != null)
             {
                 root.styleSheets.Add(styleSheet);
-                MCPLogger.LogInfo("[MCPServerManagerWindow] USS styles applied");
+                MCPLogger.LogInfo("[MCPServerManagerWindow] Successfully applied USS styles");
             }
             else
             {
-                MCPLogger.LogWarning("[MCPServerManagerWindow] USS file not found, using default styles");
+                MCPLogger.LogWarning($"[MCPServerManagerWindow] USS file not found at {ussPath}, using default styles");
             }
 
             // UI要素取得

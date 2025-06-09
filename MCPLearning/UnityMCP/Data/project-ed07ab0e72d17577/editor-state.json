@@ -14,11 +14,11 @@
         },
         {
             "key": "selectedObjectsCount",
-            "value": "1"
+            "value": "0"
         },
         {
             "key": "selectedObjectNames",
-            "value": "2D Animation"
+            "value": ""
         },
         {
             "key": "isPlayingOrWillChangePlaymode",
@@ -30,11 +30,11 @@
         },
         {
             "key": "timeSinceStartup",
-            "value": "325.50"
+            "value": "476.28"
         },
         {
             "key": "timestamp",
-            "value": "2025-06-09T05:36:03Z"
+            "value": "2025-06-09T06:08:31Z"
         }
     ]
 }
