@@ -36,7 +36,7 @@ Claude Desktop> create a cube
 # 以下のURLを入力：
 ```
 ```
-https://github.com/Otokami-Orokabu/UnityMCPLearning.git?path=MCPLearning/Assets/Packages/unity-mcp-learning#v0.1.12
+https://github.com/Otokami-Orokabu/UnityMCPLearning.git?path=MCPLearning/Assets/Packages/unity-mcp-learning#v0.2.0
 ```
 
 ```bash
