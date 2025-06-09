@@ -53,6 +53,9 @@ jobs:
           cp unity-mcp-node/tsconfig.json MCPLearning/Assets/Packages/unity-mcp-learning/Server~/
           cp -r unity-mcp-node/schema MCPLearning/Assets/Packages/unity-mcp-learning/Server~/
           
+          # Copy node_modules for complete dependency resolution
+          cp -r unity-mcp-node/node_modules MCPLearning/Assets/Packages/unity-mcp-learning/Server~/
+          
           # Copy TypeScript source for debugging (optional)
           cp -r unity-mcp-node/src MCPLearning/Assets/Packages/unity-mcp-learning/Server~/
           

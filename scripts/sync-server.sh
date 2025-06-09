@@ -61,12 +61,12 @@ cp unity-mcp-node/package.json "$PACKAGE_DIR/Server~/"
 cp unity-mcp-node/mcp-config.json "$PACKAGE_DIR/Server~/"
 cp unity-mcp-node/tsconfig.json "$PACKAGE_DIR/Server~/"
 cp -r unity-mcp-node/schema "$PACKAGE_DIR/Server~/"
+cp -r unity-mcp-node/node_modules "$PACKAGE_DIR/Server~/"
 
 # オプション: ソースファイルもコピー（デバッグ用）
 if [ "$1" = "--with-source" ]; then
     echo -e "${YELLOW}📝 ソースファイルも含めてコピー中...${NC}"
     cp -r unity-mcp-node/src "$PACKAGE_DIR/Server~/"
-    cp unity-mcp-node/tsconfig.json "$PACKAGE_DIR/Server~/"
 fi
 
 # 同期情報ファイルを作成

@@ -124,6 +124,9 @@ crashlytics-build.properties
 # MCP logs at project level
 mcp-*.log
 
+# Server~ directory is auto-synced by GitHub Actions
+MCPLearning/Assets/Packages/unity-mcp-learning/Server~/
+
 # ==============================================================================
 # Documentation and Development
 # ==============================================================================
