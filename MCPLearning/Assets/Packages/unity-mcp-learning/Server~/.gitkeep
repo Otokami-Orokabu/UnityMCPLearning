@@ -1,9 +1,7 @@
-# This file ensures the Server~ directory exists for GitHub Actions
-# Directory contents are populated by GitHub Actions and excluded from Git
+# Server~ Directory Placeholder (main branch)
 # 
-# GitHub Actions will build unity-mcp-node and copy:
-# - dist/ (compiled TypeScript)
-# - node_modules/ (dependencies)
-# - package.json, tsconfig.json, schema/, mcp-config.json
+# This directory is kept empty on main branch for lightweight distribution.
+# GitHub Actions will populate it with built MCP server files when needed.
+# For development with Server~ contents, use the 'development' branch.
 #
-# Contents are excluded by .gitignore for lightweight package distribution
+# Runtime: MCPServerManager will run npm install to generate dependencies.

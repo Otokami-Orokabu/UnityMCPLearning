@@ -89,10 +89,3 @@ crashlytics-build.properties
 
 # Unity Logging
 /Logs/
-
-# ==============================================================================
-# MCP Server Distribution (main branch)
-# ==============================================================================
-# Server~ directory exists but contents are excluded (GitHub Actions populate)
-Assets/Packages/unity-mcp-learning/Server~/*
-!Assets/Packages/unity-mcp-learning/Server~/.gitkeep
