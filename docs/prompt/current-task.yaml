@@ -1,0 +1,385 @@
+# Unity MCP Learning - 現在のタスク状況
+# セッション継続・コンテキスト維持用ファイル
+
+# 現在のタスク概要
+current_task:
+  name: "Git URL配布対応実装"
+  github_issue: "#4"
+  priority: "最高優先"
+  status: "実装準備完了・HaaS方式実行待機"
+  start_date: "2025年6月8日"
+  estimated_duration: "6-8時間（3セッション想定）"
+  
+  description: |
+    Unity Package Manager (UPM) のGit URL機能を使用した配布対応と、
+    複数のUnityエディタ同時起動に対応するマルチプロジェクト機能の実装。
+    Auto-Accept統合による高速AI駆動開発環境の提供。
+
+# 実装方式
+implementation_approach:
+  methodology: "HaaS (Human-as-a-Service) 駆動開発"
+  execution_style: "段階的実装・都度指示・確認重視"
+  task_granularity: "10-45分単位の細分化タスク"
+  quality_assurance: "各Phase完了時の動作確認"
+
+# Phase構成とタスク分解
+phases:
+  phase_1:
+    name: "パッケージ構造基盤作成"
+    duration: "2-3時間"
+    status: "準備完了"
+    tasks:
+      - id: "1.1"
+        name: "ディレクトリ構造作成"
+        duration: "15分"
+        command: "mkdir -p Packages/com.orlab.unity-mcp-learning/{Runtime,Editor,MCPServer~,Documentation~,Tests}"
+        
+      - id: "1.2" 
+        name: "package.json作成"
+        duration: "10分"
+        file: "Packages/com.orlab.unity-mcp-learning/package.json"
+        
+      - id: "1.3"
+        name: "Assembly Definition作成"
+        duration: "20分"
+        files: ["Runtime/UnityMCP.Runtime.asmdef", "Editor/UnityMCP.Editor.asmdef", "Tests/Editor/UnityMCP.Tests.Editor.asmdef"]
+        
+      - id: "1.4"
+        name: "基本ドキュメント作成"
+        duration: "15分"
+        files: ["README.md", "CHANGELOG.md", "Documentation~/Installation.md"]
+
+  phase_2:
+    name: "既存コード移行"
+    duration: "1-2時間"
+    status: "準備完了"
+    tasks:
+      - id: "2.1"
+        name: "Editor共通スクリプト移行"
+        duration: "30分"
+        source: "MCPLearning/Assets/UnityMCP/Editor/Common/*.cs"
+        target: "Packages/com.orlab.unity-mcp-learning/Editor/Common/"
+        
+      - id: "2.2"
+        name: "Exporterスクリプト移行"
+        duration: "20分"
+        source: "MCPLearning/Assets/UnityMCP/Editor/Exporters/*"
+        target: "Packages/com.orlab.unity-mcp-learning/Editor/Exporters/"
+        
+      - id: "2.3"
+        name: "Windowsスクリプト移行"
+        duration: "15分"
+        source: "MCPLearning/Assets/UnityMCP/Editor/Windows/*"
+        target: "Packages/com.orlab.unity-mcp-learning/Editor/Windows/"
+        
+      - id: "2.4"
+        name: "テストファイル移行"
+        duration: "15分"
+        source: "MCPLearning/Assets/UnityMCP/Tests/Editor/*"
+        target: "Packages/com.orlab.unity-mcp-learning/Tests/Editor/"
+        
+      - id: "2.5"
+        name: "MCPサーバー統合"
+        duration: "20分"
+        source: "unity-mcp-node/"
+        target: "Packages/com.orlab.unity-mcp-learning/MCPServer~/"
+
+  phase_3:
+    name: "新機能実装"
+    duration: "2-3時間"
+    status: "準備完了"
+    tasks:
+      - id: "3.1"
+        name: "MCPPackageResolver作成"
+        duration: "30分"
+        file: "Editor/Common/MCPPackageResolver.cs"
+        purpose: "PackageInfo APIによるパッケージパス解決"
+        
+      - id: "3.2"
+        name: "MCPProjectIdentifier作成"
+        duration: "30分"
+        file: "Editor/Common/MCPProjectIdentifier.cs"
+        purpose: "SHA256ベースのプロジェクトID生成・マルチプロジェクト対応"
+        
+      - id: "3.3"
+        name: "MCPPortManager作成"
+        duration: "20分"
+        file: "Editor/Common/MCPPortManager.cs"
+        purpose: "3000-3100範囲での動的ポート管理"
+        
+      - id: "3.4"
+        name: "MCPAutoApproveSetup作成"
+        duration: "45分"
+        file: "Editor/Setup/MCPAutoApproveSetup.cs"
+        purpose: "Auto-Approve自動設定・開発体験向上"
+        
+      - id: "3.5"
+        name: "MCPConfigGenerator更新"
+        duration: "30分"
+        purpose: "マルチプロジェクト対応のmcp-config.json生成"
+
+  phase_4:
+    name: "UI統合・テスト"
+    duration: "1-2時間"
+    status: "準備完了"
+    tasks:
+      - id: "4.1"
+        name: "MCP Server Manager UI更新"
+        duration: "45分"
+        purpose: "Auto-Approve設定セクション追加"
+        
+      - id: "4.2"
+        name: "セットアップウィザード作成"
+        duration: "30分"
+        file: "Editor/Setup/MCPSetupWizard.cs"
+        
+      - id: "4.3"
+        name: "動作テスト"
+        duration: "30分"
+        purpose: "新しいUnityプロジェクトでのインポートテスト"
+
+  phase_5:
+    name: "Git設定・公開準備"
+    duration: "1時間"
+    status: "準備完了"
+    tasks:
+      - id: "5.1"
+        name: ".gitignore更新"
+        duration: "10分"
+        purpose: ".metaファイル除外設定"
+        
+      - id: "5.2"
+        name: "GitHub Actions設定"
+        duration: "30分"
+        purpose: "UMPパッケージ自動作成ワークフロー"
+        
+      - id: "5.3"
+        name: "配布用ブランチ作成"
+        duration: "20分"
+        purpose: "upmブランチでのパッケージ配布準備"
+
+# 技術仕様・重要な設計決定
+technical_specifications:
+  package_structure:
+    root: "Packages/com.orlab.unity-mcp-learning/"
+    git_url: "https://github.com/orlab/UnityMCPLearning.git?path=/Packages/com.orlab.unity-mcp-learning"
+    unity_minimum: "6000.0"
+    
+  key_features:
+    - "マルチプロジェクト対応（プロジェクトID・動的ポート・データ分離）"
+    - "Auto-Accept統合（ワンクリック高速開発環境）"
+    - ".metaファイルUnity Editor制御"
+    - "MCPサーバー同梱（npm直接インストール）"
+    - "自動セットアップ機能"
+
+  architecture_principles:
+    - "Unity Package Manager標準準拠"
+    - "Qiita記事ベースの最適化構造"
+    - "既存機能の完全保持"
+    - "開発体験の革新的向上"
+
+# 関連ドキュメント
+related_documents:
+  issue_tracker:
+    - "GitHub Issue #4: [Feature] Git URL配布対応"
+    
+  design_documents:
+    - "docs/development/git-url-distribution-design.md - 完全設計仕様"
+    - "docs/development/upm-package-structure-design.md - UMP準拠構造"
+    - "docs/development/git-url-package-requirements.md - 品質・テスト要件"
+    - "docs/development/simplified-package-strategy.md - シンプル化アプローチ"
+    - "docs/development/claude-code-auto-approve-guide.md - Auto-Approve統合"
+    
+  reference_materials:
+    - "https://qiita.com/shirasaya0201/items/7738e4faeb822e0a9872 - Unity側実装参考"
+    - "docs/future/distribution-packages.md - 配布戦略全体"
+    
+  current_codebase:
+    - "MCPLearning/Assets/UnityMCP/ - 移行対象既存コード"
+    - "unity-mcp-node/ - MCPサーバー本体"
+    - "docs/prompt/starter-prompt.yaml - プロジェクト全体コンテキスト"
+
+# 成功基準
+success_criteria:
+  functional_requirements:
+    - "新しいUnityプロジェクトでGit URL経由インストール成功"
+    - "マルチプロジェクト同時実行での競合なし"
+    - "Auto-Accept機能による95%の確認時間削減"
+    - "既存全機能の正常動作継続"
+    
+  quality_requirements:
+    - "Unity Package Manager標準完全準拠"
+    - ".metaファイル競合なし"
+    - "パッケージサイズ10MB以下"
+    - "インストール時間30秒以内"
+    
+  user_experience:
+    - "Git URL 1つでのワンクリックインストール"
+    - "Unity Editor内でのワンクリックセットアップ"
+    - "『unity-mcp』コマンドでの即座AI開発開始"
+
+# セッション管理
+session_management:
+  current_session:
+    started: "2025年6月8日"
+    context_established: true
+    ready_for_execution: true
+    
+  next_action:
+    phase: "Phase 3進行中"
+    task: "Task 3.2 - MCPProjectIdentifier作成"
+    estimated_time: "30分"
+    command_ready: true
+    
+  progress_tracking:
+    completed_phases: 
+      - "Phase 1: パッケージ構造基盤作成 ✅ (2025年6月8日完了)"
+      - "Phase 2: 既存コード移行 ✅ (2025年6月8日完了)"
+    current_phase: "Phase 3: 新機能実装"
+    remaining_tasks: "Phase 3残り4タスク・Phase 4-5未着手"
+    
+  context_restoration:
+    key_files_read:
+      - "docs/prompt/starter-prompt.yaml"
+      - "docs/prompt/01-project-specs.yaml" 
+      - "docs/prompt/02-current-status.yaml"
+      - "docs/prompt/03-file-structure.yaml"
+      - "docs/prompt/04-configuration.yaml"
+      - "GitHub Issue #4詳細"
+      - "関連設計ドキュメント群"
+      - "Qiita参考記事"
+    
+    context_completeness: "100%"
+
+# 現在の詳細進捗状況 (2025年6月8日更新)
+detailed_progress:
+  phase_1_completed:
+    status: "完全完了 ✅"
+    completion_time: "2025年6月8日"
+    tasks_completed:
+      - "1.1: ディレクトリ構造作成 (mcp-unity準拠・Server~採用)"
+      - "1.2: package.json作成 (UPM標準準拠)"
+      - "1.3: Assembly Definition作成 (Runtime/Editor/Tests)"
+      - "1.4: 基本ドキュメント作成 (README/CHANGELOG/Installation.md)"
+    
+  phase_2_completed:
+    status: "完全完了 ✅"
+    completion_time: "2025年6月8日"
+    tasks_completed:
+      - "2.1: Editor共通スクリプト移行 (12ファイル)"
+      - "2.2: Exporterスクリプト移行 (6ファイル)"
+      - "2.3: Windowsスクリプト移行 (1ファイル)"
+      - "2.4: テストファイル移行 (2ファイル)"
+      - "2.5: パス修正・警告解消 (Assets/UnityMCP参照エラー修正)"
+    additional_fixes:
+      - "重複ファイル修正 (ClaudeDesktopConfigManager.cs)"
+      - "Runtime Assembly警告対応 (UnityMCPRuntime.cs作成)"
+      - "AssetInfoExporter.cs パス参照修正"
+    
+  phase_3_current:
+    status: "進行中 🚀"
+    start_time: "2025年6月8日"
+    tasks_completed:
+      - "3.1: MCPPackageResolver作成 ✅ (PackageInfo API・3段階フォールバック・キャッシュ機能)"
+    tasks_pending:
+      - "3.2: MCPProjectIdentifier作成 (SHA256ベース・マルチプロジェクト対応)"
+      - "3.3: MCPPortManager作成 (3000-3100動的ポート管理)"
+      - "3.4: MCPAutoApproveSetup作成 (Auto-Accept自動設定)"
+      - "3.5: MCPConfigGenerator更新 (マルチプロジェクト対応)"
+
+# パッケージ構成現状
+current_package_structure:
+  location: "MCPLearning/Assets/Packages/unity-mcp-learning/"
+  structure_status: "完全構築済み"
+  key_components:
+    - "package.json ✅ (UPM準拠)"
+    - "Scripts/Runtime/ ✅ (UnityMCPRuntime.cs)"
+    - "Scripts/Editor/ ✅ (12+6+1ファイル移行済み + MCPPackageResolver)"
+    - "Tests/Editor/ ✅ (2テストファイル)"
+    - "Server~/ ✅ (空・GitHub Actions配布待機)"
+    - "Documentation~/ ✅ (Installation.md)"
+  
+  assembly_definitions:
+    - "UnityMCP.Runtime.asmdef ✅"
+    - "UnityMCP.Editor.asmdef ✅"
+    - "UnityMCP.Tests.Editor.asmdef ✅"
+  
+  compilation_status: "エラーなし・警告解消済み"
+
+# 技術的達成事項
+technical_achievements_session:
+  package_architecture:
+    - "mcp-unity準拠のServer~構造採用"
+    - "Unity Package Manager完全対応"
+    - "PackageInfo API動的パス解決実装"
+    - "3段階フォールバック機能"
+  
+  migration_success:
+    - "既存全機能の完全移行"
+    - "namespace統一 (UnityMCP.Editor)"
+    - "パス参照の完全修正"
+    - "Assembly Definition適切設定"
+  
+  quality_improvements:
+    - "Runtime API提供開始"
+    - "エラーハンドリング強化"
+    - "ログ機能統一化"
+    - "キャッシュ機能実装"
+
+# 重要な注意事項
+important_notes:
+  git_strategy:
+    - ".metaファイルはGit管理対象外（Unity Editor制御）"
+    - "?path=パラメータでパッケージ部分のみ配布"
+    - "upmブランチでの配布用構成管理"
+    
+  compatibility:
+    - "Unity 6以降限定（最新機能活用・シンプル実装）"
+    - "既存MCPLearningプロジェクトとの並行開発維持"
+    - "Claude Code・Claude Desktop両対応"
+    
+  security:
+    - "ローカル開発環境限定使用"
+    - "Auto-Accept設定はプロジェクト限定"
+    - "エンタープライズレベルセキュリティ維持"
+
+# 期待効果
+expected_outcomes:
+  immediate_benefits:
+    - "Unity Package Managerでの標準的配布実現"
+    - "インストール手順の劇的簡素化"
+    - "マルチプロジェクト対応による企業・教育機関展開"
+    
+  long_term_impact:
+    - "Unity MCP Learningの普及促進"
+    - "AI駆動Unity開発の標準化貢献"
+    - "オープンソースプロジェクトとしての成熟"
+
+# ファイル更新履歴
+file_history:
+  created: "2025年6月8日"
+  purpose: "Git URL配布対応実装のコンテキスト維持・セッション継続支援"
+  scope: "HaaS方式実行における詳細タスク管理"
+  integration: "既存docs/prompt/セッション復元チェーンとの統合"
+
+---
+
+# このファイルの使用方法
+
+## セッション開始時
+1. `docs/prompt/starter-prompt.yaml` を読む
+2. `docs/prompt/current-task.yaml` (このファイル) を読む  
+3. 現在の進捗状況と次のタスクを確認
+4. HaaS方式で実行開始
+
+## セッション中断・復旧時
+1. このファイルの `session_management` セクションを確認
+2. `progress_tracking` で現在位置を把握
+3. `next_action` で次のタスクを実行
+
+## タスク完了時
+1. 該当タスクのstatusを更新
+2. `current_phase` と `next_action` を更新
+3. `completed_phases` に完了Phase追加
+
+Unity MCP Learning Git URL配布対応の成功を目指して、段階的な実装を進めましょう！

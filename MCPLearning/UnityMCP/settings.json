@@ -1,6 +1,6 @@
 {
-    "serverPath": "../unity-mcp-node",
+    "serverPath": "Assets/Packages/unity-mcp-learning/Server~",
     "autoStartOnLaunch": false,
     "defaultPort": 3000,
-    "lastModified": "2025-06-06T14:42:47Z"
+    "lastModified": "2025-06-08T12:10:00Z"
 }

@@ -1,27 +1,9 @@
 {
   "mcpServers": {
-    "unity-mcp-prod": {
+    "unity-mcp-server": {
       "command": "node",
-      "args": ["./unity-mcp-node/dist/index.js"],
-      "cwd": ".",
-      "env": {
-        "MCP_AUTO_APPROVE": "true"
-      }
+      "args": ["dist/index.js"]
     }
   },
-  "unityDataPath": "../MCPLearning/UnityMCP/Data",
-  "claudeCodeSettings": {
-    "autoApproveTools": [
-      "ping",
-      "unity_info_realtime",
-      "get_console_logs",
-      "create_cube",
-      "create_sphere",
-      "create_plane",
-      "create_gameobject",
-      "wait_for_compilation"
-    ],
-    "requireConfirmation": false,
-    "skipPermissionDialogs": true
-  }
+  "unityDataPath": "../MCPLearning/UnityMCP/Data"
 }

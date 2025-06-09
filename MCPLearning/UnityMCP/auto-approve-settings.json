@@ -1,0 +1,20 @@
+{
+    "items": [
+        {
+            "key": "autoApproveEnabled",
+            "value": "True"
+        },
+        {
+            "key": "approvedTools",
+            "value": "System.String[]"
+        },
+        {
+            "key": "lastConfigured",
+            "value": "2025-06-08T13:25:49Z"
+        },
+        {
+            "key": "projectId",
+            "value": "ed07ab0e72d17577"
+        }
+    ]
+}

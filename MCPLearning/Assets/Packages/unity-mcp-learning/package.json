@@ -1,0 +1,46 @@
+{
+  "name": "com.orlab.unity-mcp-learning",
+  "version": "1.0.0",
+  "displayName": "Unity MCP Learning",
+  "description": "AI-driven Unity development environment using Model Context Protocol (MCP). Enables natural language control of Unity Editor through Claude Desktop/Code integration.",
+  "unity": "6000.0",
+  "unityRelease": "0f1",
+  "documentationUrl": "https://github.com/orlab/UnityMCPLearning/blob/main/README.md",
+  "changelogUrl": "https://github.com/orlab/UnityMCPLearning/blob/main/Packages/com.orlab.unity-mcp-learning/CHANGELOG.md",
+  "licensesUrl": "https://github.com/orlab/UnityMCPLearning/blob/main/LICENSE",
+  "keywords": [
+    "ai",
+    "mcp",
+    "claude",
+    "automation",
+    "development",
+    "natural-language",
+    "editor-tools",
+    "workflow"
+  ],
+  "author": {
+    "name": "orlab",
+    "email": "contact@orlab.dev",
+    "url": "https://github.com/orlab"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/orlab/UnityMCPLearning.git",
+    "directory": "Packages/com.orlab.unity-mcp-learning"
+  },
+  "license": "MIT",
+  "dependencies": {},
+  "samples": [
+    {
+      "displayName": "Basic MCP Integration",
+      "description": "Example scene with MCP integration setup",
+      "path": "Samples~/BasicMCPIntegration"
+    },
+    {
+      "displayName": "Claude Code Workflow",
+      "description": "Example workflow using Claude Code CLI",
+      "path": "Samples~/ClaudeCodeWorkflow"
+    }
+  ],
+  "type": "tool"
+}
