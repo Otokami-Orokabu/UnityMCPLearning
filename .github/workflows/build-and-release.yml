@@ -41,6 +41,7 @@ jobs:
         run: |
           cp -r unity-mcp-node/dist MCPLearning/Assets/Packages/unity-mcp-learning/Server~/
           cp -r unity-mcp-node/node_modules MCPLearning/Assets/Packages/unity-mcp-learning/Server~/
+          cp -r unity-mcp-node/schema MCPLearning/Assets/Packages/unity-mcp-learning/Server~/
           cp unity-mcp-node/package.json MCPLearning/Assets/Packages/unity-mcp-learning/Server~/
           cp unity-mcp-node/mcp-config.json MCPLearning/Assets/Packages/unity-mcp-learning/Server~/
           cp unity-mcp-node/tsconfig.json MCPLearning/Assets/Packages/unity-mcp-learning/Server~/
