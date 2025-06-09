@@ -1,0 +1,2 @@
+MCP Server files auto-synced by GitHub Actions on Mon Jun  9 02:16:45 UTC 2025
+Built from unity-mcp-node commit: c8c797fd7fcdcff5e801eace828c87471de5024c
