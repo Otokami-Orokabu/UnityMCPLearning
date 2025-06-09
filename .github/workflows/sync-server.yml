@@ -77,32 +77,10 @@ EOF
           echo "MCP Server files auto-synced by GitHub Actions on $(date)" > MCPLearning/Assets/Packages/unity-mcp-learning/Server~/AUTO_SYNC_INFO.txt
           echo "Built from unity-mcp-node commit: ${{ github.sha }}" >> MCPLearning/Assets/Packages/unity-mcp-learning/Server~/AUTO_SYNC_INFO.txt
           
-      - name: Check for changes
-        id: verify-changed-files
-        run: |
-          if [ -n "$(git status --porcelain)" ]; then
-            echo "changed=true" >> $GITHUB_OUTPUT
-          else
-            echo "changed=false" >> $GITHUB_OUTPUT
-          fi
-          
-      - name: Commit and push changes
-        if: steps.verify-changed-files.outputs.changed == 'true'
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add MCPLearning/Assets/Packages/unity-mcp-learning/Server~
-          git commit -m "🤖 Auto-sync: Update Server~ from unity-mcp-node
-          
-          - Built MCP server from latest unity-mcp-node changes
-          - Updated dist/ files and dependencies
-          - Synchronized at $(date)
-          
-          🤖 Generated with GitHub Actions"
-          git push
-          
-      - name: Summary
+      - name: Summary (no commit - files excluded by .gitignore)
         run: |
           echo "✅ MCP Server sync completed"
-          echo "📁 Server~ directory updated with latest unity-mcp-node build"
-          echo "🔄 Changes automatically committed and pushed"
+          echo "📁 Server~ directory populated with latest unity-mcp-node build"
+          echo "🚫 Files excluded from Git by .gitignore (lightweight distribution)"
+          echo "🎯 GitHub Actions creates complete Server~ for immediate use"
+          ls -la MCPLearning/Assets/Packages/unity-mcp-learning/Server~ | head -10

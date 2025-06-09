@@ -89,3 +89,10 @@ crashlytics-build.properties
 
 # Unity Logging
 /Logs/
+
+# ==============================================================================
+# MCP Server (GitHub Actions managed)
+# ==============================================================================
+# Server~ contents are managed by GitHub Actions - exclude from Git
+Assets/Packages/unity-mcp-learning/Server~/*
+!Assets/Packages/unity-mcp-learning/Server~/.gitkeep
