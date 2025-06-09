@@ -11,6 +11,9 @@ on:
       - 'unity-mcp-node/**'
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   sync-server:
     runs-on: ubuntu-latest

@@ -3,6 +3,8 @@
 Unity統合のためのMCP (Model Context Protocol) サーバー実装。
 Claude DesktopからUnity Editorを自然言語で操作できる革新的なMCPサーバー。
 
+**🔄 Server~自動同期対応**: このディレクトリの変更は自動的にServer~に同期されます。
+
 ## ✨ 特徴
 
 - 🎮 **自然言語でUnity操作**: Claude Desktopから直接Unity Editor操作
