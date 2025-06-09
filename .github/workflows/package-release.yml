@@ -30,15 +30,18 @@ jobs:
           
       - name: Copy package files
         run: |
-          # Copy main package content
-          cp -r MCPLearning/Assets/Packages/unity-mcp-learning/* package-temp/unity-mcp-learning/
+          # Copy main package content (excluding Server~ if it exists)
+          rsync -av --exclude='Server~' MCPLearning/Assets/Packages/unity-mcp-learning/ package-temp/unity-mcp-learning/
           
-          # Copy built MCP Server (rename to Server~ for Unity package)
+          # Copy built MCP Server (create Server~ for Unity package)
           mkdir -p package-temp/unity-mcp-learning/Server~
           cp -r unity-mcp-node/dist package-temp/unity-mcp-learning/Server~/
           cp unity-mcp-node/package.json package-temp/unity-mcp-learning/Server~/
           cp unity-mcp-node/mcp-config.json package-temp/unity-mcp-learning/Server~/
           cp -r unity-mcp-node/schema package-temp/unity-mcp-learning/Server~/
+          
+          # Create a manifest file to indicate this is a complete package
+          echo "This package includes MCP server files built by GitHub Actions" > package-temp/unity-mcp-learning/SERVER_INCLUDED.txt
           
       - name: Create package archive
         run: |

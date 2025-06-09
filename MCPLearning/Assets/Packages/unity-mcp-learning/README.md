@@ -11,13 +11,21 @@ AI-driven Unity development environment using Model Context Protocol (MCP). Enab
 - **Multi-project Support**: Handle multiple Unity projects simultaneously
 - **Auto-Accept Integration**: Streamlined development workflow
 
-## Quick Start
+## Installation
 
-1. **Install Package**
-   ```
-   Window > Package Manager > + > Add package from git URL
-   https://github.com/orlab/UnityMCPLearning.git?path=MCPLearning/Assets/Packages/unity-mcp-learning
-   ```
+### Method 1: GitHub Releases (Recommended)
+1. Download the latest release package from [GitHub Releases](https://github.com/Otokami-Orokabu/UnityMCPLearning/releases)
+2. Extract the package to your project's `Packages` folder
+3. Unity will automatically detect and import the package
+
+### Method 2: Git URL (Limited - Server files not included)
+```
+Window > Package Manager > + > Add package from git URL
+https://github.com/Otokami-Orokabu/UnityMCPLearning.git?path=MCPLearning/Assets/Packages/unity-mcp-learning
+```
+**Note**: Git URL installation excludes the MCP server files. Use GitHub Releases for complete functionality.
+
+## Quick Start
 
 2. **Setup MCP Server**
    - Open Unity MCP Server Manager: `Window > Unity MCP > Server Manager`

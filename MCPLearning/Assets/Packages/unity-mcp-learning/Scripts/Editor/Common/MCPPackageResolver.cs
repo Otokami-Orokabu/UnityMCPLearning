@@ -266,37 +266,9 @@ namespace UnityMCP.Editor
                 MCPLogger.LogWarning($"{LOG_PREFIX} Server~ not found at default path: {defaultServerPath}");
                 
                 // Git URL配布でServer~が除外される問題への対策
-                // unity-mcp-nodeディレクトリを探す
-                MCPLogger.LogInfo($"{LOG_PREFIX} Searching for alternative server sources...");
-                
-                var projectRoot = Path.GetDirectoryName(Application.dataPath);
-                
-                // リポジトリルートからunity-mcp-nodeディレクトリを探す
-                for (int depth = 0; depth <= 4; depth++)
-                {
-                    var searchRoot = projectRoot;
-                    for (int i = 0; i < depth; i++)
-                    {
-                        searchRoot = Path.GetDirectoryName(searchRoot);
-                        if (string.IsNullOrEmpty(searchRoot)) break;
-                    }
-                    
-                    if (string.IsNullOrEmpty(searchRoot)) continue;
-                    
-                    var unityMcpNodePath = Path.Combine(searchRoot, "unity-mcp-node");
-                    if (Directory.Exists(unityMcpNodePath))
-                    {
-                        MCPLogger.LogInfo($"{LOG_PREFIX} Found unity-mcp-node at: {unityMcpNodePath}");
-                        
-                        // distディレクトリが存在するかチェック
-                        var distPath = Path.Combine(unityMcpNodePath, "dist");
-                        if (Directory.Exists(distPath))
-                        {
-                            MCPLogger.LogInfo($"{LOG_PREFIX} Using unity-mcp-node as server source: {unityMcpNodePath}");
-                            return unityMcpNodePath.Replace('\\', '/');
-                        }
-                    }
-                }
+                MCPLogger.LogError($"{LOG_PREFIX} Server~ directory not found in package. This indicates the package was not properly built with GitHub Actions.");
+                MCPLogger.LogError($"{LOG_PREFIX} Please use the release package from GitHub Releases instead of Git URL installation.");
+                MCPLogger.LogError($"{LOG_PREFIX} Release packages include the complete MCP server files.");
                 
                 // 相対パス指定の場合のServer~ディレクトリ検索をもう少し詳細に
                 if (packagePath.StartsWith("../"))
