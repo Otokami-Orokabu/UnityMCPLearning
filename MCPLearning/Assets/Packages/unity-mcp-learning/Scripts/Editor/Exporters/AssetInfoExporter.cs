@@ -68,6 +68,22 @@ namespace UnityMCP.Editor
                 recentAssets.Add("アセット情報の取得に失敗");
             }
             
+            // Unity MCPアセットの存在チェック（動的パス解決）
+            var hasUnityMCPAssets = 0;
+            try
+            {
+                var packagePath = MCPPackageResolver.GetPackageRootPath();
+                if (Directory.Exists(packagePath))
+                {
+                    hasUnityMCPAssets = AssetDatabase.FindAssets("", new[] { packagePath }).Length;
+                }
+            }
+            catch
+            {
+                // パッケージパスが見つからない場合は0を返す
+                hasUnityMCPAssets = 0;
+            }
+            
             return new Dictionary<string, object>
             {
                 ["totalAssets"] = allAssets.Length,
@@ -78,7 +94,7 @@ namespace UnityMCP.Editor
                 ["audioCount"] = audioCount,
                 ["sceneCount"] = sceneCount,
                 ["recentAssets"] = string.Join(", ", recentAssets),
-                ["hasUnityMCPAssets"] = AssetDatabase.FindAssets("", new[] { "Assets/Packages/unity-mcp-learning" }).Length
+                ["hasUnityMCPAssets"] = hasUnityMCPAssets
             };
         }
     }

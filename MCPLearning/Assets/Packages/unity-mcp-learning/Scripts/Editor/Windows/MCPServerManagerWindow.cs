@@ -39,6 +39,21 @@ namespace UnityMCP.Editor
                     return relativeAssetPath;
                 }
                 
+                // Server~ディレクトリ内での検索（リリースパッケージ用）
+                var serverPath = MCPPackageResolver.GetServerPath();
+                if (!string.IsNullOrEmpty(serverPath))
+                {
+                    var serverUIPath = Path.Combine(serverPath, "Scripts/Editor/Windows", fileName).Replace('\\', '/');
+                    MCPLogger.LogInfo($"[MCPServerManagerWindow] Trying Server~ path: {serverUIPath}");
+                    
+                    asset = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(serverUIPath);
+                    if (asset != null)
+                    {
+                        MCPLogger.LogInfo($"[MCPServerManagerWindow] Successfully found {fileName} at Server~ path: {serverUIPath}");
+                        return serverUIPath;
+                    }
+                }
+                
                 // AssetDatabase.FindAssetsでファイルを検索
                 var guids = AssetDatabase.FindAssets($"{Path.GetFileNameWithoutExtension(fileName)} t:{(fileName.EndsWith(".uxml") ? "VisualTreeAsset" : "StyleSheet")}");
                 foreach (var guid in guids)
