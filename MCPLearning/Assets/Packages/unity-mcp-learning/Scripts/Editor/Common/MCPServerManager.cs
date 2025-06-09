@@ -109,6 +109,10 @@ namespace UnityMCP.Editor
                     }
                 }
                 
+                // データディレクトリを確保
+                var dataPath = MCPProjectIdentifier.GetProjectDataPath();
+                Debug.Log($"{LOG_PREFIX} Using Unity data path: {dataPath}");
+                
                 // サーバー起動
                 var startInfo = new System.Diagnostics.ProcessStartInfo
                 {
@@ -123,7 +127,8 @@ namespace UnityMCP.Editor
                     Environment =
                     {
                         ["PORT"] = port.ToString(),
-                        ["NODE_ENV"] = "production"
+                        ["NODE_ENV"] = "production",
+                        ["UNITY_DATA_PATH"] = dataPath
                     }
                 };
                 
