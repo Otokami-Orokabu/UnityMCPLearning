@@ -1,0 +1,69 @@
+name: Package Release
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  package-release:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          
+      - name: Build MCP Server
+        run: |
+          cd unity-mcp-node
+          npm install
+          npm run build
+          
+      - name: Create package directory
+        run: |
+          mkdir -p package-temp/unity-mcp-learning
+          
+      - name: Copy package files
+        run: |
+          # Copy main package content
+          cp -r MCPLearning/Assets/Packages/unity-mcp-learning/* package-temp/unity-mcp-learning/
+          
+          # Copy built MCP Server (rename to Server~ for Unity package)
+          mkdir -p package-temp/unity-mcp-learning/Server~
+          cp -r unity-mcp-node/dist package-temp/unity-mcp-learning/Server~/
+          cp unity-mcp-node/package.json package-temp/unity-mcp-learning/Server~/
+          cp unity-mcp-node/mcp-config.json package-temp/unity-mcp-learning/Server~/
+          cp -r unity-mcp-node/schema package-temp/unity-mcp-learning/Server~/
+          
+      - name: Create package archive
+        run: |
+          cd package-temp
+          tar -czf ../unity-mcp-learning-${{ github.ref_name }}.tar.gz unity-mcp-learning
+          zip -r ../unity-mcp-learning-${{ github.ref_name }}.zip unity-mcp-learning
+          
+      - name: Upload package assets to release
+        if: github.event_name == 'release'
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./unity-mcp-learning-${{ github.ref_name }}.tar.gz
+          asset_name: unity-mcp-learning-${{ github.ref_name }}.tar.gz
+          asset_content_type: application/gzip
+          
+      - name: Upload package zip to release
+        if: github.event_name == 'release'
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./unity-mcp-learning-${{ github.ref_name }}.zip
+          asset_name: unity-mcp-learning-${{ github.ref_name }}.zip
+          asset_content_type: application/zip
