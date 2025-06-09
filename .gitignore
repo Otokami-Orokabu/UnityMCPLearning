@@ -124,10 +124,6 @@ crashlytics-build.properties
 # MCP logs at project level
 mcp-*.log
 
-# Server~ node_modules is auto-synced by GitHub Actions (heavy files excluded)
-MCPLearning/Assets/Packages/unity-mcp-learning/Server~/node_modules/
-MCPLearning/Assets/Packages/unity-mcp-learning/Server~/SYNC_INFO.txt
-
 # ==============================================================================
 # Documentation and Development
 # ==============================================================================
