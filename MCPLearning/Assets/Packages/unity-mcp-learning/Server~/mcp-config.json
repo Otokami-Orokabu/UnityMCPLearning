@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "unity-mcp-server": {
+      "command": "node",
+      "args": ["dist/index.js"]
+    }
+  },
+  "unityDataPath": "../../../../UnityMCP/Data"
+}
