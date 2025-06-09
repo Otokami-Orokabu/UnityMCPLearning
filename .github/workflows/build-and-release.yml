@@ -47,6 +47,12 @@ jobs:
           cp unity-mcp-node/tsconfig.json MCPLearning/Assets/Packages/unity-mcp-learning/Server~/
           cp unity-mcp-node/tsconfig.build.json MCPLearning/Assets/Packages/unity-mcp-learning/Server~/
           
+      - name: Copy UI files
+        run: |
+          mkdir -p MCPLearning/Assets/Packages/unity-mcp-learning/Server~/Scripts/Editor/Windows
+          cp MCPLearning/Assets/Packages/unity-mcp-learning/Scripts/Editor/Windows/MCPServerManagerWindow.uxml MCPLearning/Assets/Packages/unity-mcp-learning/Server~/Scripts/Editor/Windows/
+          cp MCPLearning/Assets/Packages/unity-mcp-learning/Scripts/Editor/Windows/MCPServerManagerWindow.uss MCPLearning/Assets/Packages/unity-mcp-learning/Server~/Scripts/Editor/Windows/
+          
       - name: Configure git
         run: |
           git config --local user.email "action@github.com"

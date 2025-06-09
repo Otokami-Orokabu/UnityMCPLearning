@@ -5,5 +5,5 @@
       "args": ["dist/index.js"]
     }
   },
-  "unityDataPath": "../../UnityMCP/Data"
+  "unityDataPath": "../MCPLearning/UnityMCP/Data"
 }
