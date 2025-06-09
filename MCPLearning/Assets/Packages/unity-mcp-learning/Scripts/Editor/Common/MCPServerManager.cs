@@ -71,15 +71,31 @@ namespace UnityMCP.Editor
             _serverPath = serverPath;
             _currentPort = port;
             
+            // 詳細なパス情報をログ出力
+            Debug.Log($"{LOG_PREFIX} Starting server from path: {serverPath}");
+            Debug.Log($"{LOG_PREFIX} Absolute path: {Path.GetFullPath(serverPath)}");
+            
             try
             {
                 // package.jsonの存在確認
                 var packageJsonPath = Path.Combine(serverPath, "package.json");
+                Debug.Log($"{LOG_PREFIX} Looking for package.json at: {packageJsonPath}");
                 if (!File.Exists(packageJsonPath))
                 {
                     Debug.LogError($"{LOG_PREFIX} package.json not found at: {packageJsonPath}");
                     OnServerError?.Invoke("package.json not found. Is this a valid Node.js project?");
                     return false;
+                }
+                
+                // node_modulesの存在確認
+                var nodeModulesPath = Path.Combine(serverPath, "node_modules");
+                Debug.Log($"{LOG_PREFIX} Checking node_modules at: {nodeModulesPath}");
+                Debug.Log($"{LOG_PREFIX} node_modules exists: {Directory.Exists(nodeModulesPath)}");
+                
+                if (Directory.Exists(nodeModulesPath))
+                {
+                    var ajvPath = Path.Combine(nodeModulesPath, "ajv");
+                    Debug.Log($"{LOG_PREFIX} ajv module exists: {Directory.Exists(ajvPath)}");
                 }
                 
                 // distディレクトリの存在確認

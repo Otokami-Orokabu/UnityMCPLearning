@@ -89,6 +89,3 @@ crashlytics-build.properties
 
 # Unity Logging
 /Logs/
-
-
-Assets/Packages/unity-mcp-learning/Server~*
