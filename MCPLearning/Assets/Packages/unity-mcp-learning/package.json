@@ -5,9 +5,9 @@
   "description": "AI-driven Unity development environment using Model Context Protocol (MCP). Enables natural language control of Unity Editor through Claude Desktop/Code integration.",
   "unity": "6000.0",
   "unityRelease": "0f1",
-  "documentationUrl": "https://github.com/orlab/UnityMCPLearning/blob/main/README.md",
-  "changelogUrl": "https://github.com/orlab/UnityMCPLearning/blob/main/Packages/com.orlab.unity-mcp-learning/CHANGELOG.md",
-  "licensesUrl": "https://github.com/orlab/UnityMCPLearning/blob/main/LICENSE",
+  "documentationUrl": "https://github.com/Otokami-Orokabu/UnityMCPLearning/blob/main/README.md",
+  "changelogUrl": "https://github.com/Otokami-Orokabu/UnityMCPLearning/blob/main/MCPLearning/Assets/Packages/unity-mcp-learning/CHANGELOG.md",
+  "licensesUrl": "https://github.com/Otokami-Orokabu/UnityMCPLearning/blob/main/LICENSE",
   "keywords": [
     "ai",
     "mcp",
@@ -19,14 +19,14 @@
     "workflow"
   ],
   "author": {
-    "name": "orlab",
-    "email": "contact@orlab.dev",
-    "url": "https://github.com/orlab"
+    "name": "Otokami-Orokabu",
+    "email": "contact@example.com",
+    "url": "https://github.com/Otokami-Orokabu"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/orlab/UnityMCPLearning.git",
-    "directory": "Packages/com.orlab.unity-mcp-learning"
+    "url": "https://github.com/Otokami-Orokabu/UnityMCPLearning.git",
+    "directory": "MCPLearning/Assets/Packages/unity-mcp-learning"
   },
   "license": "MIT",
   "dependencies": {},
