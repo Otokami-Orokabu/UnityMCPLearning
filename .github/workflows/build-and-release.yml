@@ -1,0 +1,52 @@
+name: Build and Release Unity MCP Package
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+          
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: unity-mcp-node/package-lock.json
+          
+      - name: Install dependencies
+        working-directory: unity-mcp-node
+        run: npm ci
+        
+      - name: Build project
+        working-directory: unity-mcp-node
+        run: npm run build
+        
+      - name: Create Server~ directory
+        run: mkdir -p MCPLearning/Assets/Packages/unity-mcp-learning/Server~
+        
+      - name: Copy build artifacts
+        run: |
+          cp -r unity-mcp-node/dist/* MCPLearning/Assets/Packages/unity-mcp-learning/Server~/
+          cp -r unity-mcp-node/node_modules MCPLearning/Assets/Packages/unity-mcp-learning/Server~/
+          cp unity-mcp-node/package.json MCPLearning/Assets/Packages/unity-mcp-learning/Server~/
+          
+      - name: Configure git
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+      - name: Commit and push changes
+        run: |
+          git add -f MCPLearning/Assets/Packages/unity-mcp-learning/Server~
+          git commit -m "release: Add built Server~ contents for ${{ github.ref_name }}"
+          git push origin HEAD:${{ github.ref_name }}
