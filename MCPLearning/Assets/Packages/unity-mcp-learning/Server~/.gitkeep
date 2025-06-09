@@ -1,7 +1,0 @@
-# Server~ Directory Placeholder (main branch)
-# 
-# This directory is kept empty on main branch for lightweight distribution.
-# GitHub Actions will populate it with built MCP server files when needed.
-# For development with Server~ contents, use the 'development' branch.
-#
-# Runtime: MCPServerManager will run npm install to generate dependencies.
