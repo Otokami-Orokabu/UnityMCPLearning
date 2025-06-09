@@ -58,10 +58,22 @@ echo -e "${YELLOW}📋 ファイルをコピー中...${NC}"
 # 必須ファイルをコピー
 cp -r unity-mcp-node/dist "$PACKAGE_DIR/Server~/"
 cp unity-mcp-node/package.json "$PACKAGE_DIR/Server~/"
-cp unity-mcp-node/mcp-config.json "$PACKAGE_DIR/Server~/"
 cp unity-mcp-node/tsconfig.json "$PACKAGE_DIR/Server~/"
 cp -r unity-mcp-node/schema "$PACKAGE_DIR/Server~/"
 cp -r unity-mcp-node/node_modules "$PACKAGE_DIR/Server~/"
+
+# Server~専用のmcp-config.jsonを作成（正しい相対パス設定）
+cat > "$PACKAGE_DIR/Server~/mcp-config.json" << 'EOF'
+{
+  "mcpServers": {
+    "unity-mcp-server": {
+      "command": "node",
+      "args": ["dist/index.js"]
+    }
+  },
+  "unityDataPath": "../../../../UnityMCP/Data"
+}
+EOF
 
 # オプション: ソースファイルもコピー（デバッグ用）
 if [ "$1" = "--with-source" ]; then

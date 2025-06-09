@@ -49,9 +49,21 @@ jobs:
           
           # Copy essential files
           cp unity-mcp-node/package.json MCPLearning/Assets/Packages/unity-mcp-learning/Server~/
-          cp unity-mcp-node/mcp-config.json MCPLearning/Assets/Packages/unity-mcp-learning/Server~/
           cp unity-mcp-node/tsconfig.json MCPLearning/Assets/Packages/unity-mcp-learning/Server~/
           cp -r unity-mcp-node/schema MCPLearning/Assets/Packages/unity-mcp-learning/Server~/
+          
+          # Create Server~-specific mcp-config.json with correct relative path
+          cat > MCPLearning/Assets/Packages/unity-mcp-learning/Server~/mcp-config.json << 'EOF'
+{
+  "mcpServers": {
+    "unity-mcp-server": {
+      "command": "node",
+      "args": ["dist/index.js"]
+    }
+  },
+  "unityDataPath": "../../../../UnityMCP/Data"
+}
+EOF
           
           # Copy node_modules for complete dependency resolution
           cp -r unity-mcp-node/node_modules MCPLearning/Assets/Packages/unity-mcp-learning/Server~/
