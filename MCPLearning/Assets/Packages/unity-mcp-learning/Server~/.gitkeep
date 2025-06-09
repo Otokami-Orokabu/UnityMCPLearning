@@ -1,0 +1,9 @@
+# This file ensures the Server~ directory exists for GitHub Actions
+# Directory contents are populated by GitHub Actions and excluded from Git
+# 
+# GitHub Actions will build unity-mcp-node and copy:
+# - dist/ (compiled TypeScript)
+# - node_modules/ (dependencies)
+# - package.json, tsconfig.json, schema/, mcp-config.json
+#
+# Contents are excluded by .gitignore for lightweight package distribution
