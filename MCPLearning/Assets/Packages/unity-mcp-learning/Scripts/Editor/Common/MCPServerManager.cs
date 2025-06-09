@@ -68,7 +68,19 @@ namespace UnityMCP.Editor
                 return false;
             }
             
-            _serverPath = serverPath;
+            // unity-mcp-nodeディレクトリを優先的に使用
+            var unityMcpNodePath = MCPPackageResolver.GetUnityMcpNodePath();
+            if (!string.IsNullOrEmpty(unityMcpNodePath))
+            {
+                Debug.Log($"{LOG_PREFIX} Using unity-mcp-node directory: {unityMcpNodePath}");
+                _serverPath = unityMcpNodePath;
+            }
+            else
+            {
+                Debug.LogWarning($"{LOG_PREFIX} unity-mcp-node not found, using Server~ directory: {serverPath}");
+                _serverPath = serverPath;
+            }
+            
             _currentPort = port;
             
             try

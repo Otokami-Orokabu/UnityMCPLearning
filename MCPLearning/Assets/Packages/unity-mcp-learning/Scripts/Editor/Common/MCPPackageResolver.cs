@@ -152,6 +152,60 @@ namespace UnityMCP.Editor
         }
         
         /// <summary>
+        /// unity-mcp-nodeディレクトリのパスを取得（元のNode.jsプロジェクト）
+        /// </summary>
+        /// <returns>unity-mcp-nodeディレクトリパス</returns>
+        public static string GetUnityMcpNodePath()
+        {
+            MCPLogger.LogInfo($"{LOG_PREFIX} Searching for unity-mcp-node directory...");
+            
+            try
+            {
+                var projectRoot = Path.GetDirectoryName(Application.dataPath);
+                MCPLogger.LogInfo($"{LOG_PREFIX} Project root: {projectRoot}");
+                
+                // プロジェクトルートからunity-mcp-nodeを検索
+                var unityMcpNodePath = Path.Combine(projectRoot, "unity-mcp-node");
+                if (Directory.Exists(unityMcpNodePath))
+                {
+                    MCPLogger.LogInfo($"{LOG_PREFIX} Found unity-mcp-node at: {unityMcpNodePath}");
+                    return unityMcpNodePath.Replace('\\', '/');
+                }
+                
+                // 親ディレクトリを段階的に検索
+                for (int depth = 1; depth <= 3; depth++)
+                {
+                    var searchRoot = projectRoot;
+                    for (int i = 0; i < depth; i++)
+                    {
+                        searchRoot = Path.GetDirectoryName(searchRoot);
+                        if (string.IsNullOrEmpty(searchRoot)) break;
+                    }
+                    
+                    if (!string.IsNullOrEmpty(searchRoot))
+                    {
+                        var candidatePath = Path.Combine(searchRoot, "unity-mcp-node");
+                        MCPLogger.LogInfo($"{LOG_PREFIX} Checking unity-mcp-node at depth {depth}: {candidatePath}");
+                        
+                        if (Directory.Exists(candidatePath))
+                        {
+                            MCPLogger.LogInfo($"{LOG_PREFIX} Found unity-mcp-node at: {candidatePath}");
+                            return candidatePath.Replace('\\', '/');
+                        }
+                    }
+                }
+                
+                MCPLogger.LogError($"{LOG_PREFIX} unity-mcp-node directory not found");
+                return null;
+            }
+            catch (Exception ex)
+            {
+                MCPLogger.LogError($"{LOG_PREFIX} Failed to find unity-mcp-node: {ex.Message}");
+                return null;
+            }
+        }
+        
+        /// <summary>
         /// Server~ディレクトリのパスを取得
         /// </summary>
         /// <returns>Server~ディレクトリパス</returns>
