@@ -49,4 +49,6 @@ jobs:
         run: |
           git add -f MCPLearning/Assets/Packages/unity-mcp-learning/Server~
           git commit -m "release: Add built Server~ contents for ${{ github.ref_name }}"
-          git push origin HEAD:${{ github.ref_name }}
+          git tag -d ${{ github.ref_name }}
+          git tag ${{ github.ref_name }}
+          git push origin ${{ github.ref_name }} --force
