@@ -1,0 +1,36 @@
+{
+    "items": [
+        {
+            "key": "currentScene",
+            "value": ""
+        },
+        {
+            "key": "scenePath",
+            "value": ""
+        },
+        {
+            "key": "isPlaying",
+            "value": "False"
+        },
+        {
+            "key": "sceneObjectCount",
+            "value": "2"
+        },
+        {
+            "key": "isDirty",
+            "value": "False"
+        },
+        {
+            "key": "buildIndex",
+            "value": "-1"
+        },
+        {
+            "key": "isLoaded",
+            "value": "True"
+        },
+        {
+            "key": "timestamp",
+            "value": "2025-06-09T05:30:07Z"
+        }
+    ]
+}

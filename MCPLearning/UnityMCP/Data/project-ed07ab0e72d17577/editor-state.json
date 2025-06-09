@@ -1,0 +1,40 @@
+{
+    "items": [
+        {
+            "key": "editorFocused",
+            "value": "True"
+        },
+        {
+            "key": "compilingAssemblies",
+            "value": "False"
+        },
+        {
+            "key": "playModeState",
+            "value": "Stopped"
+        },
+        {
+            "key": "selectedObjectsCount",
+            "value": "0"
+        },
+        {
+            "key": "selectedObjectNames",
+            "value": ""
+        },
+        {
+            "key": "isPlayingOrWillChangePlaymode",
+            "value": "False"
+        },
+        {
+            "key": "isPaused",
+            "value": "False"
+        },
+        {
+            "key": "timeSinceStartup",
+            "value": "13.37"
+        },
+        {
+            "key": "timestamp",
+            "value": "2025-06-09T05:30:07Z"
+        }
+    ]
+}
