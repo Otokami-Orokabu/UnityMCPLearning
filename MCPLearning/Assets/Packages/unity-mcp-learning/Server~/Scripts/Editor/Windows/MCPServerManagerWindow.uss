@@ -1,0 +1,297 @@
+/* Unity MCP Server Manager Window USS Styles */
+
+/* Root container */
+#root {
+    flex-grow: 1;
+    padding: 10px;
+}
+
+/* Header styling */
+#header {
+    font-size: 20px;
+    -unity-font-style: bold;
+    margin-bottom: 15px;
+    color: rgb(200, 200, 200);
+}
+
+/* Status section styling */
+#status-section {
+    background-color: rgba(51, 51, 51, 0.3);
+    border-width: 1px;
+    border-color: rgba(76, 76, 76, 1);
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+#server-status {
+    color: rgb(180, 180, 180);
+    margin-bottom: 3px;
+}
+
+#connection-status {
+    color: rgb(180, 180, 180);
+    margin-bottom: 3px;
+}
+
+#last-update {
+    font-size: 10px;
+    opacity: 0.7;
+    color: rgb(150, 150, 150);
+}
+
+/* Control section styling */
+#control-section {
+    margin-bottom: 15px;
+}
+
+#button-row {
+    flex-direction: row;
+    margin-bottom: 10px;
+    height: 28px;
+}
+
+#start-button, #stop-button, #refresh-button, #test-connection-button {
+    flex-grow: 1;
+    height: 26px;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+#start-button {
+    background-color: rgba(76, 153, 76, 1);
+}
+
+#start-button:hover {
+    background-color: rgba(96, 173, 96, 1);
+}
+
+#stop-button {
+    background-color: rgba(153, 76, 76, 1);
+}
+
+#stop-button:hover {
+    background-color: rgba(173, 96, 96, 1);
+}
+
+/* Multi-project support section */
+#multi-project-foldout {
+    margin-bottom: 10px;
+}
+
+#multi-project-content {
+    background-color: rgba(25, 25, 76, 0.3);
+    border-width: 1px;
+    border-color: rgba(51, 51, 127, 1);
+    border-radius: 5px;
+    padding: 10px;
+}
+
+#project-id, #assigned-port, #auto-approve-status, #port-registry-status {
+    font-size: 11px;
+    margin-bottom: 3px;
+    color: rgb(180, 180, 200);
+}
+
+#multi-project-buttons {
+    flex-direction: row;
+    height: 25px;
+    margin-top: 8px;
+}
+
+#refresh-port-status-button, #setup-auto-approve-button, #generate-multi-config-button {
+    flex-grow: 1;
+    height: 23px;
+    margin-left: 1px;
+    margin-right: 1px;
+}
+
+#setup-auto-approve-button {
+    background-color: rgba(51, 127, 204, 1);
+}
+
+#setup-auto-approve-button:hover {
+    background-color: rgba(71, 147, 224, 1);
+}
+
+#generate-multi-config-button {
+    background-color: rgba(76, 153, 76, 1);
+}
+
+#generate-multi-config-button:hover {
+    background-color: rgba(96, 173, 96, 1);
+}
+
+/* Settings section */
+#settings-foldout {
+    margin-bottom: 10px;
+}
+
+#settings-content {
+    padding: 5px;
+}
+
+#port-field, #server-path, #auto-start {
+    margin-bottom: 5px;
+}
+
+/* Data management section */
+#data-foldout {
+    margin-bottom: 10px;
+}
+
+#data-content {
+    background-color: rgba(25, 51, 25, 0.3);
+    border-width: 1px;
+    border-color: rgba(51, 102, 51, 1);
+    border-radius: 5px;
+    padding: 10px;
+}
+
+#data-status {
+    margin-bottom: 5px;
+    color: rgb(180, 200, 180);
+}
+
+#data-status-guide {
+    background-color: rgba(20, 20, 20, 0.8);
+    border-width: 1px;
+    border-color: rgba(64, 64, 64, 1);
+    border-radius: 3px;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+#data-buttons-1, #data-buttons-2 {
+    flex-direction: row;
+    margin-bottom: 5px;
+    height: 25px;
+}
+
+#export-data-button, #force-export-button, #clear-data-button,
+#open-folder-button, #test-logs-button, #clear-console-button {
+    flex-grow: 1;
+    height: 23px;
+    margin-left: 1px;
+    margin-right: 1px;
+}
+
+#clear-data-button {
+    background-color: rgba(153, 51, 51, 1);
+}
+
+#clear-data-button:hover {
+    background-color: rgba(173, 71, 71, 1);
+}
+
+/* Logs section */
+#logs-foldout {
+    flex-grow: 1;
+}
+
+#logs-content {
+    flex-grow: 1;
+}
+
+#log-scroll {
+    flex-grow: 1;
+    min-height: 150px;
+    background-color: rgba(38, 38, 38, 1);
+    border-width: 1px;
+    border-color: rgba(76, 76, 76, 1);
+    padding: 5px;
+}
+
+#log-buttons {
+    flex-direction: row;
+    margin-top: 5px;
+    height: 25px;
+}
+
+#copy-logs-button, #clear-logs-button {
+    flex-grow: 1;
+    height: 23px;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+/* Footer styling */
+#footer {
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top-width: 1px;
+    border-top-color: rgba(76, 76, 76, 1);
+}
+
+#open-config-button, #help-button {
+    min-width: 80px;
+}
+
+/* Foldout styling */
+.unity-foldout__toggle {
+    font-size: 12px;
+    -unity-font-style: bold;
+    color: rgb(200, 200, 200);
+}
+
+.unity-foldout__content {
+    margin-left: 0px;
+}
+
+/* Button hover effects */
+.unity-button:hover {
+    background-color: rgba(64, 64, 64, 1);
+}
+
+/* Text field styling */
+.unity-text-field__input {
+    background-color: rgba(32, 32, 32, 1);
+    border-color: rgba(76, 76, 76, 1);
+    color: rgb(200, 200, 200);
+}
+
+/* Toggle styling */
+.unity-toggle__checkmark {
+    background-color: rgba(32, 32, 32, 1);
+    border-color: rgba(76, 76, 76, 1);
+}
+
+.unity-toggle:checked .unity-toggle__checkmark {
+    background-color: rgba(51, 127, 204, 1);
+}
+
+/* ScrollView styling */
+.unity-scroll-view__content-viewport {
+    background-color: rgba(28, 28, 28, 1);
+}
+
+.unity-scroller--vertical {
+    background-color: rgba(48, 48, 48, 1);
+}
+
+/* Status color classes */
+.status-running {
+    color: rgba(128, 255, 128, 1);
+}
+
+.status-stopped {
+    color: rgba(255, 128, 128, 1);
+}
+
+.status-connected {
+    color: rgba(128, 255, 128, 1);
+}
+
+.status-disconnected {
+    color: rgba(255, 204, 77, 1);
+}
+
+.status-warning {
+    color: rgba(255, 255, 128, 1);
+}
+
+.status-error {
+    color: rgba(255, 128, 128, 1);
+}

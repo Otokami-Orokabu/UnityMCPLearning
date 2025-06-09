@@ -1,0 +1,440 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <ui:VisualElement name="root" style="padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px; flex-grow: 1;">
+        
+        <!-- Header -->
+        <ui:Label text="Unity MCP Server Manager" name="header" 
+                  style="font-size: 20px; -unity-font-style: bold; margin-bottom: 15px;" />
+        
+        <!-- Server Status Section (常時表示) -->
+        <ui:VisualElement name="status-section" 
+                          style="background-color: rgba(51, 51, 51, 0.3); 
+                                 border-width: 1px; 
+                                 border-color: rgba(76, 76, 76, 1); 
+                                 padding: 10px; 
+                                 margin-bottom: 10px; 
+                                 border-radius: 5px;">
+            <ui:Label text="Server Status: Checking..." name="server-status" />
+            <ui:Label text="Connection: Not Connected" name="connection-status" />
+            <ui:Label text="Last Update: Never" name="last-update" 
+                      style="font-size: 10px; opacity: 0.7;" />
+        </ui:VisualElement>
+        
+        <!-- Server Control Section (常時表示) -->
+        <ui:VisualElement name="control-section" style="margin-bottom: 15px;">
+            <ui:VisualElement name="button-row" 
+                              style="flex-direction: row; 
+                                     margin-bottom: 10px; 
+                                     height: 28px;">
+                <ui:Button text="Start Server" name="start-button" 
+                           style="flex-grow: 1; margin-right: 5px; height: 26px;" />
+                <ui:Button text="Stop Server" name="stop-button" 
+                           style="flex-grow: 1; margin-left: 5px; margin-right: 5px; height: 26px;" />
+                <ui:Button text="Refresh" name="refresh-button" 
+                           style="flex-grow: 1; margin-left: 5px; margin-right: 5px; height: 26px;" />
+                <ui:Button text="Test Connection" name="test-connection-button" 
+                           style="flex-grow: 1; margin-left: 5px; height: 26px;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        
+        <!-- Multi-Project Support Foldout (デフォルト展開) -->
+        <ui:Foldout text="🔗 Multi-Project Support (Phase 3)" name="multi-project-foldout" 
+                    value="true" style="margin-bottom: 10px;">
+            <ui:VisualElement name="multi-project-content" 
+                              style="background-color: rgba(25, 25, 76, 0.3); 
+                                     border-width: 1px; 
+                                     border-color: rgba(51, 51, 127, 1); 
+                                     padding: 10px; 
+                                     border-radius: 5px;">
+                
+                <!-- Project ID Section -->
+                <ui:VisualElement name="project-id-section" 
+                                  style="background-color: rgba(15, 15, 45, 0.4); 
+                                         border-width: 1px; 
+                                         border-color: rgba(35, 35, 95, 1); 
+                                         padding: 8px; 
+                                         margin-bottom: 8px; 
+                                         border-radius: 3px;">
+                    <ui:Label text="📊 Project Identification" 
+                              style="font-size: 11px; -unity-font-style: bold; margin-bottom: 4px; color: rgba(180, 180, 220, 1);" />
+                    <ui:Label text="Project ID: Loading..." name="project-id" 
+                              style="font-size: 10px; margin-bottom: 2px; color: rgba(160, 160, 200, 1);" />
+                    <ui:Label text="Project Path: Loading..." name="project-path" 
+                              style="font-size: 10px; margin-bottom: 2px; color: rgba(140, 140, 180, 1);" />
+                    <ui:VisualElement name="project-id-buttons" 
+                                      style="flex-direction: row; margin-top: 4px; height: 20px;">
+                        <ui:Button text="Copy ID" name="copy-project-id-button" 
+                                   style="flex-grow: 1; margin-right: 2px; height: 18px; font-size: 9px;" />
+                        <ui:Button text="Regenerate" name="regenerate-project-id-button" 
+                                   style="flex-grow: 1; margin-left: 2px; height: 18px; font-size: 9px;" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                
+                <!-- Port Management Section -->
+                <ui:VisualElement name="port-management-section" 
+                                  style="background-color: rgba(45, 15, 15, 0.4); 
+                                         border-width: 1px; 
+                                         border-color: rgba(95, 35, 35, 1); 
+                                         padding: 8px; 
+                                         margin-bottom: 8px; 
+                                         border-radius: 3px;">
+                    <ui:Label text="🔌 Port Management" 
+                              style="font-size: 11px; -unity-font-style: bold; margin-bottom: 4px; color: rgba(220, 180, 180, 1);" />
+                    <ui:Label text="Assigned Port: Loading..." name="assigned-port" 
+                              style="font-size: 10px; margin-bottom: 2px; color: rgba(200, 160, 160, 1);" />
+                    <ui:Label text="Port Status: Checking..." name="port-status" 
+                              style="font-size: 10px; margin-bottom: 2px; color: rgba(180, 140, 140, 1);" />
+                    <ui:Label text="Available Ports: Loading..." name="available-ports-count" 
+                              style="font-size: 10px; margin-bottom: 4px; color: rgba(180, 140, 140, 1);" />
+                    <ui:VisualElement name="port-management-buttons" 
+                                      style="flex-direction: row; margin-top: 4px; height: 20px;">
+                        <ui:Button text="Change Port" name="change-port-button" 
+                                   style="flex-grow: 1; margin-right: 2px; height: 18px; font-size: 9px;" />
+                        <ui:Button text="Release Port" name="release-port-button" 
+                                   style="flex-grow: 1; margin-left: 2px; height: 18px; font-size: 9px;" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                
+                <!-- Registry Status Section -->
+                <ui:VisualElement name="registry-status-section" 
+                                  style="background-color: rgba(15, 45, 15, 0.4); 
+                                         border-width: 1px; 
+                                         border-color: rgba(35, 95, 35, 1); 
+                                         padding: 8px; 
+                                         margin-bottom: 8px; 
+                                         border-radius: 3px;">
+                    <ui:Label text="🗂️ Multi-Project Registry" 
+                              style="font-size: 11px; -unity-font-style: bold; margin-bottom: 4px; color: rgba(180, 220, 180, 1);" />
+                    <ui:Label text="Auto-Accept: Checking..." name="auto-approve-status" 
+                              style="font-size: 10px; margin-bottom: 2px; color: rgba(160, 200, 160, 1);" />
+                    <ui:Label text="Registered Projects: Loading..." name="registered-projects-count" 
+                              style="font-size: 10px; margin-bottom: 2px; color: rgba(140, 180, 140, 1);" />
+                    <ui:Label text="Port Range: 3000-3100" name="port-range-info" 
+                              style="font-size: 10px; margin-bottom: 4px; color: rgba(140, 180, 140, 1);" />
+                    <ui:Button text="View Registry Details" name="view-registry-details-button" 
+                               style="height: 18px; font-size: 9px; margin-top: 2px;" />
+                </ui:VisualElement>
+                
+                <!-- Action Buttons -->
+                <ui:VisualElement name="multi-project-buttons" 
+                                  style="flex-direction: row; height: 25px;">
+                    <ui:Button text="Refresh Status" name="refresh-port-status-button" 
+                               style="flex-grow: 1; margin-right: 3px; height: 23px;" />
+                    <ui:Button text="Setup Auto-Accept" name="setup-auto-approve-button" 
+                               style="flex-grow: 1; margin-left: 3px; margin-right: 3px; height: 23px; 
+                                      background-color: rgba(51, 127, 204, 1);" />
+                    <ui:Button text="Generate Multi-Config" name="generate-multi-config-button" 
+                               style="flex-grow: 1; margin-left: 3px; height: 23px; 
+                                      background-color: rgba(76, 153, 76, 1);" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:Foldout>
+        
+        <!-- Auto-Accept Configuration Foldout (Phase 4.3) (デフォルト展開) -->
+        <ui:Foldout text="🚀 Auto-Accept Configuration (Phase 4.3)" name="auto-accept-config-foldout" 
+                    value="true" style="margin-bottom: 10px;">
+            <ui:VisualElement name="auto-accept-config-content" 
+                              style="background-color: rgba(25, 76, 25, 0.3); 
+                                     border-width: 1px; 
+                                     border-color: rgba(51, 127, 51, 1); 
+                                     padding: 10px; 
+                                     border-radius: 5px;">
+                
+                <!-- Configuration Status Section -->
+                <ui:VisualElement name="auto-accept-status-section" 
+                                  style="background-color: rgba(15, 45, 15, 0.4); 
+                                         border-width: 1px; 
+                                         border-color: rgba(35, 95, 35, 1); 
+                                         padding: 8px; 
+                                         margin-bottom: 8px; 
+                                         border-radius: 3px;">
+                    <ui:Label text="🔧 Configuration Status" 
+                              style="font-size: 11px; -unity-font-style: bold; margin-bottom: 4px; color: rgba(180, 220, 180, 1);" />
+                    <ui:Label text="Status: Checking..." name="auto-accept-config-status" 
+                              style="font-size: 10px; margin-bottom: 2px; color: rgba(160, 200, 160, 1);" />
+                    <ui:Label text="Claude Config: Checking..." name="claude-config-status" 
+                              style="font-size: 10px; margin-bottom: 2px; color: rgba(140, 180, 140, 1);" />
+                    <ui:Label text="Approved Tools: Loading..." name="approved-tools-count" 
+                              style="font-size: 10px; margin-bottom: 4px; color: rgba(140, 180, 140, 1);" />
+                </ui:VisualElement>
+                
+                <!-- Tool Configuration Section -->
+                <ui:VisualElement name="auto-accept-tools-section" 
+                                  style="background-color: rgba(45, 15, 45, 0.4); 
+                                         border-width: 1px; 
+                                         border-color: rgba(95, 35, 95, 1); 
+                                         padding: 8px; 
+                                         margin-bottom: 8px; 
+                                         border-radius: 3px;">
+                    <ui:Label text="🛠️ Auto-Approved Tools" 
+                              style="font-size: 11px; -unity-font-style: bold; margin-bottom: 4px; color: rgba(220, 180, 220, 1);" />
+                    <ui:Label text="The following tools will be auto-approved for Claude Code CLI:" 
+                              style="font-size: 9px; margin-bottom: 3px; color: rgba(200, 160, 200, 1); -unity-font-style: italic;" />
+                    <ui:Label text="• ping, unity_info_realtime, get_console_logs" 
+                              style="font-size: 9px; margin-bottom: 1px; color: rgba(180, 140, 180, 1);" />
+                    <ui:Label text="• create_cube, create_sphere, create_plane" 
+                              style="font-size: 9px; margin-bottom: 1px; color: rgba(180, 140, 180, 1);" />
+                    <ui:Label text="• create_gameobject, wait_for_compilation" 
+                              style="font-size: 9px; margin-bottom: 4px; color: rgba(180, 140, 180, 1);" />
+                    <ui:Label text="⚡ Benefit: Skip confirmation dialogs for instant development!" 
+                              style="font-size: 9px; color: rgba(220, 200, 140, 1); -unity-font-style: bold;" />
+                </ui:VisualElement>
+                
+                <!-- One-Click Configuration Section -->
+                <ui:VisualElement name="auto-accept-one-click-section" 
+                                  style="background-color: rgba(15, 15, 45, 0.4); 
+                                         border-width: 1px; 
+                                         border-color: rgba(35, 35, 95, 1); 
+                                         padding: 8px; 
+                                         margin-bottom: 8px; 
+                                         border-radius: 3px;">
+                    <ui:Label text="⚡ One-Click Setup" 
+                              style="font-size: 11px; -unity-font-style: bold; margin-bottom: 4px; color: rgba(180, 180, 220, 1);" />
+                    <ui:Label text="Last Configured: Never" name="last-configured-info" 
+                              style="font-size: 10px; margin-bottom: 4px; color: rgba(160, 160, 200, 1);" />
+                    <ui:VisualElement name="one-click-buttons" 
+                                      style="flex-direction: row; height: 20px;">
+                        <ui:Button text="🚀 Enable Auto-Accept" name="enable-auto-accept-button" 
+                                   style="flex-grow: 1; margin-right: 2px; height: 18px; font-size: 9px; 
+                                          background-color: rgba(51, 127, 204, 1);" />
+                        <ui:Button text="❌ Disable Auto-Accept" name="disable-auto-accept-button" 
+                                   style="flex-grow: 1; margin-left: 2px; margin-right: 2px; height: 18px; font-size: 9px; 
+                                          background-color: rgba(153, 51, 51, 1);" />
+                        <ui:Button text="🔍 Check Status" name="check-auto-accept-status-button" 
+                                   style="flex-grow: 1; margin-left: 2px; height: 18px; font-size: 9px;" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                
+                <!-- Advanced Configuration Section -->
+                <ui:VisualElement name="auto-accept-advanced-section" 
+                                  style="background-color: rgba(45, 45, 15, 0.4); 
+                                         border-width: 1px; 
+                                         border-color: rgba(95, 95, 35, 1); 
+                                         padding: 8px; 
+                                         border-radius: 3px;">
+                    <ui:Label text="🔧 Advanced Configuration" 
+                              style="font-size: 11px; -unity-font-style: bold; margin-bottom: 4px; color: rgba(220, 220, 180, 1);" />
+                    <ui:VisualElement name="advanced-buttons" 
+                                      style="flex-direction: row; height: 20px;">
+                        <ui:Button text="Reset Config" name="reset-auto-accept-button" 
+                                   style="flex-grow: 1; margin-right: 2px; height: 18px; font-size: 9px;" />
+                        <ui:Button text="Open Claude Config" name="open-claude-config-button" 
+                                   style="flex-grow: 1; margin-left: 2px; margin-right: 2px; height: 18px; font-size: 9px;" />
+                        <ui:Button text="View Logs" name="view-auto-accept-logs-button" 
+                                   style="flex-grow: 1; margin-left: 2px; height: 18px; font-size: 9px;" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:Foldout>
+        
+        <!-- Multi-Project Configuration Generator Foldout (Phase 4.4) (デフォルト展開) -->
+        <ui:Foldout text="🔧 Multi-Project Configuration Generator (Phase 4.4)" name="multi-config-generator-foldout" 
+                    value="true" style="margin-bottom: 10px;">
+            <ui:VisualElement name="multi-config-generator-content" 
+                              style="background-color: rgba(76, 25, 76, 0.3); 
+                                     border-width: 1px; 
+                                     border-color: rgba(127, 51, 127, 1); 
+                                     padding: 10px; 
+                                     border-radius: 5px;">
+                
+                <!-- Configuration Overview Section -->
+                <ui:VisualElement name="config-overview-section" 
+                                  style="background-color: rgba(45, 15, 45, 0.4); 
+                                         border-width: 1px; 
+                                         border-color: rgba(95, 35, 95, 1); 
+                                         padding: 8px; 
+                                         margin-bottom: 8px; 
+                                         border-radius: 3px;">
+                    <ui:Label text="📋 Configuration Overview" 
+                              style="font-size: 11px; -unity-font-style: bold; margin-bottom: 4px; color: rgba(220, 180, 220, 1);" />
+                    <ui:Label text="Project Name: Loading..." name="config-project-name" 
+                              style="font-size: 10px; margin-bottom: 2px; color: rgba(200, 160, 200, 1);" />
+                    <ui:Label text="Config Status: Checking..." name="config-status-overview" 
+                              style="font-size: 10px; margin-bottom: 2px; color: rgba(180, 140, 180, 1);" />
+                    <ui:Label text="Server Path: Loading..." name="config-server-path" 
+                              style="font-size: 10px; margin-bottom: 4px; color: rgba(180, 140, 180, 1);" />
+                </ui:VisualElement>
+                
+                <!-- Generation Options Section -->
+                <ui:VisualElement name="generation-options-section" 
+                                  style="background-color: rgba(15, 45, 15, 0.4); 
+                                         border-width: 1px; 
+                                         border-color: rgba(35, 95, 35, 1); 
+                                         padding: 8px; 
+                                         margin-bottom: 8px; 
+                                         border-radius: 3px;">
+                    <ui:Label text="⚙️ Generation Options" 
+                              style="font-size: 11px; -unity-font-style: bold; margin-bottom: 4px; color: rgba(180, 220, 180, 1);" />
+                    <ui:VisualElement name="option-checkboxes" style="margin-bottom: 4px;">
+                        <ui:Toggle label="Include Auto-Accept Settings" name="include-auto-accept-toggle" value="true" 
+                                   style="font-size: 9px; margin-bottom: 2px;" />
+                        <ui:Toggle label="Generate for Package Distribution" name="package-distribution-toggle" value="false" 
+                                   style="font-size: 9px; margin-bottom: 2px;" />
+                        <ui:Toggle label="Create Backup of Existing Config" name="create-backup-toggle" value="true" 
+                                   style="font-size: 9px; margin-bottom: 2px;" />
+                        <ui:Toggle label="Force Regenerate (Overwrite)" name="force-regenerate-toggle" value="false" 
+                                   style="font-size: 9px; margin-bottom: 4px;" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                
+                <!-- Target Locations Section -->
+                <ui:VisualElement name="target-locations-section" 
+                                  style="background-color: rgba(15, 15, 45, 0.4); 
+                                         border-width: 1px; 
+                                         border-color: rgba(35, 35, 95, 1); 
+                                         padding: 8px; 
+                                         margin-bottom: 8px; 
+                                         border-radius: 3px;">
+                    <ui:Label text="📂 Target Locations" 
+                              style="font-size: 11px; -unity-font-style: bold; margin-bottom: 4px; color: rgba(180, 180, 220, 1);" />
+                    <ui:Label text="Server Directory: Loading..." name="target-server-dir" 
+                              style="font-size: 10px; margin-bottom: 2px; color: rgba(160, 160, 200, 1);" />
+                    <ui:Label text="Project Root: Loading..." name="target-project-root" 
+                              style="font-size: 10px; margin-bottom: 2px; color: rgba(140, 140, 180, 1);" />
+                    <ui:Label text="Claude Desktop: Loading..." name="target-claude-desktop" 
+                              style="font-size: 10px; margin-bottom: 4px; color: rgba(140, 140, 180, 1);" />
+                    <ui:VisualElement name="target-location-buttons" 
+                                      style="flex-direction: row; height: 20px;">
+                        <ui:Button text="📂 Open Server Dir" name="open-server-dir-button" 
+                                   style="flex-grow: 1; margin-right: 2px; height: 18px; font-size: 9px;" />
+                        <ui:Button text="📂 Open Project Root" name="open-project-root-button" 
+                                   style="flex-grow: 1; margin-left: 2px; margin-right: 2px; height: 18px; font-size: 9px;" />
+                        <ui:Button text="📂 Open Claude Config" name="open-claude-dir-button" 
+                                   style="flex-grow: 1; margin-left: 2px; height: 18px; font-size: 9px;" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                
+                <!-- Generation Actions Section -->
+                <ui:VisualElement name="generation-actions-section" 
+                                  style="background-color: rgba(45, 45, 15, 0.4); 
+                                         border-width: 1px; 
+                                         border-color: rgba(95, 95, 35, 1); 
+                                         padding: 8px; 
+                                         border-radius: 3px;">
+                    <ui:Label text="🚀 Generation Actions" 
+                              style="font-size: 11px; -unity-font-style: bold; margin-bottom: 4px; color: rgba(220, 220, 180, 1);" />
+                    <ui:VisualElement name="generation-buttons-row1" 
+                                      style="flex-direction: row; height: 20px; margin-bottom: 4px;">
+                        <ui:Button text="📝 Preview Config" name="preview-config-button" 
+                                   style="flex-grow: 1; margin-right: 2px; height: 18px; font-size: 9px;" />
+                        <ui:Button text="🔍 Validate Setup" name="validate-setup-button" 
+                                   style="flex-grow: 1; margin-left: 2px; margin-right: 2px; height: 18px; font-size: 9px;" />
+                        <ui:Button text="🔄 Check Existing" name="check-existing-button" 
+                                   style="flex-grow: 1; margin-left: 2px; height: 18px; font-size: 9px;" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="generation-buttons-row2" 
+                                      style="flex-direction: row; height: 22px;">
+                        <ui:Button text="🚀 Generate All Configs" name="generate-all-configs-button" 
+                                   style="flex-grow: 1; margin-right: 2px; height: 20px; font-size: 9px; 
+                                          background-color: rgba(51, 127, 204, 1); -unity-font-style: bold;" />
+                        <ui:Button text="🎯 Generate Server Only" name="generate-server-only-button" 
+                                   style="flex-grow: 1; margin-left: 2px; margin-right: 2px; height: 20px; font-size: 9px; 
+                                          background-color: rgba(76, 153, 76, 1);" />
+                        <ui:Button text="Clean &amp; Regenerate" name="clean-regenerate-button" 
+                                   style="flex-grow: 1; margin-left: 2px; height: 20px; font-size: 9px; 
+                                          background-color: rgba(153, 76, 51, 1);" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:Foldout>
+        
+        <!-- Settings Foldout (デフォルト折りたたみ) -->
+        <ui:Foldout text="⚙️ Settings" name="settings-foldout" 
+                    value="false" style="margin-bottom: 10px;">
+            <ui:VisualElement name="settings-content" style="padding: 5px;">
+                <uie:IntegerField label="Port" name="port-field" value="3000" />
+                <ui:TextField label="Server Path" name="server-path" 
+                              value="Assets/Packages/unity-mcp-learning/Server~" />
+                <ui:Toggle label="Auto Start on Unity Launch" name="auto-start" />
+            </ui:VisualElement>
+        </ui:Foldout>
+        
+        <!-- Data Management Foldout (デフォルト折りたたみ) -->
+        <ui:Foldout text="📁 Data Management" name="data-foldout" 
+                    value="false" style="margin-bottom: 10px;">
+            <ui:VisualElement name="data-content" 
+                              style="background-color: rgba(25, 51, 25, 0.3); 
+                                     border-width: 1px; 
+                                     border-color: rgba(51, 102, 51, 1); 
+                                     padding: 10px; 
+                                     border-radius: 5px;">
+                
+                <ui:Label text="Data Status: Ready" name="data-status" 
+                          style="margin-bottom: 5px;" />
+                
+                <!-- Data Status Guide -->
+                <ui:VisualElement name="data-status-guide" 
+                                  style="background-color: rgba(20, 20, 20, 0.8); 
+                                         border-width: 1px; 
+                                         border-color: rgba(64, 64, 64, 1); 
+                                         padding: 8px; 
+                                         margin-bottom: 10px; 
+                                         border-radius: 3px;">
+                    <ui:Label text="📊 Data Size Guide:" 
+                              style="font-size: 11px; -unity-font-style: bold; margin-bottom: 3px;" />
+                    <ui:Label text="• &lt; 50KB (Normal)   • 50-100KB (Caution)   • &gt; 100KB (High Token Use)" 
+                              style="font-size: 10px;" />
+                    <ui:Label text="💡 Tip: Use 'Clear Data' to reduce token consumption" 
+                              style="font-size: 10px; opacity: 0.8; margin-top: 3px; -unity-font-style: italic;" />
+                </ui:VisualElement>
+                
+                <!-- Data Action Buttons Row 1 -->
+                <ui:VisualElement name="data-buttons-1" 
+                                  style="flex-direction: row; margin-bottom: 5px; height: 25px;">
+                    <ui:Button text="Export Data" name="export-data-button" 
+                               style="flex-grow: 1; margin-right: 3px; height: 23px;" />
+                    <ui:Button text="Force Export" name="force-export-button" 
+                               style="flex-grow: 1; margin-left: 3px; margin-right: 3px; height: 23px;" />
+                    <ui:Button text="Clear Data" name="clear-data-button" 
+                               style="flex-grow: 1; margin-left: 3px; height: 23px; 
+                                      background-color: rgba(153, 51, 51, 1);" />
+                </ui:VisualElement>
+                
+                <!-- Data Action Buttons Row 2 -->
+                <ui:VisualElement name="data-buttons-2" 
+                                  style="flex-direction: row; margin-bottom: 5px; height: 25px;">
+                    <ui:Button text="Open Data Folder" name="open-folder-button" 
+                               style="flex-grow: 1; margin-right: 3px; height: 23px;" />
+                    <ui:Button text="Generate Test Logs" name="test-logs-button" 
+                               style="flex-grow: 1; margin-left: 3px; margin-right: 3px; height: 23px;" />
+                    <ui:Button text="Clear Console" name="clear-console-button" 
+                               style="flex-grow: 1; margin-left: 3px; height: 23px;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:Foldout>
+        
+        <!-- Server Logs Foldout (デフォルト展開) -->
+        <ui:Foldout text="📝 Server Logs" name="logs-foldout" 
+                    value="true" style="flex-grow: 1;">
+            <ui:VisualElement name="logs-content" style="flex-grow: 1;">
+                <ui:ScrollView name="log-scroll" 
+                               style="flex-grow: 1; 
+                                      min-height: 150px; 
+                                      background-color: rgba(38, 38, 38, 1); 
+                                      border-width: 1px; 
+                                      border-color: rgba(76, 76, 76, 1); 
+                                      padding: 5px;" />
+                
+                <!-- Log Action Buttons -->
+                <ui:VisualElement name="log-buttons" 
+                                  style="flex-direction: row; margin-top: 5px; height: 25px;">
+                    <ui:Button text="Copy Logs" name="copy-logs-button" 
+                               style="flex-grow: 1; margin-right: 5px; height: 23px;" />
+                    <ui:Button text="Clear Logs" name="clear-logs-button" 
+                               style="flex-grow: 1; margin-left: 5px; height: 23px;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:Foldout>
+        
+        <!-- Footer -->
+        <ui:VisualElement name="footer" 
+                          style="flex-direction: row; 
+                                 justify-content: space-between; 
+                                 margin-top: 10px; 
+                                 padding-top: 10px; 
+                                 border-top-width: 1px; 
+                                 border-top-color: rgba(76, 76, 76, 1);">
+            <ui:Button text="Open Config" name="open-config-button" />
+            <ui:Button text="Help" name="help-button" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
