@@ -182,6 +182,12 @@ async function main() {
   log(getMessage('server.starting'));
   log('Process ID:', process.pid);
   log('Working directory:', process.cwd());
+  log('__dirname:', __dirname);
+  log('Environment variables:', {
+    MCP_CONFIG_PATH: process.env.MCP_CONFIG_PATH,
+    UNITY_DATA_PATH: process.env.UNITY_DATA_PATH,
+    NODE_ENV: process.env.NODE_ENV
+  });
   
   // 設定ファイル検証と初期化
   initializeConfig();
